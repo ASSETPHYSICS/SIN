@@ -1,0 +1,65 @@
+[
+    {
+        "id": 14195,
+        "slug": "impressum",
+        "title": "Impressum",
+        "parent": 0,
+        "menu_order": 0
+    },
+    {
+        "id": 14200,
+        "slug": "datenschutzerklaerung",
+        "title": "Datenschutzerklärung",
+        "parent": 14195,
+        "menu_order": 0
+    },
+    {
+        "id": 14285,
+        "slug": "startseite",
+        "title": "Startseite",
+        "parent": 0,
+        "menu_order": 0
+    },
+    {
+        "id": 14286,
+        "slug": "nachhaltigkeit",
+        "title": "Nachhaltigkeit",
+        "parent": 0,
+        "menu_order": 0
+    },
+    {
+        "id": 14287,
+        "slug": "pai-statement",
+        "title": "PAI Statement",
+        "parent": 14286,
+        "menu_order": 0
+    },
+    {
+        "id": 14294,
+        "slug": "karriere",
+        "title": "Karriere",
+        "parent": 0,
+        "menu_order": 0
+    },
+    {
+        "id": 14296,
+        "slug": "datenschutzhinweise-mieter-2ip-gmbh",
+        "title": "Datenschutzhinweise für Mieter – 2IP GmbH",
+        "parent": 14195,
+        "menu_order": 0
+    },
+    {
+        "id": 14297,
+        "slug": "datenschutzhinweise-mieter-2ip-sarl",
+        "title": "Datenschutzhinweise für Mieter – 2IP S.à.r.l.",
+        "parent": 14195,
+        "menu_order": 0
+    },
+    {
+        "id": 14345,
+        "slug": "second-opinions",
+        "title": "Second Opinions",
+        "parent": 0,
+        "menu_order": 0
+    }
+]

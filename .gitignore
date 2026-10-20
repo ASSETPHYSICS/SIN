@@ -1,0 +1,30 @@
+# Allowlist: alles ignorieren, nur Eigenes versionieren.
+/*
+!/.gitignore
+!/README.md
+!/router.php
+!/tools/
+!/content/
+!/wp-content/
+/wp-content/*
+!/wp-content/mu-plugins/
+!/wp-content/plugins/
+/wp-content/plugins/*
+!/wp-content/plugins/appointment-booking/
+!/wp-content/themes/
+/wp-content/themes/*
+!/wp-content/themes/Divi-2IP/
+
+# Lizenzierte Schriften (Repo ist öffentlich) und große Mediendateien
+/wp-content/themes/Divi-2IP/fonts/
+*.woff
+*.woff2
+*.zip
+*.sql
+*.sql.gz
+
+# Zugangsdaten, Caches, Hilfsdateien
+wp-config.php
+.env
+*.log
+.DS_Store

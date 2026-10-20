@@ -1,0 +1,407 @@
+/* Appointment Booking - Clean & Simple */
+
+.appointment-booking-wrapper {
+    max-width: 864px;
+    margin: 0 auto;
+    padding: 15px;
+    font-family: 'Neue Hass', sans-serif;
+}
+
+/* Tab Navigation */
+.tab-navigation {
+    display: flex;
+    gap: 0px;
+    margin-bottom: 0;
+    justify-content: center;
+}
+
+.tab-button {
+    padding: 8px 20px;
+    width: 200px;
+    background: #f5f5f5;
+    color: #666;
+    border: none;
+    border-radius: 24px 24px 0 0;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.tab-button:hover {
+    background: linear-gradient(150deg, rgba(20, 140, 245, 0.95) 0%, #30dcf5 84% 100%);
+    color: #fff;
+}
+
+.tab-button.active {
+    background: linear-gradient(150deg, rgba(0, 125, 234, 0.9) 0%, #10d1ef 84% 100%);
+    color: #fff;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.appointment-booking-form {
+    background: #fff;
+    padding: 20px 25px 20px 25px;
+    border-radius: 24px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Anti-spam honeypot - pushed off-screen so real users never see or fill it */
+.form-group-website {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    margin: 0;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    right: 10px;
+    bottom: 12px;
+    color: #666;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon img {
+    opacity: 0.6;
+}
+
+.input-with-icon input,
+.input-with-icon select {
+    padding-right: 40px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    color: #666;
+    font-size: 17px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px !important;
+	padding-top: 2px !important;
+    border: none !important;
+    border-bottom: 1px solid #ddd !important;
+    border-radius: 0;
+    font-size: 15px;
+    font-family: 'Neue Hass', sans-serif;
+    color: #424242;
+    transition: border-color 0.2s;
+    background: transparent;
+}
+
+.form-group select option {
+    font-family: 'Neue Hass', sans-serif;
+}
+
+.form-group select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    font-family: 'Neue Hass', sans-serif;
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 24px;
+    font-size: 15px;
+    color: #424242;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-bottom-color: #2ea3f2;
+}
+
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2ea3f2;
+}
+
+
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+/* Checkbox */
+.checkbox-group {
+    display: flex;
+    align-items: top;
+    gap: 8px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-top: 0px;
+	width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: #2ea3f2;
+}
+
+.checkbox-group label {
+    margin: 0;
+    font-size: 15px;
+    color: #666;
+    cursor: pointer;
+	line-height: 1;
+}
+
+/* Buttons */
+.btn-submit,
+.btn-new-booking {
+    padding: 12px 24px;
+    background: linear-gradient(150deg, rgba(0, 125, 234, 0.9) 0%, #10d1ef 84% 100%);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-submit {
+    width: auto;
+    min-width: 200px;
+    display: block;
+    margin: 0 auto;
+    font-size: 17px;
+}
+
+.btn-submit:hover,
+.btn-new-booking:hover {
+    background: linear-gradient(150deg, rgba(20, 140, 245, 0.95) 0%, #30dcf5 84% 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 125, 234, 0.3);
+}
+
+.btn-submit:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Success Message */
+.success-message {
+    text-align: center;
+    padding: 30px;
+    display: none;
+}
+
+.success-message.visible {
+    display: block;
+}
+
+.success-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
+    background: #4cd233;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+}
+
+.success-message h2 {
+    color: #4cd233;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    font-family: 'Neue Hass Display', 'Neue Hass', sans-serif;
+}
+
+.success-message p {
+    color: #666;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.success-details {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 24px;
+}
+
+.success-details p {
+    margin: 8px 0;
+    color: #424242;
+    font-size: 15px;
+}
+
+.btn-new-booking {
+    margin-top: 15px;
+}
+
+/* Loading & Error */
+.loading-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+}
+
+.loading-overlay.visible {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #2ea3f2;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.error-message {
+    display: none;
+    padding: 12px 40px 12px 15px;
+    background: #ff4f87;
+    color: #fff;
+    border-radius: 24px;
+    margin-bottom: 20px;
+    position: relative;
+    font-size: 14px;
+}
+
+.error-message.visible {
+    display: block;
+}
+
+.close-error {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    line-height: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .appointment-booking-wrapper {
+        padding: 0px;
+    }
+    
+    .appointment-booking-form {
+        padding: 5px 20px 20px 20px;
+        border-radius: 0 0 24px 24px;
+    }
+    
+    .tab-navigation {
+        gap: 0;
+        width: 100%;
+        margin-bottom: 0;
+    }
+    
+    .tab-button {
+        width: 50%;
+        flex: none;
+        padding: 8px 8px;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+    
+	.tab-button:first-child {
+    border-radius: 24px 0 0 0;
+	}
+
+	.tab-button:last-child {
+		border-radius: 0 24px 0 0;
+	}
+    .form-group label {
+        font-size: 15px;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 15px !important;
+    }
+    
+    .checkbox-group label {
+        font-size: 13px;
+    }
+    
+    .form-row {
+        display: block;
+    }
+    
+    .form-row {
+        margin-bottom: 10px !important;
+    }
+	
+	.form-group {
+        margin-bottom: 10px !important;
+    }
+    
+    .btn-submit {
+        width: 100%;
+        min-width: auto;
+        font-size: 16px;
+        padding: 12px 24px;
+    }
+}
