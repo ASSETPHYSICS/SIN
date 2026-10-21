@@ -126,7 +126,7 @@ GRUPPE = """<div class="ip-wrap ip-grid ip-grid--split">
 <div class="ip-col">
 %s
 <h2>Institutional Solutions Division der Institutional Investment Group</h2>
-<p class="ip-lead">Die Investor Solutions Division vereint alle Leistungen der 2IG, die sich direkt an institutionelle Investoren richten.</p>
+<p class="ip-lead">Institutional Investment Partners GmbH, Institutional Investment Partners S.à.r.l. und Institutional Investment Consulting Partners GmbH bilden die Investor Solutions Division der Institutional Investment Group (2IG). Sie vereint alle Leistungen der 2IG, die sich direkt an institutionelle Investoren richten.</p>
 </div>
 <div class="ip-col">
 <p>Die Institutional Investment Group (2IG) ist eine der führenden unabhängigen Investoren-Plattformen für Real Asset-Investments in Deutschland und Europa. 2IG hat sich mit ihren Geschäftsbereichen Investor Solutions Division und Asset Servicing Division auf Dienstleistungen für institutionelle Real Asset-Fonds nach deutschem und luxemburgischem Recht spezialisiert.</p>
@@ -166,8 +166,8 @@ home_sections = [
     section("ip-sec ip-sec--white", "Überzeugung", UEBERZEUGUNG.replace('<div class="ip-wrap ip-grid', '<div id="ueberzeugung" class="ip-wrap ip-grid', 1)),
     section("ip-sec ip-sec--mist", "Assetklassen", ASSETKLASSEN.replace('<div class="ip-wrap">', '<div id="assetklassen" class="ip-wrap">', 1)),
     section("ip-sec ip-sec--white", "Leistungen", LEISTUNGEN.replace('<div class="ip-wrap">', '<div id="leistungen" class="ip-wrap">', 1)),
-    section("ip-sec ip-sec--mist", "Die Gruppe", GRUPPE.replace('<div class="ip-wrap ip-grid', '<div id="gruppe" class="ip-wrap ip-grid', 1)),
     section("ip-sec ip-sec--white", "Unser Ansatz", ANSATZ.replace('<div class="ip-wrap">', '<div id="ansatz" class="ip-wrap">', 1)),
+    section("ip-sec ip-sec--mist", "Die Gruppe", GRUPPE.replace('<div class="ip-wrap ip-grid', '<div id="gruppe" class="ip-wrap ip-grid', 1)),
     section("ip-sec ip-sec--forest", "Kontakt", KONTAKT.replace('<div class="ip-wrap ip-grid', '<div id="kontakt" class="ip-wrap ip-grid', 1)),
 ]
 home = "<!-- wp:divi/placeholder -->" + "\n".join(home_sections) + "<!-- /wp:divi/placeholder -->"

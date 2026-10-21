@@ -1,7 +1,7 @@
 <?php
 /**
  * Startseite: Texte der Sections "Leistungen" und "Unser Ansatz" ändern, Section "Die Gruppe" neu setzen (ohne Boxen),
- * ausgeblendete Section "Standorte" entfernen.
+ * ausgeblendete Section "Standorte" entfernen, Reihenfolge "Unser Ansatz" vor "Die Gruppe".
  * Aufruf im WordPress-Stammverzeichnis:  php wp-cli.phar eval-file <Pfad>/startseite-leistungen-gruppe.php
  * Idempotent: bereits angewendete Änderungen werden übersprungen.
  *
@@ -48,7 +48,7 @@ $gruppe_html = <<<'HTML'
 <div class="ip-col">
 <p class="ip-kicker ">Die Gruppe</p>
 <h2>Institutional Solutions Division der Institutional Investment Group</h2>
-<p class="ip-lead">Die Investor Solutions Division vereint alle Leistungen der 2IG, die sich direkt an institutionelle Investoren richten.</p>
+<p class="ip-lead">Institutional Investment Partners GmbH, Institutional Investment Partners S.à.r.l. und Institutional Investment Consulting Partners GmbH bilden die Investor Solutions Division der Institutional Investment Group (2IG). Sie vereint alle Leistungen der 2IG, die sich direkt an institutionelle Investoren richten.</p>
 </div>
 <div class="ip-col">
 <p>Die Institutional Investment Group (2IG) ist eine der führenden unabhängigen Investoren-Plattformen für Real Asset-Investments in Deutschland und Europa. 2IG hat sich mit ihren Geschäftsbereichen Investor Solutions Division und Asset Servicing Division auf Dienstleistungen für institutionelle Real Asset-Fonds nach deutschem und luxemburgischem Recht spezialisiert.</p>
@@ -82,6 +82,25 @@ foreach ( $parts as $i => $part ) {
 		WP_CLI::log( 'Section "Standorte" entfernt.' );
 		break;
 	}
+}
+
+// --- Reihenfolge: "Unser Ansatz" vor "Die Gruppe"
+$parts  = preg_split( '/(?=<!-- wp:divi\/section )/', $content );
+$ansatz = $gruppe = null;
+foreach ( $parts as $i => $part ) {
+	if ( false !== strpos( $part, 'id=' . $quote . 'ansatz' . $quote ) ) { $ansatz = $i; }
+	if ( false !== strpos( $part, 'id=' . $quote . 'gruppe' . $quote ) )  { $gruppe = $i; }
+}
+if ( null === $ansatz || null === $gruppe ) { WP_CLI::error( 'Sections "ansatz"/"gruppe" nicht gefunden.' ); }
+if ( $ansatz > $gruppe ) {
+	if ( $ansatz !== $gruppe + 1 ) { WP_CLI::error( 'Sections stehen nicht direkt hintereinander.' ); }
+	$g    = rtrim( $parts[ $gruppe ], "\n" );
+	$a    = rtrim( $parts[ $ansatz ], "\n" );
+	$tail = substr( $parts[ $ansatz ], strlen( $a ) );
+	$parts[ $gruppe ] = $a . "\n";
+	$parts[ $ansatz ] = $g . $tail;
+	$content = implode( '', $parts );
+	WP_CLI::log( 'Sections getauscht: Unser Ansatz steht vor Die Gruppe.' );
 }
 
 if ( $content !== $page->post_content ) {

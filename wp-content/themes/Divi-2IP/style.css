@@ -347,6 +347,9 @@ html body .et_pb_menu.dd-hamburger-menu ul.et_mobile_menu {
 
 /* Karten */
 .ip-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4cm; margin-top: 56px; }
+/* Kacheln teilen sich die Zeilen (Titel, Text, Firmenname): Firmennamen stehen oben bündig nebeneinander */
+.ip-cards > .ip-card { display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 0; }
+.ip-cards > .ip-card > .ip-conclusion { margin-top: 0; align-self: start; }
 .ip-card { display: flex; flex-direction: column; padding: 28px 28px 12px; border-top: 3px solid var(--ip-green); background: var(--ip-mist); }
 .ip-sec--mist .ip-card { background: var(--ip-white); }
 .ip-card .ip-kicker { margin-bottom: 1.2em; color: var(--ip-forest); }
