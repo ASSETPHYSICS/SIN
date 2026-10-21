@@ -51,8 +51,8 @@ $gruppe_html = <<<'HTML'
 <div class="ip-col">
 <p>Die Institutional Investment Group (2IG) ist eine der führenden unabhängigen Investoren-Plattformen für Immobilien- und Real Asset-Investments in Deutschland und Europa. 2IG hat sich mit ihren beiden Geschäftsbereichen Investor Solutions Division und Asset Servicing Division auf Dienstleistungen für institutionelle Immobilienfonds nach deutschem und luxemburgischem Recht spezialisiert.</p>
 <p>Mit mehr als 350 Mitarbeitern verwaltet 2IG über 50 Milliarden Euro Immobilienvermögen in ca. 25 Ländern und nimmt damit eine marktführende Position in der Administration von Real Assets ein.</p>
-<p>Wir sind 100% unabhängig von Banken, Versicherungen, anderen professionellen Immobilieneignern und auch Asset Managern.</p>
-<p class="ip-group-link">Teil der Institutional Investment Group <a href="https://www.2ig.de" target="_blank" rel="noopener">→ www.2ig.de</a></p>
+<p><strong>100% unabhängig von Banken, Versicherungen, anderen professionellen Immobilieneignern und auch Asset Managern.</strong></p>
+<p class="ip-group-link"><a href="https://www.2ig.de" target="_blank" rel="noopener">→ www.2ig.de</a></p>
 </div>
 </div>
 HTML;
