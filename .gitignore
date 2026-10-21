@@ -1,6 +1,7 @@
 # Allowlist: alles ignorieren, nur Eigenes versionieren.
 /*
 !/.gitignore
+!/.gitattributes
 !/README.md
 !/router.php
 !/tools/
