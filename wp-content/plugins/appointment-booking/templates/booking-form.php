@@ -121,6 +121,83 @@
             <button type="button" class="close-error">X</button>
         </div>
         
+<?php if ( 'kontakt' === $ab_variant ) : ?>
+        <div class="ab-intro">
+            <p>Wir freuen uns, dass Sie Kontakt mit uns aufnehmen wollen.<br>Bitte nutzen Sie das folgende Formular, wir melden uns baldmöglichst bei Ihnen.</p>
+            <p>Sollten Sie eine Anfrage zu einem Objekt haben, das zu einem der von den 2IP-Kapitalverwaltungsgesellschaften verwalteten Fonds gehört, empfehlen wir Ihnen, sich direkt an den verantwortlichen Asset- oder Property Manager (Hausverwaltung) zu wenden. Dort kann Ihnen noch schneller ohne Umweg geholfen werden.</p>
+        </div>
+
+        <form id="anfrage-form" class="kontakt-form">
+
+            <!-- Anti-spam honeypot: hidden off-screen, must stay empty for real users -->
+            <div class="form-group form-group-website" aria-hidden="true">
+                <input type="text" id="anfrage-website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="anfrage-name">Ihr Name *</label>
+                <input type="text" id="anfrage-name" name="anfrage_name" autocomplete="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="anfrage-email">Ihre E-Mail-Adresse *</label>
+                <input type="email" id="anfrage-email" name="anfrage_email" autocomplete="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="anfrage-company">Ihr Unternehmen</label>
+                <input type="text" id="anfrage-company" name="anfrage_company" autocomplete="organization">
+            </div>
+
+            <div class="form-group">
+                <label for="anfrage-reason">Grund Ihrer Anfrage *</label>
+                <select id="anfrage-reason" name="anfrage_reason" aria-controls="anfrage-objekt" required>
+                    <option value="">- Bitte auswählen -</option>
+                    <?php foreach ( $ab_reasons as $ab_reason ) : ?>
+                    <option value="<?php echo esc_attr( $ab_reason ); ?>"><?php echo esc_html( $ab_reason ); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <div class="ab-objekt" id="anfrage-objekt" hidden>
+                <p class="ab-note">Bei Anfragen zu einem konkreten Objekt, das zu einem der von den 2IP-Kapitalverwaltungsgesellschaften verwalteten Fonds gehört, empfehlen wir Ihnen, sich direkt an den verantwortlichen Asset- oder Property Manager zu wenden. Dort kann Ihnen noch schneller ohne Umweg geholfen werden.</p>
+                <fieldset>
+                    <legend>Objektadresse (Pflichtangabe)</legend>
+                    <div class="form-group">
+                        <label for="anfrage-street">Straße, Hausnummer *</label>
+                        <input type="text" id="anfrage-street" name="anfrage_street" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="anfrage-unit">Einheit/Stockwerk</label>
+                        <input type="text" id="anfrage-unit" name="anfrage_unit" autocomplete="off">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="anfrage-zip">Postleitzahl *</label>
+                            <input type="text" id="anfrage-zip" name="anfrage_zip" inputmode="numeric" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="anfrage-city">Ort *</label>
+                            <input type="text" id="anfrage-city" name="anfrage_city" autocomplete="off">
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="form-group">
+                <label for="anfrage-message">Ihre Anfrage *</label>
+                <textarea id="anfrage-message" name="anfrage_message" rows="6" required></textarea>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="privacy-consent-anfrage" required>
+                <label for="privacy-consent-anfrage">Ich habe die <a href="<?php echo esc_url( home_url( '/impressum/datenschutzerklaerung/' ) ); ?>" target="_blank" rel="noopener">Datenschutzerklärung</a> zur Kenntnis genommen und bin damit einverstanden, dass meine persönlichen Daten erfasst, gespeichert und zur Bearbeitung meiner Anfrage verwendet werden. *</label>
+            </div>
+
+            <button type="submit" class="btn-submit">Anfrage senden</button>
+
+        </form>
+<?php else : ?>
         <form id="anfrage-form">
 
             <!-- Anti-spam honeypot: hidden off-screen, must stay empty for real users -->
@@ -175,9 +252,10 @@
             </div>
             
             <button type="submit" class="btn-submit">Anfrage senden</button>
-            
+
         </form>
-        
+<?php endif; ?>
+
         <!-- Success Message -->
         <div class="success-message" id="success-message-anfrage">
             <div class="success-icon">✓</div>

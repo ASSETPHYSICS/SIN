@@ -39,6 +39,17 @@ class Appointment_Booking {
 
 	private static $instance = null;
 
+	/** Anliegen des Kontaktformulars (Startseite); der Wert ist der Anzeigetext, der erste Eintrag verlangt eine Objektadresse. */
+	public static $kontakt_reasons = array(
+		'Anfrage bezüglich Verwaltung eines bestimmten Fondsobjektes',
+		'Angebotsanfrage',
+		'Presseanfrage',
+		'Bewerbung',
+		'Kooperationsangebot',
+		'Dienstleistungsangebot',
+		'Sonstiges',
+	);
+
 	public static function get_instance() {
 		if ( null === self::$instance ) {
 			self::$instance = new self();
@@ -54,7 +65,7 @@ class Appointment_Booking {
 
 		add_shortcode( 'appointment_booking', array( $this, 'render_booking_form' ) );
 
-		foreach ( array( 'get_available_slots', 'book_appointment', 'submit_anfrage' ) as $action ) {
+		foreach ( array( 'get_available_slots', 'book_appointment', 'submit_anfrage', 'submit_kontakt' ) as $action ) {
 			add_action( 'wp_ajax_' . $action, array( $this, 'ajax_' . $action ) );
 			add_action( 'wp_ajax_nopriv_' . $action, array( $this, 'ajax_' . $action ) );
 		}
@@ -102,9 +113,11 @@ class Appointment_Booking {
 	}
 
 	public function render_booking_form( $atts = array() ) {
-		$atts             = shortcode_atts( array( 'tab' => '', 'hide_investor' => '' ), $atts, 'appointment_booking' );
+		$atts             = shortcode_atts( array( 'tab' => '', 'hide_investor' => '', 'variant' => '' ), $atts, 'appointment_booking' );
 		$ab_hide_investor = ( '1' === (string) $atts['hide_investor'] );
 		$ab_tab           = sanitize_key( $atts['tab'] );
+		$ab_variant       = sanitize_key( $atts['variant'] );
+		$ab_reasons       = self::$kontakt_reasons;
 
 		$this->enqueue_assets();
 
@@ -327,6 +340,52 @@ class Appointment_Booking {
 		wp_send_json_success( array( 'message' => 'Ihre Anfrage wurde erfolgreich gesendet!' ) );
 	}
 
+	/** Kontaktformular der Startseite: Anliegen per Auswahl, bei Fondsobjekten mit Objektadresse. */
+	public function ajax_submit_kontakt() {
+		$this->guard( 'Ihre Anfrage wurde erfolgreich gesendet!', 'anfrage' );
+
+		$name    = $this->field( 'name', 100 );
+		$company = $this->field( 'company', 150 );
+		$email   = $this->email_field( 'email' );
+		$reason  = $this->field( 'reason', 100 );
+		$message = $this->field( 'message', 2000, true );
+
+		if ( '' === $name || '' === $email || '' === $reason || '' === $message ) {
+			$this->fail( 'Bitte füllen Sie alle Pflichtfelder aus.' );
+		}
+		if ( ! in_array( $reason, self::$kontakt_reasons, true ) ) {
+			$this->fail( 'Bitte wählen Sie einen Grund Ihrer Anfrage aus.' );
+		}
+		if ( ! is_email( $email ) ) {
+			$this->fail( 'Bitte geben Sie eine gültige E-Mail-Adresse ein.' );
+		}
+
+		$object = array();
+		if ( self::$kontakt_reasons[0] === $reason ) {
+			$object = array(
+				'street' => $this->field( 'street', 120 ),
+				'unit'   => $this->field( 'unit', 60 ),
+				'zip'    => $this->field( 'zip', 10 ),
+				'city'   => $this->field( 'city', 80 ),
+			);
+			if ( '' === $object['street'] || '' === $object['zip'] || '' === $object['city'] ) {
+				$this->fail( 'Bitte geben Sie die Objektadresse an (Straße, Hausnummer, Postleitzahl und Ort).' );
+			}
+			if ( ! preg_match( '/^[0-9A-Za-z][0-9A-Za-z \-]{2,9}$/', $object['zip'] ) ) {
+				$this->fail( 'Bitte geben Sie eine gültige Postleitzahl ein.' );
+			}
+		}
+
+		if ( ! $this->allow( 'mail', strtolower( $email ), (int) APPOINTMENT_BOOKING_RATE_EMAIL ) ) {
+			$this->fail( 'Für diese E-Mail-Adresse wurden bereits Nachrichten versendet. Bitte versuchen Sie es später erneut.' );
+		}
+
+		$this->send_anfrage_customer_email( $email, $name );
+		$this->send_kontakt_manager_email( $name, $company, $email, $reason, $object, $message );
+
+		wp_send_json_success( array( 'message' => 'Ihre Anfrage wurde erfolgreich gesendet!' ) );
+	}
+
 	/* ------------------------------------------------------------------
 	 * E-Mails
 	 * ---------------------------------------------------------------- */
@@ -406,6 +465,29 @@ class Appointment_Booking {
 		$body .= "Euer 2IP-Webmaster";
 
 		wp_mail( $this->recipient(), 'Neue Anfrage von ' . $name, $body, $this->headers( $name, $email ) );
+	}
+
+	private function send_kontakt_manager_email( $name, $company, $email, $reason, $object, $message ) {
+		$body  = "Hallo 2IP-Team,\n\n";
+		$body .= $name . " hat über das Kontaktformular eine Anfrage gestellt.\n\n";
+		$body .= "Grund der Anfrage: " . $reason . "\n";
+		if ( '' !== $company ) {
+			$body .= "Unternehmen: " . $company . "\n";
+		}
+		$body .= "E-Mail: " . $email . "\n";
+		if ( $object ) {
+			$body .= "\nObjektadresse:\n" . $object['street'] . "\n";
+			if ( '' !== $object['unit'] ) {
+				$body .= $object['unit'] . "\n";
+			}
+			$body .= $object['zip'] . ' ' . $object['city'] . "\n";
+		}
+		$body .= "\nAnfrage:\n" . $message . "\n\n";
+		$body .= "Bitte meldet euch baldmöglichst beim Interessenten.\n\n";
+		$body .= "Vielen Dank und viele Grüße\n";
+		$body .= "Euer 2IP-Webmaster";
+
+		wp_mail( $this->recipient(), 'Neue Anfrage von ' . $name . ' (' . $reason . ')', $body, $this->headers( $name, $email ) );
 	}
 
 	/* ------------------------------------------------------------------

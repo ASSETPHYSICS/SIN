@@ -158,7 +158,7 @@ Brüsseler Str. 1–3<br>
 </div>
 <div class="ip-col">
 <div id="ip-contact-form" class="ip-contact-panel">
-[appointment_booking tab="anfrage" hide_investor="1"]
+[appointment_booking tab="anfrage" variant="kontakt"]
 </div>
 </div>
 </div>""".replace("tel:+496948448550 0", "tel:+4969484485500") % kicker("Kontakt", "ip-kicker--light")

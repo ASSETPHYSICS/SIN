@@ -221,26 +221,58 @@ jQuery(document).ready(function($) {
         location.reload();
     });
     
+    // Kontaktformular (Startseite): Objektadresse nur bei "Anfrage bezüglich Verwaltung eines bestimmten Fondsobjektes"
+    const $reason = $('#anfrage-reason');
+    const isKontakt = $reason.length > 0;
+    const objectFields = '#anfrage-street, #anfrage-zip, #anfrage-city';
+
+    function toggleObject() {
+        const show = isKontakt && $reason.prop('selectedIndex') === 1;
+        $('#anfrage-objekt').prop('hidden', !show);
+        $(objectFields).prop('required', show);
+    }
+    if (isKontakt) {
+        $reason.on('change', toggleObject);
+        toggleObject();
+    }
+
     // Handle anfrage form submission
     $('#anfrage-form').on('submit', function(e) {
         e.preventDefault();
-        
+
         // Get form data
         const formData = {
-            action: 'submit_anfrage',
+            action: isKontakt ? 'submit_kontakt' : 'submit_anfrage',
             nonce: appointmentBooking.nonce,
             name: $('#anfrage-name').val(),
             company: $('#anfrage-company').val(),
-            investor_type: $('#anfrage-investor-type').val(),
             email: $('#anfrage-email').val(),
-            phone: $('#anfrage-phone').val(),
             message: $('#anfrage-message').val(),
             website: $('#anfrage-website').val()
         };
-        
+        if (isKontakt) {
+            formData.reason = $reason.val();
+            if ($reason.prop('selectedIndex') === 1) {
+                formData.street = $('#anfrage-street').val();
+                formData.unit = $('#anfrage-unit').val();
+                formData.zip = $('#anfrage-zip').val();
+                formData.city = $('#anfrage-city').val();
+            }
+        } else {
+            formData.investor_type = $('#anfrage-investor-type').val();
+            formData.phone = $('#anfrage-phone').val();
+        }
+
         // Validate
-        if (!formData.name || !formData.company || ($('#anfrage-investor-type').length && !formData.investor_type) || !formData.email || !formData.message) {
+        const missing = isKontakt
+            ? (!formData.name || !formData.email || !formData.reason || !formData.message)
+            : (!formData.name || !formData.company || ($('#anfrage-investor-type').length && !formData.investor_type) || !formData.email || !formData.message);
+        if (missing) {
             showErrorAnfrage('Bitte füllen Sie alle Pflichtfelder aus.');
+            return;
+        }
+        if (isKontakt && $reason.prop('selectedIndex') === 1 && (!formData.street || !formData.zip || !formData.city)) {
+            showErrorAnfrage('Bitte geben Sie die Objektadresse an (Straße, Hausnummer, Postleitzahl und Ort).');
             return;
         }
         

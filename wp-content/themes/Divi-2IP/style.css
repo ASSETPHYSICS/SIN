@@ -614,6 +614,14 @@ html body .ip-divi-sec .ip-link-toggle:hover { color: var(--ip-green); }
 .appointment-booking-wrapper .success-message h2 { color: var(--ip-forest); }
 .appointment-booking-wrapper .spinner { border-top-color: var(--ip-green); }
 .appointment-booking-wrapper .error-message { background: var(--ip-raspberry); }
+/* Kontaktformular der Startseite: Einleitung und bedingter Block „Objektadresse“ */
+.appointment-booking-wrapper .ab-intro p { margin: 0 0 1em; padding: 0; font-size: var(--fs-body); line-height: 1.35; color: var(--ip-black); max-width: none; }
+.appointment-booking-wrapper .ab-intro { margin-bottom: 20px; }
+.appointment-booking-wrapper .ab-objekt[hidden] { display: none !important; }
+.appointment-booking-wrapper .ab-objekt { margin: 0 0 15px; padding: 16px 18px 4px; background: var(--ip-mist); border-left: 3px solid var(--ip-green); animation: ip-sub-in .3s ease; }
+.appointment-booking-wrapper .ab-note { margin: 0 0 16px; padding: 0; font-size: var(--fs-xs); line-height: 1.4; color: var(--ip-text-2); max-width: none; }
+.appointment-booking-wrapper .ab-objekt fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+.appointment-booking-wrapper .ab-objekt legend { margin: 0 0 12px; padding: 0; font-weight: 700; font-size: var(--fs-body); color: var(--ip-black); }
 .flatpickr-day.selected, .flatpickr-day.selected:hover { background: var(--ip-green-print); border-color: var(--ip-green-print); color: var(--ip-white); }
 
 /* Passwortabfrage (geschützte Seiten) – Divi-Formular und WordPress-Standardformular */
@@ -662,7 +670,7 @@ html body .ip-divi-sec .ip-link-toggle:hover { color: var(--ip-green); }
 	.ip-fund-hero:before, .ip-nh-hero:before, .ip-slide, .ip-slider--5 .ip-slide { animation: none; }
 	.ip-slide:first-child { opacity: 1; }
 	.ip-tile img, .ip-tile:hover img { transition: none; transform: none; }
-	.ip-contact-panel, .et_pb_menu.dd-hamburger-menu .et_mobile_menu li.ip-nolink.ip-open > ul.sub-menu { animation: none; }
+	.ip-contact-panel, .ab-objekt, .et_pb_menu.dd-hamburger-menu .et_mobile_menu li.ip-nolink.ip-open > ul.sub-menu { animation: none; }
 	.et_pb_menu.dd-hamburger-menu .et_mobile_menu li.ip-nolink > a:after, .ip-link-toggle:after { transition: none; }
 	.et_pb_menu.dd-hamburger-menu .et_mobile_menu,
 	.et_pb_menu.dd-hamburger-menu .mobile_nav:before,
