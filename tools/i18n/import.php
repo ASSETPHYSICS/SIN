@@ -128,6 +128,7 @@ foreach ( $de_menus as $dm ) {
 			'menu-item-position'  => $it->menu_order,
 			'menu-item-classes'   => implode( ' ', array_filter( (array) $it->classes ) ),
 			'menu-item-target'    => $it->target,
+			'menu-item-xfn'       => $it->xfn,
 			'menu-item-status'    => 'publish',
 		);
 		if ( 'post_type' === $it->type ) {
