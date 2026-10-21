@@ -725,6 +725,15 @@ html body .ip-divi-sec .ip-link-toggle:hover { color: var(--ip-light-green); }
 .ip-divi-sec .ip-intro { max-width: 70ch; }
 .ip-values--3 { grid-template-columns: repeat(3, 1fr); }
 
+/* Fußnotenverweise in Rechtstexten (z. B. Vergütungspolitik) ohne Zeilensprung */
+.ip-legal sup { font-size: .7em; line-height: 0; vertical-align: super; }
+.ip-legal sup a { text-decoration: none; font-weight: 700; }
+
+/* Fondsseiten: Kopfbilder (Platzhalter aus dem 2IP-Bestand, bis eigene Motive vorliegen) */
+.ip-fund-hero--debeka { --ip-fund-bg: url('images/fonds/invesco.jpg'); }
+.ip-fund-hero--tas    { --ip-fund-bg: url('images/fonds/gerlif.jpg'); }
+.ip-fund-hero--tas:before { background-position: center 66%; }
+
 /* Standorte im Kontaktbereich */
 .ip-locations { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 40px; margin-top: 2em; }
 .ip-divi-sec .ip-locations p { margin: 0; line-height: 1.4; }

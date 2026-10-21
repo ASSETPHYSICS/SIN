@@ -2,13 +2,12 @@
 """Wandelt die Rechtstexte (.txt) in Divi-5-Blockinhalt. Der Wortlaut bleibt unverändert."""
 import html, json, re, sys
 
-SRC = __import__("os").environ.get("IP_CONTENT_DIR", "2IP Content") + "/"
+SRC = __import__("os").environ.get("IP_CONTENT_DIR", "SIN Content") + "/"
 VER = "5.0.0-public-beta.2"
 PAGES = {
-    14195: ("Impressum", "2IP_Impressum.txt", "impressum"),
-    14200: ("Datenschutzerklärung", "2IP_Datenschutzhinweise nach Art. 13, 1.txt", "web"),
-    14296: ("Datenschutzhinweise für Mieter – 2IP GmbH", "2IP_Datenschutzhinweise nach Art. 13, 1_Mieter.txt", "mieter"),
-    14297: ("Datenschutzhinweise für Mieter – 2IP S.à.r.l.", "2IP_Datenschutzhinweise nach Art. 13, 1_LUX.txt", "mieter"),
+    14195: ("Impressum", "SI-Impressum.txt", "impressum"),
+    14200: ("Datenschutzerklärung", "SI-Datenschutzerklärung.txt", "web"),
+    14296: ("Datenschutzhinweise für Mieter", "SI-Datenschutzhinweise für Mieter.txt", "mieter"),
 }
 KV = ("Zweck der Verarbeitung", "Rechtsgrundlage", "Datenkategorien", "Empfänger der Daten",
       "Beabsichtigte Drittlandübermittlung", "Betroffenenrechte", "Domainname", "Ablauf", "Dienst")
@@ -56,7 +55,7 @@ def render(kind, title, text):
             continue
         lines = [l.strip() for l in b]
         # Inhaltsverzeichnis (Website-Erklärung)
-        if kind == "web" and any(re.match(r"^\s+\d+\.", l) for l in b):
+        if kind == "web" and any(re.match(r"^\s{3,}\d+\.", l) for l in b):   # eingerückte Zeilen = Inhaltsverzeichnis
             items = []
             if not b[0][:1].isspace() and not ROMAN.match(b[0].strip()):
                 out.append('<p class="ip-lead">%s</p>' % esc(b[0]))
@@ -110,7 +109,7 @@ def render(kind, title, text):
                 flush(); out.append("<h2>%s</h2>" % esc(l)); i += 1; continue
             if re.match(r"^§ \d", l):
                 flush(); out.append("<h3>%s</h3>" % esc(l)); i += 1; continue
-            if l == "Bildrechte:":
+            if l in ("Bildrechte:", "Bildnachweis:", "Informationen zur Vergütungspolitik") or l.startswith("Beschwerdestelle für Fondsanleger der "):
                 flush(); out.append("<h3>%s</h3>" % esc(l)); i += 1; continue
             if re.search(r"\(Art\. [^)]*\)[^)]*\):$", l):
                 flush(); out.append("<h3>%s</h3>" % esc(l)); i += 1; continue
@@ -170,22 +169,19 @@ outdir = sys.argv[1]
 for pid, (title, fn, kind) in PAGES.items():
     raw = open(SRC + fn, encoding="utf-8-sig").read().replace("\r\n", "\n")
     src_raw = raw
-    if pid == 14195:  # Bildrechte neu
-        raw = re.sub(r"Bildrechte:.*?(?=Disclaimer / Rechtliche Hinweise)",
-                     "Bildrechte:\nAlle Bilder und Videos auf Startseite wurden mit Gemini (KI) generiert. Copyright Institutional Investment Partners GmbH.\n\n"
-                     "Nachhaltigkeit / People photo created by freepik – www.freepik.com / Scott Webb; Daria Obymaha; Skitterphoto – pexels.com / German Living Impact Fund – David Franck / Icons Nachhaltigkeitsziele – UNGC\n\n",
-                     raw, flags=re.S)
-        assert "Gemini" in raw and "Pixabay" not in raw
-    if pid == 14200:  # Google Fonts, Google Maps, Vimeo entfernen
+    if pid == 14200:  # Google Fonts und Google Maps entfernen (die neue Seite nutzt beides nicht)
         raw, n1 = re.subn(r"Google Fonts\nZweck der Verarbeitung.*?(?=Videointerviews/-statements und Podcasts)", "", raw, flags=re.S)
-        raw, n2 = re.subn(r"Dienst: vimeo\nCookie/ähnliche Technologie: player \(1 Jahr\)\nCookie/ähnliche Technologie: vuid \(2 Jahre\)\n+", "", raw)
-        assert n1 == 1 and n2 == 1, (n1, n2)
+        assert n1 == 1, n1
         assert not re.search(r"Google Fonts|Google Maps|Vimeo|vimeo", raw), re.findall(r".{40}(?:Google|imeo).{40}", raw)
     body = render(kind, title, raw)
+    if pid == 14195:  # Verweise auf Beschwerdestelle und Vergütungspolitik verlinken
+        body, a = re.subn(r"über diesen Link", 'über <a href="/impressum/beschwerdestelle/">diesen Link</a>', body)
+        body, b = re.subn(r"unter diesem Link", 'unter <a href="/impressum/verguetungspolitik/">diesem Link</a>', body)
+        assert a == 1 and b == 1, (a, b)
     open("%s/legal_%d.txt" % (outdir, pid), "w", encoding="utf-8").write(divi(body))
     # Textvergleich: sichtbarer Text muss dem Original entsprechen (ohne Boilerplate)
     plain = re.sub(r"<[^>]+>", " ", body)
     plain = html.unescape(plain)
     norm = lambda s: re.sub(r"\s+", "", s)
     miss = [w for w in re.split(r"\s+", raw) if w and norm(w) not in norm(plain) and not w.startswith(("©2025",))]
-    print(pid, title, "| Zeichen:", len(body), "| im Original, aber nicht im Ergebnis:", [m for m in miss if m not in ("Impressum", "/", "Datenschutzerklärung", "All", "rights", "reserved", "by", "Institutional", "Investment", "Partners", "GmbH", "und", "S.à", "r.l")][:12])
+    print(pid, title, "| Zeichen:", len(body), "| im Original, aber nicht im Ergebnis:", [m for m in miss if m not in ("Impressum", "/", "Datenschutzerklärung", "All", "rights", "reserved", "by", "ServiceInvest", "Kapitalverwaltungsgesellschaft", "mbH")][:12])

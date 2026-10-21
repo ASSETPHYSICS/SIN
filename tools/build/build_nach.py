@@ -40,20 +40,18 @@ def split(title, body):
 # ------------------------------------------------------------------ Inhalte
 HERO = """<div class="ip-wrap ip-hero__inner">
 <h1>Nachhaltiges Handeln</h1>
-<p class="ip-lead">bei Institutional Investment Partners</p>
+<p class="ip-lead">bei ServiceInvest</p>
 </div>"""
 
 UEBERZEUGUNGEN = """<div class="ip-wrap"><div class="ip-nh-card">
 <h2>Unsere Überzeugungen</h2>
-<p>Seit der Unternehmensgründung basiert das zentrale Nutzen- und Werteversprechen für die Anleger und Mitarbeiter von Institutional Investment Partners („2IP“)* und ihrer Unternehmensgruppe darauf, Nachhaltigkeitsfaktoren in sämtlichen Handlungen und Dienstleistungen einen wesentlichen Stellenwert einzuräumen.</p>
+<p>Als Teil der Institutional Investment Group basiert das zentrale Nutzen- und Werteversprechen für die Anleger und Mitarbeiter der ServiceInvest Kapitalverwaltungsgesellschaft mbH darauf, Nachhaltigkeitsfaktoren in sämtlichen Handlungen und Dienstleistungen einen wesentlichen Stellenwert einzuräumen.</p>
 <p>Befördert durch unsere gewonnene Marktstellung und die damit gestiegene gesellschaftliche Verantwortung – aber auch durch die generelle gesellschaftliche Entwicklung – ist es unser wesentliches Bestreben den eigenen Wirkungskreis zu nutzen, um einen bedeutsamen Unternehmensbeitrag für eine nachhaltige Umwelt und Gesellschaft zu leisten.</p>
-<p>Deswegen hat 2IP die allgemeinen Grundsätze zur nachhaltigen Unternehmensführung in eine eigene unternehmensbezogene Nachhaltigkeitsstrategie übersetzt, die nachhaltiges Handeln in und durch unser Unternehmen verbindlich macht und zudem etwaige nachteilige Auswirkungen bei Investitionsentscheidungen auf Nachhaltigkeitsfaktoren berücksichtigt.</p>
-<p class="ip-footnote">*Institutional Investment Partners GmbH, Frankfurt am Main, und Institutional Investment Partners S.à.r.l., Mertert (Luxemburg)</p>
+<p>Deswegen hat die ServiceInvest die allgemeinen Grundsätze zur nachhaltigen Unternehmensführung in eine eigene unternehmensbezogene Nachhaltigkeitsstrategie übersetzt, die nachhaltiges Handeln in und durch unser Unternehmen verbindlich macht und zudem etwaige nachteilige Auswirkungen bei Investitionsentscheidungen auf Nachhaltigkeitsfaktoren berücksichtigt.</p>
 </div></div>"""
 
 ECKPUNKTE = split("Zentrale Eckpunkte für unser nachhaltiges Handeln", """<p>Zentrale Inhalte und Eckpunkte unseres Handelns sind:</p>
 <ul class="ip-check">
-<li>Förderung von Impact-Fondsprojekten (sog. „Artikel 9-Fonds“ der EU-Verordnung 2019/2088), die es sich zur Aufgabe machen, mit ihren Handlungen Nachhaltigkeitsziele mindestens gleichwertig zu Renditezielen zu verfolgen.</li>
 <li>Förderung von verantwortlichem und nachhaltigem Handeln unserer Immobilienmanagement-Partner durch die Verankerung von Verhaltensleitlinien in der Geschäftsbeziehung.</li>
 <li>Förderung von Investitions- und Bewirtschaftungsinitiativen an Immobilien, die positiv darauf hinwirken,
 <ul class="ip-sub"><li>die CO<sub>2</sub>-Emission zu reduzieren und</li><li>die Gesamtbelastung von Mietern durch reduzierte Heiz- und Nebenkosten zu senken.</li></ul></li>
@@ -72,7 +70,7 @@ PRINZIPIEN = [
     "Wir werden zusammenarbeiten, um unsere Wirksamkeit bei der Umsetzung der Prinzipien zu steigern.",
     "Wir werden über unsere Aktivitäten und Fortschritte bei der Umsetzung der Prinzipien Bericht erstatten.",
 ]
-KODIZES = ('<div class="ip-wrap ip-nh-split"><div class="ip-nh-head"><h2>Kodizes und Mitgliedschaften</h2>'
+KODIZES = ('<div class="ip-wrap ip-nh-split"><div class="ip-nh-head"><h2>Prinzipien und Kodizes</h2>'
            '<p class="ip-signatory"><img src="%s/pri-signatory.png" alt="Principles for Responsible Investment (PRI) – Signatory" width="300" height="111"></p>'
            '<p>Die Institutional Investment Group mit all ihren Tochtergesellschaften ist Unterzeichnerin der von den Vereinten Nationen unterstützten Initiative Principles for Responsible Investment (PRI). Dieses Netzwerk internationaler Investoren hat sich der Etablierung und Umsetzung der Prinzipien verantwortlichen Investierens in die Praxis verschrieben. Die PRI wurden von der Gemeinschaft der Investoren entwickelt und spiegeln die Ansicht wider, dass Umwelt-, Sozial- und Governance-Themen (ESG) die Performance von Investmentportfolios beeinflussen können und daher von Investoren angemessen berücksichtigt werden müssen, wenn sie ihrer gesellschaftlichen Verantwortung nachkommen wollen. Durch die Umsetzung der Grundsätze tragen die Unterzeichner zur Entwicklung eines nachhaltigeren globalen Finanzsystems bei.</p>'
            '<p>Die 2006 von der UNEP Finance Initiative und dem UN Global Compact ins Leben gerufenen PRI bieten einen freiwilligen Rahmen, mit dem alle Investoren ESG-Aspekte in ihre Entscheidungsfindung und ihre Eigentumsverhältnisse einbeziehen und so ihre Ziele besser mit denen der Gesellschaft als Ganzes in Einklang bringen können.</p></div>'
@@ -128,7 +126,7 @@ secs = [
     section("ip-hero ip-nh-hero", "Hero", HERO),
     section("ip-nh-photo ip-nh-photo--ueberzeugung", "Unsere Überzeugungen", UEBERZEUGUNGEN),
     section("ip-sec ip-sec--white", "Zentrale Eckpunkte", ECKPUNKTE),
-    section("ip-sec ip-sec--mist", "Kodizes und Mitgliedschaften", KODIZES),
+    section("ip-sec ip-sec--mist", "Prinzipien und Kodizes", KODIZES),
     section("ip-sec ip-sec--white", "UN Global Compact", GLOBAL_COMPACT),
     section("ip-sec ip-sec--mist", "Nachhaltigkeitsrisiken", RISIKEN),
     section("ip-sec ip-sec--white", "Nachteilige Auswirkungen", AUSWIRKUNGEN),

@@ -40,5 +40,33 @@
         "title": "Datenschutzhinweise für Mieter",
         "parent": 14195,
         "menu_order": 0
+    },
+    {
+        "id": 14603,
+        "slug": "beschwerdestelle",
+        "title": "Beschwerdestelle für Fondsanleger",
+        "parent": 14195,
+        "menu_order": 0
+    },
+    {
+        "id": 14604,
+        "slug": "verguetungspolitik",
+        "title": "Vergütungspolitik",
+        "parent": 14195,
+        "menu_order": 0
+    },
+    {
+        "id": 14606,
+        "slug": "debeka-immobilien-invest-i",
+        "title": "Debeka Immobilien Invest I",
+        "parent": 14605,
+        "menu_order": 0
+    },
+    {
+        "id": 14607,
+        "slug": "tas-wohnen-i",
+        "title": "TAS Wohnen I",
+        "parent": 14605,
+        "menu_order": 0
     }
 ]
