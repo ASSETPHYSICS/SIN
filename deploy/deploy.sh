@@ -2,7 +2,8 @@
 # Deployment der 2IP-Website auf IONOS (per SSH im WordPress-Stammverzeichnis ausführen).
 #
 #   cd <WordPress-Stammverzeichnis>
-#   NEW_URL=https://2ip4896.live-website.com ADMIN_MAIL=name@2ip.de ./deploy.sh
+#   SRC_DIR=$HOME/2ip-code NEW_URL=https://2ip4896.live-website.com ADMIN_MAIL=name@2ip.de ./deploy.sh
+#   (SRC_DIR = entpacktes Code-Paket aus "git archive"; ohne SRC_DIR wird $REPO geklont, nur bei öffentlichem Repo)
 #
 # Voraussetzungen: SSH, PHP-CLI >= 8.3 (PHP=/usr/bin/php8.3-cli), git, bereits installiertes WordPress mit Divi,
 # bereinigter Dump unter $DUMP (nicht im Repository!). Schriften werden separat hochgeladen.
@@ -37,7 +38,12 @@ chmod 600 "$HOME/.divi-lizenz.json"
 
 echo "== 3/9 Theme und Plugins aus GitHub"
 TMP=$(mktemp -d)
-git clone --depth 1 "$REPO" "$TMP/repo"
+if [ -n "${SRC_DIR:-}" ]; then   # entpacktes Code-Paket (Repo ist privat, der Server kann nicht klonen)
+  [ -d "$SRC_DIR/wp-content/themes/Divi-2IP" ] || { echo "SRC_DIR ungültig: $SRC_DIR"; exit 1; }
+  ln -s "$SRC_DIR" "$TMP/repo"
+else
+  git clone --depth 1 "$REPO" "$TMP/repo"
+fi
 mkdir -p wp-content/themes wp-content/plugins wp-content/mu-plugins
 copy_dir() { # Quelle Ziel [rsync-Optionen]
   if command -v rsync >/dev/null; then rsync -a --delete "${@:3}" "$1/" "$2/"; else rm -rf "$2"; mkdir -p "$2"; cp -a "$1/." "$2/"; fi
