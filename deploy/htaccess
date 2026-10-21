@@ -7,12 +7,12 @@
 # AuthUserFile /kunden/homepages/XX/dXXXXXXXX/htdocs/.htpasswd
 # Require valid-user
 
-# --- HTTPS erzwingen ---
+# --- HTTPS erzwingen: erst zum Livegang aktivieren (die Service-Domain bietet kein HTTPS) ---
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteCond %{HTTPS} !=on
-RewriteCond %{HTTP:X-Forwarded-Proto} !https
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# RewriteCond %{HTTPS} !=on
+# RewriteCond %{HTTP:X-Forwarded-Proto} !https
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # --- Livegang: www -> Hauptdomain (Zeilen erst dann aktivieren) ---
 # RewriteCond %{HTTP_HOST} ^www\.2ip\.de$ [NC]
