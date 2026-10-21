@@ -108,7 +108,7 @@ add_filter( 'et_get_option_et_divi_divi_seo_home_titletext', function ( $value )
 	return 'en' === divi_2ip_lang() ? 'Institutional Investment Partners – Investor Master KVG for Real Assets' : $value;
 } );
 add_filter( 'et_get_option_et_divi_divi_seo_home_descriptiontext', function ( $value ) {
-	return 'en' === divi_2ip_lang() ? 'Investor Master KVG and AIFM for Real Assets: clear structures, reliable processes and transparent information for institutional investors.' : $value;
+	return 'en' === divi_2ip_lang() ? 'A unique investor platform and investment consulting for real asset investments by institutional investors.' : $value;
 } );
 
 // Viewport ohne Zoom-Sperre (Divi setzt maximum-scale=1 und user-scalable=0; das verhindert Vergrößern auf Mobilgeräten).

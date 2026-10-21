@@ -12,7 +12,7 @@
 global $wpdb;
 
 $home_title       = 'Institutional Investment Partners – Investoren-Master-KVG für Real Assets';
-$home_description = 'Investoren-Master-KVG und AIFM für Real Assets: klare Strukturen, verlässliche Prozesse und transparente Informationen für institutionelle Anleger.';
+$home_description = 'Einzigartige Investoren-Plattform und Investment-Consulting für Real-Asset-Investments institutioneller Anleger.';
 $tagline          = 'Investoren-Master-KVG · AIFM · Investment Consulting';
 
 // --- Divi-Optionen
