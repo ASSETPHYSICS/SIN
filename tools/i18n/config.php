@@ -15,6 +15,13 @@ return array(
 		'nachhaltigkeit'  => array( 'slug' => 'sustainability',  'title' => 'Sustainability',  'status' => 'publish' ),
 		// Polylang (kostenlos) erlaubt denselben Slug nicht in zwei Sprachen.
 		'second-opinions' => array( 'slug' => 'second-opinion',  'title' => 'Second Opinions', 'status' => 'publish' ),
+
+		// Offenlegungen: offizielle englische Fassungen (nicht DeepL), Übersetzungsspeicher mit "source": "official".
+		// GalCap und German Living Impact Fund haben nur deutsche Fassungen.
+		'pai-statement'                  => array( 'slug' => 'pai-statement',                  'title' => 'PAI Statement',                   'status' => 'publish' ),
+		'icf-glog'                       => array( 'slug' => 'icf-glog',                       'title' => 'ICF GLoG',                        'status' => 'publish' ),
+		'invesco-real-ge-2014'           => array( 'slug' => 'invesco-real-ge-2014',           'title' => 'Invesco Real GE 2014',            'status' => 'publish' ),
+		'ww-real-estate-international-1' => array( 'slug' => 'ww-real-estate-international-1', 'title' => 'W&W Real Estate International 1', 'status' => 'publish' ),
 	),
 
 	// Menüs, an deren Ende der Sprachumschalter steht (Slug des deutschen Menüs).

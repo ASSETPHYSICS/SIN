@@ -52,5 +52,7 @@ Die Texte des Kontaktformulars stehen in `wp-content/plugins/appointment-booking
 - **Schriften** (Neue Haas Grotesk Display, lizenziert) – `wp-content/themes/Divi-2IP/fonts/` lokal ablegen.
 - **Divi**, WordPress-Kern, `wp-content/uploads/` (Mediathek).
 - **`wp-config.php`**, Datenbank-Dumps, Passwörter, der DeepL-API-Schlüssel (liegt lokal in `~/.config/2ip/deepl.env`).
-- **Passwortgeschützte Fondsseiten** (Inhalte und Passwörter) und Entwürfe – das Repository ist öffentlich.
+- **Passwörter der Fondsseiten** – sie stehen nur in der Datenbank; `import.php` übernimmt sie von der deutschen Seite.
+  Die Texte der Offenlegungen (SFDR, auch als PDF veröffentlicht) liegen im Übersetzungsspeicher `content/i18n/en/`.
+  Das Repository ist privat; vor einer Veröffentlichung diese Dateien prüfen.
 - Persönliche Daten (z. B. Terminanfragen, Benutzerkonten).
