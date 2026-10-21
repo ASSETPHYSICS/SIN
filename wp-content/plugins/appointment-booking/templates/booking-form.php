@@ -126,7 +126,7 @@ $ab_privacy_link = '<a href="' . esc_url( Appointment_Booking::privacy_url() ) .
 if ( 'kontakt' === $ab_variant ) : ?>
         <div class="ab-intro">
             <p><?php esc_html_e( 'Wir freuen uns, dass Sie Kontakt mit uns aufnehmen wollen. Bitte nutzen Sie das folgende Formular, wir melden uns baldmöglichst bei Ihnen.', 'appointment-booking' ); ?></p>
-            <p><?php esc_html_e( 'Sollten Sie eine Anfrage zu einem Objekt haben, das zu einem der von den 2IP-Kapitalverwaltungsgesellschaften verwalteten Fonds gehört, empfehlen wir Ihnen, sich direkt an den verantwortlichen Asset- oder Property Manager (Hausverwaltung) zu wenden. Dort kann Ihnen noch schneller ohne Umweg geholfen werden.', 'appointment-booking' ); ?></p>
+            <p><?php esc_html_e( 'Sollten Sie eine Anfrage zu einem Objekt haben, das zu einem der von der ServiceInvest verwalteten Fonds gehört, empfehlen wir Ihnen, sich direkt an den verantwortlichen Asset- oder Property Manager (Hausverwaltung) zu wenden. Dort kann Ihnen noch schneller ohne Umweg geholfen werden.', 'appointment-booking' ); ?></p>
         </div>
 
         <form id="anfrage-form" class="kontakt-form">
@@ -162,7 +162,7 @@ if ( 'kontakt' === $ab_variant ) : ?>
             </div>
 
             <div class="ab-objekt" id="anfrage-objekt" hidden>
-                <p class="ab-note"><?php esc_html_e( 'Bei Anfragen zu einem konkreten Objekt, das zu einem der von den 2IP-Kapitalverwaltungsgesellschaften verwalteten Fonds gehört, empfehlen wir Ihnen, sich direkt an den verantwortlichen Asset- oder Property Manager zu wenden. Dort kann Ihnen noch schneller ohne Umweg geholfen werden.', 'appointment-booking' ); ?></p>
+                <p class="ab-note"><?php esc_html_e( 'Bei Anfragen zu einem konkreten Objekt, das zu einem der von der ServiceInvest verwalteten Fonds gehört, empfehlen wir Ihnen, sich direkt an den verantwortlichen Asset- oder Property Manager zu wenden. Dort kann Ihnen noch schneller ohne Umweg geholfen werden.', 'appointment-booking' ); ?></p>
                 <fieldset>
                     <legend><?php esc_html_e( 'Objektadresse (Pflichtangabe)', 'appointment-booking' ); ?></legend>
                     <div class="form-group">

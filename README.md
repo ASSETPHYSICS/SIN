@@ -1,13 +1,19 @@
-# 2IP – Website (WordPress, Divi 5)
+# ServiceInvest – Website (WordPress, Divi 5)
 
-Lokale Entwicklungsumgebung der Website von Institutional Investment Partners (2IP).
+Lokale Entwicklungsumgebung der Website der ServiceInvest Kapitalverwaltungsgesellschaft mbH (serviceinvest.de).
+
+Abgeleitet von der 2IP-Website (https://github.com/ASSETPHYSICS-org/2ip, Git-Remote `upstream`): gleiche Struktur,
+gleiche CSS-Klassen und Variablennamen, eigene Farben, Logos und Inhalte. Gemeinsame Verbesserungen lassen sich mit
+`git fetch upstream` und `git cherry-pick` übernehmen; ServiceInvest-spezifisches CSS steht gesammelt in Abschnitt 9 der `style.css`.
+
+Lokal: `php -S 127.0.0.1:8081 router.php` (Datenbank `sin_neu`).
 Versioniert wird nur Eigenes; WordPress-Kern, Divi, Uploads und Zugangsdaten gehören nicht ins Repository.
 
 ## Inhalt
 
 | Pfad | Zweck |
 |---|---|
-| `wp-content/themes/Divi-2IP/` | Child-Theme (CSS, JS, Bilder, Downloads, `functions.php`) |
+| `wp-content/themes/Divi-SIN/` | Child-Theme (CSS, JS, Bilder, Downloads, `functions.php`) |
 | `wp-content/plugins/appointment-booking/` | Terminbuchung / Kontaktanfrage (Rate-Limit, Validierung, konfigurierbare Adressen) |
 | `wp-content/mu-plugins/2ip-hardening.php` | Härtung (REST-Benutzerliste, XML-RPC, Header) |
 | `router.php` | Router für den lokalen PHP-Server (`php -S 127.0.0.1:8080 router.php`) |
@@ -49,7 +55,7 @@ Die Texte des Kontaktformulars stehen in `wp-content/plugins/appointment-booking
 
 ## Bewusst nicht im Repository
 
-- **Schriften** (Neue Haas Grotesk Display, lizenziert) – `wp-content/themes/Divi-2IP/fonts/` lokal ablegen.
+- **Schriften** (Neue Haas Grotesk Display, lizenziert) – `wp-content/themes/Divi-SIN/fonts/` lokal ablegen.
 - **Divi**, WordPress-Kern, `wp-content/uploads/` (Mediathek).
 - **`wp-config.php`**, Datenbank-Dumps, Passwörter, der DeepL-API-Schlüssel (liegt lokal in `~/.config/2ip/deepl.env`).
 - **Passwörter der Fondsseiten** – sie stehen nur in der Datenbank; `import.php` übernimmt sie von der deutschen Seite.

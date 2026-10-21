@@ -3,7 +3,7 @@
 import json, sys
 
 VER = "5.0.0-public-beta.2"
-IMG = "/wp-content/themes/Divi-2IP/images/nachhaltigkeit"
+IMG = "/wp-content/themes/Divi-SIN/images/nachhaltigkeit"
 
 
 def j(obj):
@@ -109,7 +109,7 @@ AUSWIRKUNGEN = split("Systematische Berücksichtigung von nachteiligen Nachhalti
 STEWARDSHIP = split("Stewardship", """<p>Befördert durch unsere gewonnene Marktstellung und die damit gestiegene gesellschaftliche Verantwortung – aber auch durch die generelle gesellschaftliche Entwicklung – ist es unser wesentliches Bestreben den eigenen Wirkungskreis zu nutzen, um einen bedeutsamen Unternehmensbeitrag für eine nachhaltige Umwelt und Gesellschaft zu leisten.</p>
 <p>Dazu zählt auch die Nutzung des eigenen Einflusses (Stewardship) auf Dritte zur Optimierung des langfristigen Gesamtwerts, einschließlich gemeinsamer wirtschaftlicher, sozialer und ökologischer Werte, von denen die Renditen und die Interessen der Anleger und Begünstigten abhängen.</p>
 <p>Wie wir als Institutional Investment Group im Sinne der Nachhaltigkeit verantwortungsvoll Einfluss nehmen wollen beschreibt die folgende Leitlinie:</p>
-<p><a href="/wp-content/themes/Divi-2IP/downloads/2023-10-31-2IG-Stewardship-Policy.pdf" target="_blank" rel="noopener">Stewardship-Policy</a>.</p>""")
+<p><a href="/wp-content/themes/Divi-SIN/downloads/2023-10-31-2IG-Stewardship-Policy.pdf" target="_blank" rel="noopener">Stewardship-Policy</a>.</p>""")
 
 VERGUETUNG = """<div class="ip-wrap"><div class="ip-nh-card">
 <h2>Nachhaltigkeit in der Vergütungspolitik</h2>

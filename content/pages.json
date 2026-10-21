@@ -35,59 +35,10 @@
         "menu_order": 0
     },
     {
-        "id": 14294,
-        "slug": "karriere",
-        "title": "Karriere",
-        "parent": 0,
-        "menu_order": 0
-    },
-    {
         "id": 14296,
-        "slug": "datenschutzhinweise-mieter-2ip-gmbh",
-        "title": "Datenschutzhinweise für Mieter – 2IP GmbH",
+        "slug": "datenschutzhinweise-mieter",
+        "title": "Datenschutzhinweise für Mieter",
         "parent": 14195,
-        "menu_order": 0
-    },
-    {
-        "id": 14297,
-        "slug": "datenschutzhinweise-mieter-2ip-sarl",
-        "title": "Datenschutzhinweise für Mieter – 2IP S.à.r.l.",
-        "parent": 14195,
-        "menu_order": 0
-    },
-    {
-        "id": 14345,
-        "slug": "second-opinions",
-        "title": "Second Opinions",
-        "parent": 0,
-        "menu_order": 0
-    },
-    {
-        "id": 14377,
-        "slug": "home",
-        "title": "Home",
-        "parent": 0,
-        "menu_order": 0
-    },
-    {
-        "id": 14378,
-        "slug": "sustainability",
-        "title": "Sustainability",
-        "parent": 0,
-        "menu_order": 0
-    },
-    {
-        "id": 14379,
-        "slug": "second-opinion",
-        "title": "Second Opinions",
-        "parent": 0,
-        "menu_order": 0
-    },
-    {
-        "id": 14507,
-        "slug": "pai-statement",
-        "title": "PAI Statement",
-        "parent": 14378,
         "menu_order": 0
     }
 ]

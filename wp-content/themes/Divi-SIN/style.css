@@ -1,8 +1,8 @@
 /*
-Theme Name:   Divi 2IP
-Theme URI:    https://2ip.de
-Description:  Child-Theme von Divi mit den Marken-Schriften und -Farben von 2IP (Institutional Investment Partners).
-Author:       2IP
+Theme Name:   Divi ServiceInvest
+Theme URI:    https://serviceinvest.de
+Description:  Child-Theme von Divi mit den Marken-Schriften und -Farben der ServiceInvest Kapitalverwaltungsgesellschaft. Abgeleitet vom 2IP-Theme (gleiche Struktur und Klassen, andere Farbwerte).
+Author:       ServiceInvest
 Template:     Divi
 Version:      1.1.0
 Text Domain:  divi-2ip
@@ -29,21 +29,22 @@ Aufbau dieser Datei
 @font-face { font-family: 'Archivo Narrow';                src: url('fonts/ArchivoNarrow-Bold.woff2') format('woff2');             font-weight: 700;     font-style: normal; font-display: swap; }
 
 :root {
-	/* Marken-Farben */
-	--ip-white: #FDFEFD;
-	--ip-black: #1A1A1A;
-	--ip-green: #64C34D;        /* Display-Grün (Bildschirm) */
-	--ip-green-print: #28AE28;  /* Print-Grün, auch Zwischentitel */
-	--ip-forest: #024017;
-	--ip-light-green: #B9EDB5;
-	--ip-mist: #F1F4F9;
-	--ip-text-2: #5F5F5F;
-	--ip-note: #878787;
-	--ip-rule: #D4D4D4;
-	--ip-grid: #E3E3E3;
-	--ip-raspberry: #C0718A;
-	--ip-apricot: #EDA56A;
-	--ip-honey: #E8BF6A;
+	/* Marken-Farben ServiceInvest. Die Variablennamen stammen aus dem 2IP-Theme und bleiben gleich,
+	   damit Änderungen zwischen beiden Seiten übertragbar sind; maßgeblich ist die Rolle, nicht der Name. */
+	--ip-white: #FFFFFF;        /* SI White */
+	--ip-black: #1B1B1C;        /* SI Black: Text, dunkler Hintergrund */
+	--ip-green: #C50000;        /* SI Red: Markenfarbe, Akzente, Buttons, Abschluss-Flächen */
+	--ip-green-print: #8E0A0A;  /* Deep Red: Kicker, Links */
+	--ip-forest: #4A0E0E;       /* Oxblood: dunkle Sektionen, Kennzahlen */
+	--ip-light-green: #D9604F;  /* Ember: heller Akzent */
+	--ip-mist: #F2F2F3;         /* heller Sektionshintergrund (zwischen SI White und Silver Grey) */
+	--ip-text-2: #595A5C;       /* Dark Grey */
+	--ip-note: #8F9395;         /* Grey */
+	--ip-rule: #D5D6D6;         /* Light Grey: Trennlinien */
+	--ip-grid: #E8E9EA;         /* Silver Grey */
+	--ip-raspberry: #D9604F;    /* Ember: Fehlermeldungen */
+	--ip-apricot: #E3B04B;      /* Ochre */
+	--ip-honey: #A6BFA0;        /* Sage */
 
 	--ip-font: 'Neue Haas Grotesk Display Pro', Arial, Helvetica, sans-serif;
 	--ip-font-figure: 'Archivo Narrow', 'Arial Narrow', Arial, sans-serif;
@@ -308,10 +309,10 @@ html body .et_pb_menu.dd-hamburger-menu ul.et_mobile_menu {
 	font-size: var(--fs-body);
 	line-height: 1;
 	cursor: pointer;
-	box-shadow: 0 10px 24px rgba(100, 195, 77, 0.35);
+	box-shadow: 0 10px 24px rgba(197, 0, 0, 0.35);
 	transition: background-color .2s ease, box-shadow .2s ease;
 }
-.ip-btn:hover { background: var(--ip-green-print); box-shadow: 0 10px 24px rgba(40, 174, 40, 0.4); color: var(--ip-black) !important; }
+.ip-btn:hover { background: var(--ip-green-print); box-shadow: 0 10px 24px rgba(142, 10, 10, 0.4); color: var(--ip-black) !important; }
 
 /* Raster: zweispaltig (Startseite) */
 .ip-grid--split { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 0.4cm; row-gap: 48px; }
@@ -610,9 +611,9 @@ html body .ip-divi-sec .ip-link-toggle:hover { color: var(--ip-green); }
 .appointment-booking-wrapper .form-group textarea:focus { border-color: var(--ip-green); }
 .appointment-booking-wrapper input[type="checkbox"] { accent-color: var(--ip-green-print); }
 .appointment-booking-wrapper .btn-submit,
-.appointment-booking-wrapper .btn-new-booking { background: var(--ip-green); color: var(--ip-black); font-weight: 700; box-shadow: 0 10px 24px rgba(100, 195, 77, 0.35); }
+.appointment-booking-wrapper .btn-new-booking { background: var(--ip-green); color: var(--ip-black); font-weight: 700; box-shadow: 0 10px 24px rgba(197, 0, 0, 0.35); }
 .appointment-booking-wrapper .btn-submit:hover,
-.appointment-booking-wrapper .btn-new-booking:hover { background: var(--ip-green-print); box-shadow: 0 10px 24px rgba(40, 174, 40, 0.4); }
+.appointment-booking-wrapper .btn-new-booking:hover { background: var(--ip-green-print); box-shadow: 0 10px 24px rgba(142, 10, 10, 0.4); }
 .appointment-booking-wrapper .success-icon { background: var(--ip-green-print); }
 .appointment-booking-wrapper .success-message h2 { color: var(--ip-forest); }
 .appointment-booking-wrapper .spinner { border-top-color: var(--ip-green); }
@@ -639,11 +640,11 @@ html body .ip-divi-sec .ip-link-toggle:hover { color: var(--ip-green); }
 .et_password_protected_form h1 { font-size: var(--fs-h3); line-height: 1; margin: 0 0 .5em; padding: 0; }
 .post-password-form input[type="password"] { width: 100%; box-sizing: border-box; padding: 14px 16px; border: 0; border-bottom: 2px solid var(--ip-rule); background: var(--ip-mist); font: 400 17px var(--ip-font); }
 .post-password-form input[type="password"]:focus { outline: none; border-bottom-color: var(--ip-green); }
-.post-password-form input[type="submit"] { margin-top: 12px; border: 0; border-radius: 999px; padding: 14px 32px; background: var(--ip-green); color: var(--ip-black); font: 700 16px var(--ip-font); cursor: pointer; box-shadow: 0 10px 24px rgba(100, 195, 77, .35); }
+.post-password-form input[type="submit"] { margin-top: 12px; border: 0; border-radius: 999px; padding: 14px 32px; background: var(--ip-green); color: var(--ip-black); font: 700 16px var(--ip-font); cursor: pointer; box-shadow: 0 10px 24px rgba(197, 0, 0, .35); }
 .post-password-form input[type="submit"]:hover { background: var(--ip-green-print); }
 .et_password_protected_form p input { background: var(--ip-mist) !important; color: var(--ip-black) !important; font: 400 17px var(--ip-font) !important; padding: 14px 16px !important; border: 0 !important; border-bottom: 2px solid var(--ip-rule) !important; width: 100% !important; box-sizing: border-box; }
 .et_password_protected_form p input:focus { outline: none; border-bottom-color: var(--ip-green) !important; }
-.et_password_protected_form .et_submit_button { display: inline-block !important; float: none !important; border: 0 !important; border-radius: 999px !important; padding: 14px 32px !important; background: var(--ip-green) !important; color: var(--ip-black) !important; font: 700 16px var(--ip-font) !important; box-shadow: 0 10px 24px rgba(100, 195, 77, .35); cursor: pointer; }
+.et_password_protected_form .et_submit_button { display: inline-block !important; float: none !important; border: 0 !important; border-radius: 999px !important; padding: 14px 32px !important; background: var(--ip-green) !important; color: var(--ip-black) !important; font: 700 16px var(--ip-font) !important; box-shadow: 0 10px 24px rgba(197, 0, 0, .35); cursor: pointer; }
 .et_password_protected_form .et_submit_button:hover { background: var(--ip-green-print) !important; padding: 14px 32px !important; }
 
 /* ==================================================================
@@ -682,4 +683,56 @@ html body .ip-divi-sec .ip-link-toggle:hover { color: var(--ip-green); }
 	html body .et_pb_menu.dd-hamburger-menu .mobile_nav .mobile_menu_bar,
 	html body .et_pb_menu.dd-hamburger-menu .mobile_nav .mobile_menu_bar:before,
 	html body .et_pb_menu.dd-hamburger-menu .mobile_nav .mobile_menu_bar:after { transition-duration: .01s !important; transition-delay: 0s !important; }
+}
+
+/* ==================================================================
+   9  SERVICEINVEST – ABWEICHUNGEN VOM 2IP-THEME
+   Bewusst am Dateiende gesammelt, damit Änderungen aus dem 2IP-Theme
+   (Abschnitte 1–8) konfliktarm übernommen werden können.
+   ================================================================== */
+
+/* Logo: Wort-Bild-Marke ist breiter als die 2IP-Marke */
+.et_pb_menu .et_pb_menu__logo img,
+.et_pb_menu .et_pb_menu__logo-wrap img { width: 190px; }
+
+/* Kontrast: weiße Schrift auf SI Red (schwarz auf Rot ist zu schwach) */
+.ip-btn,
+.appointment-booking-wrapper .btn-submit,
+.appointment-booking-wrapper .btn-new-booking,
+.appointment-booking-wrapper .tab-button.active { color: var(--ip-white) !important; }
+
+/* Kicker und Akzente auf dunklen Flächen in Ember (Rot auf Oxblood ist kaum lesbar) */
+.ip-sec--black .ip-kicker, .ip-sec--forest .ip-kicker, .ip-hero .ip-kicker, .ip-kicker--light,
+.ip-fund-hero--home .ip-kicker { color: var(--ip-light-green); }
+html body .ip-divi-sec .ip-link-toggle { text-decoration-color: var(--ip-light-green); }
+html body .ip-divi-sec .ip-link-toggle:hover { color: var(--ip-light-green); }
+.ip-sec--forest a:not(.ip-btn):not(.ip-link-toggle) { color: var(--ip-white); text-decoration: underline; text-decoration-color: var(--ip-light-green); text-underline-offset: 4px; }
+
+/* Abschluss-Fläche in SI Red (laut Farbpalette), Text weiß */
+.ip-sec--brand { background: var(--ip-green); color: var(--ip-white); }
+.ip-sec--brand .ip-kicker { color: var(--ip-white); opacity: .85; }
+.ip-sec--brand .ip-conclusion { color: var(--ip-white); }
+
+/* Kennzahlen (z. B. „100 %“): drei Spalten, große Ziffern in der Kennzahl-Schrift */
+.ip-figures { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 4vw, 64px); margin-top: 56px; }
+.ip-figure { border-top: 1px solid rgba(255, 255, 255, .35); padding-top: 24px; }
+.ip-sec--white .ip-figure, .ip-sec--mist .ip-figure { border-top-color: var(--ip-rule); }
+.ip-divi-sec .ip-figure__value { display: block; font-family: var(--ip-font-figure); font-weight: 700; font-size: clamp(56px, 6.4vw, 96px); line-height: 1; letter-spacing: -0.01em; margin: 0 0 .25em; }
+.ip-divi-sec .ip-figure h3 { margin-bottom: .45em; }
+.ip-divi-sec .ip-figure p { max-width: 34ch; }
+
+/* Leistungen: Einleitung und hervorgehobener Absatz über den Kacheln */
+.ip-divi-sec .ip-intro { max-width: 70ch; }
+.ip-values--3 { grid-template-columns: repeat(3, 1fr); }
+
+/* Standorte im Kontaktbereich */
+.ip-locations { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 40px; margin-top: 2em; }
+.ip-divi-sec .ip-locations p { margin: 0; line-height: 1.4; }
+.ip-divi-sec .ip-locations .ip-kicker { margin-bottom: .8em; }
+
+@media (max-width: 980px) {
+	.ip-figures, .ip-values--3 { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+	.ip-locations { grid-template-columns: 1fr; }
 }

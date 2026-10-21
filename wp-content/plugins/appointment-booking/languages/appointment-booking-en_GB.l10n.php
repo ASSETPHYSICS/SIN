@@ -29,15 +29,15 @@ return array(
 
 		// Bestätigungsmail an den Absender
 		'Guten Tag %s,' => 'Dear %s,',
-		'vielen Dank für Ihr Interesse an 2IP.' => 'Thank you for your interest in 2IP.',
+		'vielen Dank für Ihr Interesse an %s.' => 'Thank you for your interest in %s.',
 		'Ihre Anfrage haben wir erhalten, ein Kollege wird sich baldmöglichst bei Ihnen melden.' => 'We have received your enquiry and a colleague will be in touch with you as soon as possible.',
 		'Mit freundlichen Grüßen' => 'Kind regards',
-		'Ihr 2IP-Team' => 'Your 2IP team',
-		'Bestätigung Ihrer Anfrage bei 2IP' => 'Confirmation of your enquiry to 2IP',
+		'Ihr %s-Team' => 'Your %s team',
+		'Bestätigung Ihrer Anfrage bei %s' => 'Confirmation of your enquiry to %s',
 
 		// Kontaktformular (Startseite)
 		'Wir freuen uns, dass Sie Kontakt mit uns aufnehmen wollen. Bitte nutzen Sie das folgende Formular, wir melden uns baldmöglichst bei Ihnen.' => 'We are pleased that you would like to get in touch with us. Please use the form below and we will get back to you as soon as possible.',
-		'Sollten Sie eine Anfrage zu einem Objekt haben, das zu einem der von den 2IP-Kapitalverwaltungsgesellschaften verwalteten Fonds gehört, empfehlen wir Ihnen, sich direkt an den verantwortlichen Asset- oder Property Manager (Hausverwaltung) zu wenden. Dort kann Ihnen noch schneller ohne Umweg geholfen werden.' => 'If your enquiry concerns a property belonging to one of the funds managed by the 2IP capital management companies, we recommend contacting the responsible asset or property manager (property management) directly. They will be able to help you more quickly.',
+		'Sollten Sie eine Anfrage zu einem Objekt haben, das zu einem der von der ServiceInvest verwalteten Fonds gehört, empfehlen wir Ihnen, sich direkt an den verantwortlichen Asset- oder Property Manager (Hausverwaltung) zu wenden. Dort kann Ihnen noch schneller ohne Umweg geholfen werden.' => 'If your enquiry concerns a property belonging to one of the funds managed by ServiceInvest, we recommend contacting the responsible asset or property manager (property management) directly. They will be able to help you more quickly.',
 		'Ihr Name' => 'Your name',
 		'Ihre E-Mail-Adresse' => 'Your email address',
 		'Ihr Unternehmen' => 'Your company',
@@ -50,7 +50,7 @@ return array(
 		'Kooperationsangebot' => 'Partnership proposal',
 		'Dienstleistungsangebot' => 'Service offer',
 		'Sonstiges' => 'Other',
-		'Bei Anfragen zu einem konkreten Objekt, das zu einem der von den 2IP-Kapitalverwaltungsgesellschaften verwalteten Fonds gehört, empfehlen wir Ihnen, sich direkt an den verantwortlichen Asset- oder Property Manager zu wenden. Dort kann Ihnen noch schneller ohne Umweg geholfen werden.' => 'For enquiries about a specific property belonging to one of the funds managed by the 2IP capital management companies, we recommend contacting the responsible asset or property manager directly. They will be able to help you more quickly.',
+		'Bei Anfragen zu einem konkreten Objekt, das zu einem der von der ServiceInvest verwalteten Fonds gehört, empfehlen wir Ihnen, sich direkt an den verantwortlichen Asset- oder Property Manager zu wenden. Dort kann Ihnen noch schneller ohne Umweg geholfen werden.' => 'For enquiries about a specific property belonging to one of the funds managed by ServiceInvest, we recommend contacting the responsible asset or property manager directly. They will be able to help you more quickly.',
 		'Objektadresse (Pflichtangabe)' => 'Property address (required)',
 		'Straße, Hausnummer' => 'Street, house number',
 		'Einheit/Stockwerk' => 'Unit/floor',

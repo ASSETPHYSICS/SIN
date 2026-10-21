@@ -22,7 +22,8 @@ define( 'APPOINTMENT_BOOKING_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 $appointment_booking_defaults = array(
 	'APPOINTMENT_BOOKING_TO'             => 'info@2ig.de', // Empfänger der internen Benachrichtigungen
 	'APPOINTMENT_BOOKING_FROM'           => 'contact@2ig.de', // Absenderadresse aller Mails
-	'APPOINTMENT_BOOKING_FROM_NAME'      => '2IP',
+	'APPOINTMENT_BOOKING_FROM_NAME'      => 'ServiceInvest',   // Absendername (Alias)
+	'APPOINTMENT_BOOKING_BRAND'          => 'ServiceInvest',   // Markenname in Mails und Betreffzeilen
 	'APPOINTMENT_BOOKING_RETENTION_DAYS' => 180,           // Buchungsdaten werden so lange nach dem Termin aufbewahrt
 	'APPOINTMENT_BOOKING_RATE_IP'        => 5,             // Absendungen pro IP und Stunde
 	'APPOINTMENT_BOOKING_RATE_EMAIL'     => 2,             // Bestätigungsmails pro Empfängeradresse und Stunde
@@ -442,17 +443,17 @@ class Appointment_Booking {
 
 	private function send_customer_email( $to, $name, $date, $time ) {
 		$body  = "Guten Tag " . $name . ",\n\n";
-		$body .= "vielen Dank für Ihr Interesse an 2IP und Ihre Terminbuchung am " . $date . " um " . $time . ".\n\n";
+		$body .= "vielen Dank für Ihr Interesse an " . APPOINTMENT_BOOKING_BRAND . " und Ihre Terminbuchung am " . $date . " um " . $time . ".\n\n";
 		$body .= "Der Termin wird per MS-Teams-Call stattfinden, die Einladung mit Einwahl-Link erhalten Sie in einer separaten E-Mail direkt von Ihrem Gesprächspartner.\n\n";
 		$body .= "Sollten Sie den Termin doch nicht wahrnehmen können oder Fragen haben, kommen Sie gern auf uns zu.\n\n";
 		$body .= "Mit freundlichen Grüßen\n";
-		$body .= "Ihr 2IP-Team";
+		$body .= "Ihr " . APPOINTMENT_BOOKING_BRAND . "-Team";
 
-		wp_mail( $to, 'Terminbestätigung - Ihr Termin bei 2IP', $body, $this->headers() );
+		wp_mail( $to, 'Terminbestätigung - Ihr Termin bei ' . APPOINTMENT_BOOKING_BRAND, $body, $this->headers() );
 	}
 
 	private function send_manager_email( $name, $company, $investor_type, $email, $phone, $date, $time, $message ) {
-		$body  = "Hallo 2IP-Team,\n\n";
+		$body  = "Hallo " . APPOINTMENT_BOOKING_BRAND . "-Team,\n\n";
 		$body .= $name . " möchte einen Teams-Call am " . $date . " um " . $time . " vereinbaren.\n\n";
 		$body .= "Unternehmen: " . $company . "\n";
 		$body .= "Anlegertyp: " . $investor_type . "\n";
@@ -466,25 +467,25 @@ class Appointment_Booking {
 		}
 		$body .= "Bitte koordiniert den Termin intern und sendet entsprechende Einwahldaten an den Interessenten.\n\n";
 		$body .= "Vielen Dank und viele Grüße\n";
-		$body .= "Euer 2IP-Webmaster";
+		$body .= "Euer " . APPOINTMENT_BOOKING_BRAND . "-Webmaster";
 
-		wp_mail( $this->recipient(), 'Neue Terminbuchung - ' . $date . ' um ' . $time, $body, $this->headers( $name, $email ) );
+		wp_mail( $this->recipient(), '[' . APPOINTMENT_BOOKING_BRAND . '] Neue Terminbuchung - ' . $date . ' um ' . $time, $body, $this->headers( $name, $email ) );
 	}
 
 	/** Bestätigung an den Absender – bewusst ohne Wiedergabe des Freitexts. */
 	private function send_anfrage_customer_email( $to, $name ) {
 		/* translators: %s: Name des Absenders */
 		$body  = sprintf( __( 'Guten Tag %s,', 'appointment-booking' ), $name ) . "\n\n";
-		$body .= __( 'vielen Dank für Ihr Interesse an 2IP.', 'appointment-booking' ) . "\n\n";
+		$body .= sprintf( __( 'vielen Dank für Ihr Interesse an %s.', 'appointment-booking' ), APPOINTMENT_BOOKING_BRAND ) . "\n\n";
 		$body .= __( 'Ihre Anfrage haben wir erhalten, ein Kollege wird sich baldmöglichst bei Ihnen melden.', 'appointment-booking' ) . "\n\n";
 		$body .= __( 'Mit freundlichen Grüßen', 'appointment-booking' ) . "\n";
-		$body .= __( 'Ihr 2IP-Team', 'appointment-booking' );
+		$body .= sprintf( __( 'Ihr %s-Team', 'appointment-booking' ), APPOINTMENT_BOOKING_BRAND );
 
-		wp_mail( $to, __( 'Bestätigung Ihrer Anfrage bei 2IP', 'appointment-booking' ), $body, $this->headers() );
+		wp_mail( $to, sprintf( __( 'Bestätigung Ihrer Anfrage bei %s', 'appointment-booking' ), APPOINTMENT_BOOKING_BRAND ), $body, $this->headers() );
 	}
 
 	private function send_anfrage_manager_email( $name, $company, $investor_type, $email, $phone, $message ) {
-		$body  = "Hallo 2IP-Team,\n\n";
+		$body  = "Hallo " . APPOINTMENT_BOOKING_BRAND . "-Team,\n\n";
 		$body .= $name . " hat eine Anfrage gestellt.\n\n";
 		$body .= "Unternehmen: " . $company . "\n";
 		if ( '' !== $investor_type ) {
@@ -497,13 +498,13 @@ class Appointment_Booking {
 		$body .= "\nAnfrage:\n" . $message . "\n\n";
 		$body .= "Bitte meldet euch baldmöglichst beim Interessenten.\n\n";
 		$body .= "Vielen Dank und viele Grüße\n";
-		$body .= "Euer 2IP-Webmaster";
+		$body .= "Euer " . APPOINTMENT_BOOKING_BRAND . "-Webmaster";
 
-		wp_mail( $this->recipient(), 'Neue Anfrage von ' . $name, $body, $this->headers( $name, $email ) );
+		wp_mail( $this->recipient(), '[' . APPOINTMENT_BOOKING_BRAND . '] Neue Anfrage von ' . $name, $body, $this->headers( $name, $email ) );
 	}
 
 	private function send_kontakt_manager_email( $name, $company, $email, $reason, $object, $message ) {
-		$body  = "Hallo 2IP-Team,\n\n";
+		$body  = "Hallo " . APPOINTMENT_BOOKING_BRAND . "-Team,\n\n";
 		$body .= $name . " hat über das Kontaktformular eine Anfrage gestellt.\n\n";
 		$body .= "Grund der Anfrage: " . $reason . "\n";
 		if ( '' !== $company ) {
@@ -520,9 +521,9 @@ class Appointment_Booking {
 		$body .= "\nAnfrage:\n" . $message . "\n\n";
 		$body .= "Bitte meldet euch baldmöglichst beim Interessenten.\n\n";
 		$body .= "Vielen Dank und viele Grüße\n";
-		$body .= "Euer 2IP-Webmaster";
+		$body .= "Euer " . APPOINTMENT_BOOKING_BRAND . "-Webmaster";
 
-		wp_mail( $this->recipient(), 'Neue Anfrage von ' . $name . ' (' . $reason . ')', $body, $this->headers( $name, $email ) );
+		wp_mail( $this->recipient(), '[' . APPOINTMENT_BOOKING_BRAND . '] Neue Anfrage von ' . $name . ' (' . $reason . ')', $body, $this->headers( $name, $email ) );
 	}
 
 	/* ------------------------------------------------------------------

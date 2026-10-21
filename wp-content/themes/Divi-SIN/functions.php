@@ -1,6 +1,6 @@
 <?php
 /**
- * Divi 2IP – Child-Theme.
+ * Divi ServiceInvest – Child-Theme (abgeleitet vom 2IP-Theme; Funktionsnamen divi_2ip_* bleiben für den Abgleich gleich).
  */
 
 // Version = Theme-Version + Änderungszeit der Datei (Cache-Busting).
@@ -105,10 +105,10 @@ add_filter( 'appointment_booking_privacy_url', function ( $url ) {
 
 // Titel und Beschreibung der Startseite für Suchmaschinen auf Englisch.
 add_filter( 'et_get_option_et_divi_divi_seo_home_titletext', function ( $value ) {
-	return 'en' === divi_2ip_lang() ? 'Institutional Investment Partners – Investor Master KVG for Real Assets' : $value;
+	return 'en' === divi_2ip_lang() ? 'ServiceInvest – Asset Servicing and Partner Funds' : $value;
 } );
 add_filter( 'et_get_option_et_divi_divi_seo_home_descriptiontext', function ( $value ) {
-	return 'en' === divi_2ip_lang() ? 'A unique investor platform and investment consulting for real asset investments by institutional investors.' : $value;
+	return 'en' === divi_2ip_lang() ? 'Asset servicing and partner funds for asset managers and KVGs of real estate assets – KVG insourcing in the middle and back office.' : $value;
 } );
 
 // Viewport ohne Zoom-Sperre (Divi setzt maximum-scale=1 und user-scalable=0; das verhindert Vergrößern auf Mobilgeräten).

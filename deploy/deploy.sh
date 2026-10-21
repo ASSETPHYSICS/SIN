@@ -39,7 +39,7 @@ chmod 600 "$HOME/.divi-lizenz.json"
 echo "== 3/9 Theme und Plugins aus GitHub"
 TMP=$(mktemp -d)
 if [ -n "${SRC_DIR:-}" ]; then   # entpacktes Code-Paket (Repo ist privat, der Server kann nicht klonen)
-  [ -d "$SRC_DIR/wp-content/themes/Divi-2IP" ] || { echo "SRC_DIR ungültig: $SRC_DIR"; exit 1; }
+  [ -d "$SRC_DIR/wp-content/themes/Divi-SIN" ] || { echo "SRC_DIR ungültig: $SRC_DIR"; exit 1; }
   ln -s "$SRC_DIR" "$TMP/repo"
 else
   git clone --depth 1 "$REPO" "$TMP/repo"
@@ -48,16 +48,16 @@ mkdir -p wp-content/themes wp-content/plugins wp-content/mu-plugins
 copy_dir() { # Quelle Ziel [rsync-Optionen]
   if command -v rsync >/dev/null; then rsync -a --delete "${@:3}" "$1/" "$2/"; else rm -rf "$2"; mkdir -p "$2"; cp -a "$1/." "$2/"; fi
 }
-mkdir -p wp-content/themes/Divi-2IP
-if [ -d wp-content/themes/Divi-2IP/fonts ]; then
-  copy_dir "$TMP/repo/wp-content/themes/Divi-2IP" wp-content/themes/Divi-2IP --exclude=fonts/
+mkdir -p wp-content/themes/Divi-SIN
+if [ -d wp-content/themes/Divi-SIN/fonts ]; then
+  copy_dir "$TMP/repo/wp-content/themes/Divi-SIN" wp-content/themes/Divi-SIN --exclude=fonts/
 else
-  copy_dir "$TMP/repo/wp-content/themes/Divi-2IP" wp-content/themes/Divi-2IP
+  copy_dir "$TMP/repo/wp-content/themes/Divi-SIN" wp-content/themes/Divi-SIN
 fi
 copy_dir "$TMP/repo/wp-content/plugins/appointment-booking" wp-content/plugins/appointment-booking
 cp -a "$TMP/repo/wp-content/mu-plugins/." wp-content/mu-plugins/
 rm -rf "$TMP"
-[ -f wp-content/themes/Divi-2IP/fonts/NeueHaasGroteskDisplay-Roman.woff2 ] || echo "!! WARNUNG: Schriften fehlen in wp-content/themes/Divi-2IP/fonts/ (separat hochladen)"
+[ -f wp-content/themes/Divi-SIN/fonts/NeueHaasGroteskDisplay-Roman.woff2 ] || echo "!! WARNUNG: Schriften fehlen in wp-content/themes/Divi-SIN/fonts/ (separat hochladen)"
 
 echo "== 4/9 Konfiguration"
 WP config set table_prefix wp_ --type=variable
@@ -81,7 +81,7 @@ echo "Verbleibende Treffer für $OLD_HOST:"; WP db query "select count(*) from w
 
 echo "== 7/9 Divi-Lizenz zurückschreiben, Theme/Plugin aktivieren, Admin anlegen"
 if grep -q "{" "$HOME/.divi-lizenz.json"; then WP option update et_automatic_updates_options --format=json < "$HOME/.divi-lizenz.json"; fi
-WP theme activate Divi-2IP
+WP theme activate Divi-SIN
 WP plugin activate appointment-booking
 WP option update blog_public "$INDEXING"
 WP rewrite structure '/%postname%/' --hard
@@ -94,7 +94,7 @@ WP user create "$ADMIN_USER" "$ADMIN_MAIL" --role=administrator --user_pass="$AD
 echo "Admin: $ADMIN_USER  Passwort (einmalig, sofort in den Passwortmanager): $ADMIN_PW"
 
 echo "== 8/9 Dateirechte"
-find wp-content/themes/Divi-2IP wp-content/plugins/appointment-booking wp-content/mu-plugins -type d -exec chmod 755 {} \; -o -type f -exec chmod 644 {} \;
+find wp-content/themes/Divi-SIN wp-content/plugins/appointment-booking wp-content/mu-plugins -type d -exec chmod 755 {} \; -o -type f -exec chmod 644 {} \;
 chmod 600 wp-config.php
 
 echo "== 9/9 Prüfung"

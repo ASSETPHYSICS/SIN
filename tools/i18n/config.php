@@ -1,9 +1,9 @@
 <?php
 /**
- * Konfiguration der Übersetzung DE -> EN.
+ * Konfiguration der Übersetzung DE -> EN (ServiceInvest).
  *
  * pages:    deutscher Slug => englischer Slug, englischer Titel (null = DeepL), Status der englischen Seite.
- *           Nur hier eingetragene Seiten werden übersetzt. Rechtstexte und Fondsseiten erst nach Freigabe.
+ *           Nur hier eingetragene Seiten werden übersetzt. Noch leer: die Inhalte werden zuerst auf Deutsch fertiggestellt.
  * glossary: feste Übersetzungen für DeepL (Quelle => Ziel), z. B. Fachbegriffe und Namen.
  */
 return array(
@@ -11,50 +11,33 @@ return array(
 	'target'   => 'EN-GB',
 
 	'pages'    => array(
-		'startseite'      => array( 'slug' => 'home',            'title' => 'Home',            'status' => 'publish' ),
-		'nachhaltigkeit'  => array( 'slug' => 'sustainability',  'title' => 'Sustainability',  'status' => 'publish' ),
-		// Polylang (kostenlos) erlaubt denselben Slug nicht in zwei Sprachen.
-		'second-opinions' => array( 'slug' => 'second-opinion',  'title' => 'Second Opinions', 'status' => 'publish' ),
-
-		// Offenlegungen: offizielle englische Fassungen (nicht DeepL), Übersetzungsspeicher mit "source": "official".
-		// GalCap und German Living Impact Fund haben nur deutsche Fassungen.
-		'pai-statement'                  => array( 'slug' => 'pai-statement',                  'title' => 'PAI Statement',                   'status' => 'publish' ),
-		'icf-glog'                       => array( 'slug' => 'icf-glog',                       'title' => 'ICF GLoG',                        'status' => 'publish' ),
-		'invesco-real-ge-2014'           => array( 'slug' => 'invesco-real-ge-2014',           'title' => 'Invesco Real GE 2014',            'status' => 'publish' ),
-		'ww-real-estate-international-1' => array( 'slug' => 'ww-real-estate-international-1', 'title' => 'W&W Real Estate International 1', 'status' => 'publish' ),
+		// 'startseite'     => array( 'slug' => 'home',           'title' => 'Home',           'status' => 'publish' ),
+		// 'nachhaltigkeit' => array( 'slug' => 'sustainability', 'title' => 'Sustainability', 'status' => 'publish' ),
 	),
 
 	// Menüs, an deren Ende der Sprachumschalter steht (Slug des deutschen Menüs).
 	'switcher_menus' => array( 'menu' ),
 
 	// Englische Bezeichnungen der Menüeinträge (deutscher Titel => englischer Titel).
-	// Seiten ohne englische Fassung verlinken weiter auf die deutsche Seite.
 	'menu_labels' => array(
-		'Nachhaltigkeit'                                => 'Sustainability',
-		'Ausgewählte Fonds'                             => 'Selected funds',
-		'Karriere'                                      => 'Careers',
-		'Kontakt'                                       => 'Contact',
-		'Impressum'                                     => 'Legal notice',
-		'Datenschutzerklärung'                          => 'Privacy policy',
-		'Datenschutzhinweise für Mieter – 2IP GmbH'     => 'Privacy notice for tenants – 2IP GmbH',
-		'Datenschutzhinweise für Mieter – 2IP S.à.r.l.' => 'Privacy notice for tenants – 2IP S.à.r.l.',
+		'Nachhaltigkeit'                 => 'Sustainability',
+		'Karriere'                       => 'Careers',
+		'Kontakt'                        => 'Contact',
+		'Impressum'                      => 'Legal notice',
+		'Datenschutzerklärung'           => 'Privacy policy',
+		'Datenschutzhinweise für Mieter' => 'Privacy notice for tenants',
 	),
 
 	'glossary' => array(
-		'Investoren-Master-KVG'   => 'Investor Master KVG',
-		'Master-KVG'              => 'Master KVG',
-		'Spezial-AIF'             => 'special AIF',
-		'Real Assets'             => 'Real Assets',
-		'Real Asset-Investments'  => 'Real Asset investments',
-		'Investment Consulting'   => 'Investment Consulting',
-		'Second Opinion'          => 'Second Opinion',
-		'Second Opinions'         => 'Second Opinions',
-		'Manager Selection'       => 'Manager Selection',
-		'Asset Manager'           => 'Asset Manager',
-		'Property Manager'        => 'Property Manager',
-		'Hausverwaltung'          => 'property management',
-		'Anlageausschüsse'        => 'investment committees',
-		'Investor Solutions Division' => 'Investor Solutions Division',
-		'Asset Servicing Division'    => 'Asset Servicing Division',
+		'Kapitalverwaltungsgesellschaft' => 'KVG (German capital management company)',
+		'KVG-Insourcing'                 => 'KVG insourcing',
+		'Asset Servicing Division'       => 'Asset Servicing Division',
+		'Partner-Fonds'                  => 'partner funds',
+		'Real Assets'                    => 'Real Assets',
+		'Asset Manager'                  => 'Asset Manager',
+		'AIFMControl'                    => 'AIFMControl',
+		'Middle und Back Office'         => 'middle and back office',
+		'Meldewesen'                     => 'regulatory reporting',
+		'Investorenberichtswesen'        => 'investor reporting',
 	),
 );

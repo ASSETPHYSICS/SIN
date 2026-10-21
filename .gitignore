@@ -15,10 +15,10 @@
 !/wp-content/plugins/appointment-booking/
 !/wp-content/themes/
 /wp-content/themes/*
-!/wp-content/themes/Divi-2IP/
+!/wp-content/themes/Divi-SIN/
 
 # Lizenzierte Schriften (Repo ist öffentlich) und große Mediendateien
-/wp-content/themes/Divi-2IP/fonts/
+/wp-content/themes/Divi-SIN/fonts/
 *.woff
 *.woff2
 *.zip
