@@ -58,6 +58,7 @@ class Appointment_Booking {
 	}
 
 	private function __construct() {
+		add_action( 'init', array( $this, 'load_textdomain' ) );
 		add_action( 'init', array( $this, 'register_post_type' ) );
 		add_action( 'init', array( $this, 'schedule_cleanup' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_assets' ) );
@@ -74,6 +75,25 @@ class Appointment_Booking {
 	/* ------------------------------------------------------------------
 	 * Infrastruktur
 	 * ---------------------------------------------------------------- */
+
+	/** Texte sind auf Deutsch geschrieben; Übersetzungen liegen in languages/ (z. B. appointment-booking-en_GB.l10n.php). */
+	public function load_textdomain() {
+		load_plugin_textdomain( 'appointment-booking', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+	}
+
+	/**
+	 * AJAX-Anfragen kennen die Sprache der Seite nicht: das Formular sendet sie mit (Feld "lang", z. B. "en-GB").
+	 * Meldungen und die Bestätigungsmail an den Absender erscheinen dann in dieser Sprache.
+	 */
+	private function use_request_locale() {
+		$lang = isset( $_POST['lang'] ) ? strtolower( substr( sanitize_text_field( wp_unslash( $_POST['lang'] ) ), 0, 2 ) ) : '';
+		$map  = (array) apply_filters( 'appointment_booking_locales', array( 'en' => 'en_GB', 'de' => 'de_DE' ) );
+		if ( isset( $map[ $lang ] ) && determine_locale() !== $map[ $lang ] ) {
+			switch_to_locale( $map[ $lang ] );
+			unload_textdomain( 'appointment-booking' );
+			$this->load_textdomain();
+		}
+	}
 
 	public function register_post_type() {
 		register_post_type( 'appointment', array(
@@ -109,7 +129,19 @@ class Appointment_Booking {
 		wp_localize_script( 'appointment-booking-js', 'appointmentBooking', array(
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			'nonce'   => wp_create_nonce( 'appointment_booking_nonce' ),
+			'i18n'    => array(
+				'required'      => __( 'Bitte füllen Sie alle Pflichtfelder aus.', 'appointment-booking' ),
+				'privacy'       => __( 'Bitte akzeptieren Sie die Datenschutzerklärung.', 'appointment-booking' ),
+				'objectAddress' => __( 'Bitte geben Sie die Objektadresse an (Straße, Hausnummer, Postleitzahl und Ort).', 'appointment-booking' ),
+				'error'         => __( 'Ein Fehler ist aufgetreten.', 'appointment-booking' ),
+				'errorRetry'    => __( 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.', 'appointment-booking' ),
+			),
 		) );
+	}
+
+	/** Link zur Datenschutzerklärung; Themes können ihn sprachabhängig umleiten (Filter appointment_booking_privacy_url). */
+	public static function privacy_url() {
+		return (string) apply_filters( 'appointment_booking_privacy_url', home_url( '/impressum/datenschutzerklaerung/' ) );
 	}
 
 	public function render_booking_form( $atts = array() ) {
@@ -168,15 +200,16 @@ class Appointment_Booking {
 
 	/** Gemeinsame Prüfungen aller Absende-Aktionen: Honigtopf, Nonce, Rate-Limit pro IP. */
 	private function guard( $success_message, $limit_bucket ) {
+		$this->use_request_locale();
 		// Honeypot: Bots füllen das versteckte Feld. Wir tun so, als wäre alles gut.
 		if ( ! empty( $_POST['website'] ) ) {
 			wp_send_json_success( array( 'message' => $success_message ) );
 		}
 		if ( ! check_ajax_referer( 'appointment_booking_nonce', 'nonce', false ) ) {
-			$this->fail( 'Sicherheitsüberprüfung fehlgeschlagen. Bitte laden Sie die Seite neu.' );
+			$this->fail( __( 'Sicherheitsüberprüfung fehlgeschlagen. Bitte laden Sie die Seite neu.', 'appointment-booking' ) );
 		}
 		if ( ! $this->allow( $limit_bucket, $this->client_ip(), (int) APPOINTMENT_BOOKING_RATE_IP ) ) {
-			$this->fail( 'Zu viele Anfragen. Bitte versuchen Sie es später erneut.' );
+			$this->fail( __( 'Zu viele Anfragen. Bitte versuchen Sie es später erneut.', 'appointment-booking' ) );
 		}
 	}
 
@@ -235,22 +268,23 @@ class Appointment_Booking {
 	 * ---------------------------------------------------------------- */
 
 	public function ajax_get_available_slots() {
+		$this->use_request_locale();
 		if ( ! check_ajax_referer( 'appointment_booking_nonce', 'nonce', false ) ) {
-			$this->fail( 'Sicherheitsüberprüfung fehlgeschlagen. Bitte laden Sie die Seite neu.' );
+			$this->fail( __( 'Sicherheitsüberprüfung fehlgeschlagen. Bitte laden Sie die Seite neu.', 'appointment-booking' ) );
 		}
 		if ( ! $this->allow( 'slots', $this->client_ip(), 60 ) ) {
-			$this->fail( 'Zu viele Anfragen. Bitte versuchen Sie es später erneut.' );
+			$this->fail( __( 'Zu viele Anfragen. Bitte versuchen Sie es später erneut.', 'appointment-booking' ) );
 		}
 		$date = $this->field( 'date', 10 );
 		if ( ! $this->valid_date( $date ) ) {
-			$this->fail( 'Bitte wählen Sie einen gültigen Werktag.' );
+			$this->fail( __( 'Bitte wählen Sie einen gültigen Werktag.', 'appointment-booking' ) );
 		}
 		$available = array_diff( $this->get_all_time_slots(), $this->get_booked_slots( $date ) );
 		wp_send_json_success( array( 'slots' => array_values( $available ) ) );
 	}
 
 	public function ajax_book_appointment() {
-		$this->guard( 'Termin erfolgreich gebucht! Sie erhalten in Kürze eine Bestätigungs-E-Mail.', 'book' );
+		$this->guard( __( 'Termin erfolgreich gebucht! Sie erhalten in Kürze eine Bestätigungs-E-Mail.', 'appointment-booking' ), 'book' );
 
 		$date          = $this->field( 'date', 10 );
 		$time          = $this->field( 'time', 5 );
@@ -262,16 +296,16 @@ class Appointment_Booking {
 		$message       = $this->field( 'message', 2000, true );
 
 		if ( '' === $date || '' === $time || '' === $name || '' === $company || '' === $investor_type || '' === $email ) {
-			$this->fail( 'Bitte füllen Sie alle Pflichtfelder aus.' );
+			$this->fail( __( 'Bitte füllen Sie alle Pflichtfelder aus.', 'appointment-booking' ) );
 		}
 		if ( ! is_email( $email ) ) {
-			$this->fail( 'Bitte geben Sie eine gültige E-Mail-Adresse ein.' );
+			$this->fail( __( 'Bitte geben Sie eine gültige E-Mail-Adresse ein.', 'appointment-booking' ) );
 		}
 		if ( ! $this->valid_date( $date ) || ! in_array( $time, $this->get_all_time_slots(), true ) ) {
-			$this->fail( 'Bitte wählen Sie einen gültigen Termin.' );
+			$this->fail( __( 'Bitte wählen Sie einen gültigen Termin.', 'appointment-booking' ) );
 		}
 		if ( ! $this->allow( 'mail', strtolower( $email ), (int) APPOINTMENT_BOOKING_RATE_EMAIL ) ) {
-			$this->fail( 'Für diese E-Mail-Adresse wurden bereits Nachrichten versendet. Bitte versuchen Sie es später erneut.' );
+			$this->fail( __( 'Für diese E-Mail-Adresse wurden bereits Nachrichten versendet. Bitte versuchen Sie es später erneut.', 'appointment-booking' ) );
 		}
 
 		// Doppelbuchungen verhindern: Prüfung und Anlegen unter einer Datenbanksperre.
@@ -281,7 +315,7 @@ class Appointment_Booking {
 
 		if ( in_array( $time, $this->get_booked_slots( $date ), true ) ) {
 			$wpdb->get_var( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lock ) );
-			$this->fail( 'Dieser Termin wurde bereits gebucht. Bitte wählen Sie einen anderen Zeitpunkt.' );
+			$this->fail( __( 'Dieser Termin wurde bereits gebucht. Bitte wählen Sie einen anderen Zeitpunkt.', 'appointment-booking' ) );
 		}
 
 		$post_id = wp_insert_post( array(
@@ -302,7 +336,7 @@ class Appointment_Booking {
 		$wpdb->get_var( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lock ) );
 
 		if ( is_wp_error( $post_id ) || ! $post_id ) {
-			$this->fail( 'Fehler beim Speichern des Termins.' );
+			$this->fail( __( 'Fehler beim Speichern des Termins.', 'appointment-booking' ) );
 		}
 
 		$formatted_date = $this->valid_date( $date )->format( 'd.m.Y' );
@@ -310,11 +344,11 @@ class Appointment_Booking {
 		$this->send_customer_email( $email, $name, $formatted_date, $time );
 		$this->send_manager_email( $name, $company, $investor_type, $email, $phone, $formatted_date, $time, $message );
 
-		wp_send_json_success( array( 'message' => 'Termin erfolgreich gebucht! Sie erhalten in Kürze eine Bestätigungs-E-Mail.' ) );
+		wp_send_json_success( array( 'message' => __( 'Termin erfolgreich gebucht! Sie erhalten in Kürze eine Bestätigungs-E-Mail.', 'appointment-booking' ) ) );
 	}
 
 	public function ajax_submit_anfrage() {
-		$this->guard( 'Ihre Anfrage wurde erfolgreich gesendet!', 'anfrage' );
+		$this->guard( __( 'Ihre Anfrage wurde erfolgreich gesendet!', 'appointment-booking' ), 'anfrage' );
 
 		$name          = $this->field( 'name', 100 );
 		$company       = $this->field( 'company', 150 );
@@ -325,24 +359,24 @@ class Appointment_Booking {
 		$message       = $this->field( 'message', 2000, true );
 
 		if ( '' === $name || '' === $company || ( $has_investor && '' === $investor_type ) || '' === $email || '' === $message ) {
-			$this->fail( 'Bitte füllen Sie alle Pflichtfelder aus.' );
+			$this->fail( __( 'Bitte füllen Sie alle Pflichtfelder aus.', 'appointment-booking' ) );
 		}
 		if ( ! is_email( $email ) ) {
-			$this->fail( 'Bitte geben Sie eine gültige E-Mail-Adresse ein.' );
+			$this->fail( __( 'Bitte geben Sie eine gültige E-Mail-Adresse ein.', 'appointment-booking' ) );
 		}
 		if ( ! $this->allow( 'mail', strtolower( $email ), (int) APPOINTMENT_BOOKING_RATE_EMAIL ) ) {
-			$this->fail( 'Für diese E-Mail-Adresse wurden bereits Nachrichten versendet. Bitte versuchen Sie es später erneut.' );
+			$this->fail( __( 'Für diese E-Mail-Adresse wurden bereits Nachrichten versendet. Bitte versuchen Sie es später erneut.', 'appointment-booking' ) );
 		}
 
 		$this->send_anfrage_customer_email( $email, $name );
 		$this->send_anfrage_manager_email( $name, $company, $investor_type, $email, $phone, $message );
 
-		wp_send_json_success( array( 'message' => 'Ihre Anfrage wurde erfolgreich gesendet!' ) );
+		wp_send_json_success( array( 'message' => __( 'Ihre Anfrage wurde erfolgreich gesendet!', 'appointment-booking' ) ) );
 	}
 
 	/** Kontaktformular der Startseite: Anliegen per Auswahl, bei Fondsobjekten mit Objektadresse. */
 	public function ajax_submit_kontakt() {
-		$this->guard( 'Ihre Anfrage wurde erfolgreich gesendet!', 'anfrage' );
+		$this->guard( __( 'Ihre Anfrage wurde erfolgreich gesendet!', 'appointment-booking' ), 'anfrage' );
 
 		$name    = $this->field( 'name', 100 );
 		$company = $this->field( 'company', 150 );
@@ -351,13 +385,13 @@ class Appointment_Booking {
 		$message = $this->field( 'message', 2000, true );
 
 		if ( '' === $name || '' === $email || '' === $reason || '' === $message ) {
-			$this->fail( 'Bitte füllen Sie alle Pflichtfelder aus.' );
+			$this->fail( __( 'Bitte füllen Sie alle Pflichtfelder aus.', 'appointment-booking' ) );
 		}
 		if ( ! in_array( $reason, self::$kontakt_reasons, true ) ) {
-			$this->fail( 'Bitte wählen Sie einen Grund Ihrer Anfrage aus.' );
+			$this->fail( __( 'Bitte wählen Sie einen Grund Ihrer Anfrage aus.', 'appointment-booking' ) );
 		}
 		if ( ! is_email( $email ) ) {
-			$this->fail( 'Bitte geben Sie eine gültige E-Mail-Adresse ein.' );
+			$this->fail( __( 'Bitte geben Sie eine gültige E-Mail-Adresse ein.', 'appointment-booking' ) );
 		}
 
 		$object = array();
@@ -369,21 +403,21 @@ class Appointment_Booking {
 				'city'   => $this->field( 'city', 80 ),
 			);
 			if ( '' === $object['street'] || '' === $object['zip'] || '' === $object['city'] ) {
-				$this->fail( 'Bitte geben Sie die Objektadresse an (Straße, Hausnummer, Postleitzahl und Ort).' );
+				$this->fail( __( 'Bitte geben Sie die Objektadresse an (Straße, Hausnummer, Postleitzahl und Ort).', 'appointment-booking' ) );
 			}
 			if ( ! preg_match( '/^[0-9A-Za-z][0-9A-Za-z \-]{2,9}$/', $object['zip'] ) ) {
-				$this->fail( 'Bitte geben Sie eine gültige Postleitzahl ein.' );
+				$this->fail( __( 'Bitte geben Sie eine gültige Postleitzahl ein.', 'appointment-booking' ) );
 			}
 		}
 
 		if ( ! $this->allow( 'mail', strtolower( $email ), (int) APPOINTMENT_BOOKING_RATE_EMAIL ) ) {
-			$this->fail( 'Für diese E-Mail-Adresse wurden bereits Nachrichten versendet. Bitte versuchen Sie es später erneut.' );
+			$this->fail( __( 'Für diese E-Mail-Adresse wurden bereits Nachrichten versendet. Bitte versuchen Sie es später erneut.', 'appointment-booking' ) );
 		}
 
 		$this->send_anfrage_customer_email( $email, $name );
 		$this->send_kontakt_manager_email( $name, $company, $email, $reason, $object, $message );
 
-		wp_send_json_success( array( 'message' => 'Ihre Anfrage wurde erfolgreich gesendet!' ) );
+		wp_send_json_success( array( 'message' => __( 'Ihre Anfrage wurde erfolgreich gesendet!', 'appointment-booking' ) ) );
 	}
 
 	/* ------------------------------------------------------------------
@@ -439,13 +473,14 @@ class Appointment_Booking {
 
 	/** Bestätigung an den Absender – bewusst ohne Wiedergabe des Freitexts. */
 	private function send_anfrage_customer_email( $to, $name ) {
-		$body  = "Guten Tag " . $name . ",\n\n";
-		$body .= "vielen Dank für Ihr Interesse an 2IP.\n\n";
-		$body .= "Ihre Anfrage haben wir erhalten, ein Kollege wird sich baldmöglichst bei Ihnen melden.\n\n";
-		$body .= "Mit freundlichen Grüßen\n";
-		$body .= "Ihr 2IP-Team";
+		/* translators: %s: Name des Absenders */
+		$body  = sprintf( __( 'Guten Tag %s,', 'appointment-booking' ), $name ) . "\n\n";
+		$body .= __( 'vielen Dank für Ihr Interesse an 2IP.', 'appointment-booking' ) . "\n\n";
+		$body .= __( 'Ihre Anfrage haben wir erhalten, ein Kollege wird sich baldmöglichst bei Ihnen melden.', 'appointment-booking' ) . "\n\n";
+		$body .= __( 'Mit freundlichen Grüßen', 'appointment-booking' ) . "\n";
+		$body .= __( 'Ihr 2IP-Team', 'appointment-booking' );
 
-		wp_mail( $to, 'Bestätigung Ihrer Anfrage bei 2IP', $body, $this->headers() );
+		wp_mail( $to, __( 'Bestätigung Ihrer Anfrage bei 2IP', 'appointment-booking' ), $body, $this->headers() );
 	}
 
 	private function send_anfrage_manager_email( $name, $company, $investor_type, $email, $phone, $message ) {

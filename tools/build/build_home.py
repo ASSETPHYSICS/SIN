@@ -157,7 +157,7 @@ Brüsseler Str. 1–3<br>
 
 FOOTER = """<div class="ip-wrap ip-footer__inner">
 <p class="ip-footer__name">Institutional Investment Partners GmbH</p>
-<p class="ip-footer__links"><a href="/impressum/">Impressum</a> · <a href="/impressum/datenschutzerklaerung/">Datenschutz</a></p>
+<p class="ip-footer__links">[ip_legal_links]</p>
 <p class="ip-footer__copy">© 2026 Institutional Investment Partners GmbH</p>
 </div>"""
 

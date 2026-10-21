@@ -17,6 +17,11 @@ add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_script( 'divi-2ip-nav', $uri . '/js/nav.js', array(), divi_2ip_ver( 'js/nav.js' ), true );
 	wp_enqueue_script( 'divi-2ip-burger', $uri . '/js/burger.js', array(), divi_2ip_ver( 'js/burger.js' ), true );
 
+	// Logo im Header (Divi-Layout, Link "/") führt auf die Startseite der aktuellen Sprache.
+	if ( function_exists( 'pll_home_url' ) && 'de' !== divi_2ip_lang() ) {
+		wp_add_inline_script( 'divi-2ip-nav', 'document.querySelectorAll(".et_pb_menu__logo a[href=\'/\'],.et_pb_menu__logo-wrap a[href=\'/\']").forEach(function(a){a.setAttribute("href",' . wp_json_encode( pll_home_url() ) . ');});' );
+	}
+
 	// Menü-Skript von Divi 5 immer laden; die automatische Erkennung greift für Theme-Builder-Header nicht zuverlässig.
 	if ( defined( 'ET_BUILDER_5_URI' ) ) {
 		wp_enqueue_script( 'divi-script-library-menu', ET_BUILDER_5_URI . '/visual-builder/build/script-library-menu.js', array( 'jquery' ), ET_CORE_VERSION, true );
@@ -40,6 +45,71 @@ add_action( 'wp_head', function () {
 		printf( '<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n", esc_url( $base . $file ) );
 	}
 }, 1 );
+
+/* ------------------------------------------------------------------
+ * Zweisprachigkeit (Polylang): Deutsch ohne Präfix, Englisch unter /en/
+ * ---------------------------------------------------------------- */
+
+function divi_2ip_lang() {
+	return function_exists( 'pll_current_language' ) ? ( pll_current_language() ?: 'de' ) : 'de';
+}
+
+// Divi-Menümodul verweist fest auf das deutsche Menü: auf englischen Seiten das englische einsetzen
+// (Zuordnung schreibt tools/i18n/import.php in die Option ip_menu_translations).
+add_filter( 'wp_nav_menu_args', function ( $args ) {
+	if ( 'de' === divi_2ip_lang() || empty( $args['menu'] ) ) {
+		return $args;
+	}
+	$map  = (array) get_option( 'ip_menu_translations', array() );
+	$menu = wp_get_nav_menu_object( $args['menu'] );
+	if ( $menu && isset( $map[ $menu->term_id ] ) ) {
+		$args['menu'] = (int) $map[ $menu->term_id ];
+	}
+	return $args;
+} );
+
+// [ip_legal_links] – Impressum und Datenschutz in der aktuellen Sprache (Fußzeile).
+add_shortcode( 'ip_legal_links', function () {
+	$en    = ( 'en' === divi_2ip_lang() );
+	$links = array(
+		'impressum'                       => $en ? 'Legal notice' : 'Impressum',
+		'impressum/datenschutzerklaerung' => $en ? 'Privacy policy' : 'Datenschutz',
+	);
+	$out = array();
+	foreach ( $links as $path => $label ) {
+		$page = get_page_by_path( $path );
+		if ( ! $page ) {
+			continue;
+		}
+		$id = $page->ID;
+		if ( $en && function_exists( 'pll_get_post' ) ) {
+			$tr = pll_get_post( $id, 'en' );
+			$id = ( $tr && 'publish' === get_post_status( $tr ) ) ? $tr : $id;
+		}
+		$out[] = '<a href="' . esc_url( get_permalink( $id ) ) . '">' . esc_html( $label ) . '</a>';
+	}
+	return implode( ' · ', $out );
+} );
+
+// Kontaktformular: Link zur Datenschutzerklärung in der Sprache der Seite (sofern übersetzt).
+add_filter( 'appointment_booking_privacy_url', function ( $url ) {
+	$page = get_page_by_path( 'impressum/datenschutzerklaerung' );
+	if ( $page && function_exists( 'pll_get_post' ) && 'de' !== divi_2ip_lang() ) {
+		$tr = pll_get_post( $page->ID, divi_2ip_lang() );
+		if ( $tr && 'publish' === get_post_status( $tr ) ) {
+			return get_permalink( $tr );
+		}
+	}
+	return $url;
+} );
+
+// Titel und Beschreibung der Startseite für Suchmaschinen auf Englisch.
+add_filter( 'et_get_option_et_divi_divi_seo_home_titletext', function ( $value ) {
+	return 'en' === divi_2ip_lang() ? 'Institutional Investment Partners – Investor Master KVG for Real Assets' : $value;
+} );
+add_filter( 'et_get_option_et_divi_divi_seo_home_descriptiontext', function ( $value ) {
+	return 'en' === divi_2ip_lang() ? 'Investor Master KVG and AIFM for Real Assets: clear structures, reliable processes and transparent information for institutional investors.' : $value;
+} );
 
 // Viewport ohne Zoom-Sperre (Divi setzt maximum-scale=1 und user-scalable=0; das verhindert Vergrößern auf Mobilgeräten).
 add_action( 'after_setup_theme', function () {

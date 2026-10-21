@@ -3,6 +3,13 @@ jQuery(document).ready(function($) {
     
     let selectedDate = '';
     let selectedTime = '';
+
+    // Übersetzte Meldungen (wp_localize_script); deutscher Text als Rückfall
+    const t = function(key, fallback) {
+        return (appointmentBooking.i18n && appointmentBooking.i18n[key]) || fallback;
+    };
+    // Sprache der Seite, damit Server-Meldungen und Bestätigungsmail in derselben Sprache kommen
+    const pageLang = document.documentElement.lang || '';
     
     // Tab Switching
     $('.tab-button').on('click', function() {
@@ -244,6 +251,7 @@ jQuery(document).ready(function($) {
         const formData = {
             action: isKontakt ? 'submit_kontakt' : 'submit_anfrage',
             nonce: appointmentBooking.nonce,
+            lang: pageLang,
             name: $('#anfrage-name').val(),
             company: $('#anfrage-company').val(),
             email: $('#anfrage-email').val(),
@@ -268,16 +276,16 @@ jQuery(document).ready(function($) {
             ? (!formData.name || !formData.email || !formData.reason || !formData.message)
             : (!formData.name || !formData.company || ($('#anfrage-investor-type').length && !formData.investor_type) || !formData.email || !formData.message);
         if (missing) {
-            showErrorAnfrage('Bitte füllen Sie alle Pflichtfelder aus.');
+            showErrorAnfrage(t('required', 'Bitte füllen Sie alle Pflichtfelder aus.'));
             return;
         }
         if (isKontakt && $reason.prop('selectedIndex') === 1 && (!formData.street || !formData.zip || !formData.city)) {
-            showErrorAnfrage('Bitte geben Sie die Objektadresse an (Straße, Hausnummer, Postleitzahl und Ort).');
+            showErrorAnfrage(t('objectAddress', 'Bitte geben Sie die Objektadresse an (Straße, Hausnummer, Postleitzahl und Ort).'));
             return;
         }
-        
+
         if (!$('#privacy-consent-anfrage').is(':checked')) {
-            showErrorAnfrage('Bitte akzeptieren Sie die Datenschutzerklärung.');
+            showErrorAnfrage(t('privacy', 'Bitte akzeptieren Sie die Datenschutzerklärung.'));
             return;
         }
         
@@ -297,12 +305,12 @@ jQuery(document).ready(function($) {
                     $('#anfrage-form').hide();
                     $('#success-message-anfrage').addClass('visible');
                 } else {
-                    showErrorAnfrage(response.data.message || 'Ein Fehler ist aufgetreten.');
+                    showErrorAnfrage(response.data.message || t('error', 'Ein Fehler ist aufgetreten.'));
                 }
             },
             error: function() {
                 showLoadingAnfrage(false);
-                showErrorAnfrage('Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.');
+                showErrorAnfrage(t('errorRetry', 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.'));
             }
         });
     });
