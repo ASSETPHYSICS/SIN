@@ -80,7 +80,7 @@ OLD_HOST=${OLD_URL#*://}; NEW_HOST=${NEW_URL#*://}
 echo "Verbleibende Treffer für $OLD_HOST:"; WP db query "select count(*) from wp_posts where post_content like '%${OLD_HOST}%'" --skip-column-names
 
 echo "== 7/9 Divi-Lizenz zurückschreiben, Theme/Plugin aktivieren, Admin anlegen"
-if [ -s "$HOME/.divi-lizenz.json" ]; then WP option update et_automatic_updates_options --format=json < "$HOME/.divi-lizenz.json"; fi
+if grep -q "{" "$HOME/.divi-lizenz.json"; then WP option update et_automatic_updates_options --format=json < "$HOME/.divi-lizenz.json"; fi
 WP theme activate Divi-2IP
 WP plugin activate appointment-booking
 WP option update blog_public "$INDEXING"
