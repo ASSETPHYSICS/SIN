@@ -1,0 +1,60 @@
+# 2IP – .htaccess für IONOS (Apache). Als ".htaccess" in das WordPress-Stammverzeichnis legen.
+# Ersetzt die Schutzfunktionen des lokalen router.php.
+
+# --- Staging-Schutz (nur bis zum Livegang aktiv lassen; Datei .htpasswd mit "htpasswd -c" anlegen) ---
+# AuthType Basic
+# AuthName "2IP Staging"
+# AuthUserFile /kunden/homepages/XX/dXXXXXXXX/htdocs/.htpasswd
+# Require valid-user
+
+# --- HTTPS erzwingen ---
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# --- Livegang: www -> Hauptdomain (Zeilen erst dann aktivieren) ---
+# RewriteCond %{HTTP_HOST} ^www\.2ip\.de$ [NC]
+# RewriteRule ^ https://2ip.de%{REQUEST_URI} [L,R=301]
+
+# --- Livegang: alte URLs -> neue URLs (aus der Weiterleitungstabelle ergänzen) ---
+# RewriteRule ^alter-pfad/?$ /neuer-pfad/ [L,R=301]
+</IfModule>
+
+# --- Sicherheits-Header ---
+<IfModule mod_headers.c>
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+# HSTS erst nach stabilem Livegang aktivieren:
+# Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+Options -Indexes
+ServerSignature Off
+
+# --- Sensible Dateien und Angriffsflächen sperren ---
+<FilesMatch "^(wp-config\.php|wp-config-sample\.php|xmlrpc\.php|readme\.html|license\.txt|\.htpasswd|.*\.(sql|gz|log|bak|sh))$">
+  Require all denied
+</FilesMatch>
+RedirectMatch 404 /\.git
+
+# --- PHP-Ausführung im Uploads-Ordner verbieten ---
+<IfModule mod_rewrite.c>
+RewriteRule ^wp-content/uploads/.*\.php$ - [F,L]
+</IfModule>
+
+# --- WordPress ---
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress
