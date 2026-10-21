@@ -21,7 +21,7 @@ define( 'APPOINTMENT_BOOKING_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
  */
 $appointment_booking_defaults = array(
 	'APPOINTMENT_BOOKING_TO'             => 'info@2ig.de', // Empfänger der internen Benachrichtigungen
-	'APPOINTMENT_BOOKING_FROM'           => 'info@2ip.de', // Absenderadresse aller Mails
+	'APPOINTMENT_BOOKING_FROM'           => 'contact@2ig.de', // Absenderadresse aller Mails
 	'APPOINTMENT_BOOKING_FROM_NAME'      => '2IP',
 	'APPOINTMENT_BOOKING_RETENTION_DAYS' => 180,           // Buchungsdaten werden so lange nach dem Termin aufbewahrt
 	'APPOINTMENT_BOOKING_RATE_IP'        => 5,             // Absendungen pro IP und Stunde
