@@ -20,8 +20,17 @@ php -r '
   file_put_contents("content/pages.json", json_encode($meta, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n");
   foreach ($meta as $m) { echo $m["id"], " ", $m["slug"], "\n"; }
 ' | while read -r id slug; do
-  $WP post get "$id" --field=post_content >"content/pages/$slug.html" 2>/dev/null
-  echo "Seite: $slug"
+  # Sprache (Polylang-Taxonomie "language"): Übersetzungen erhalten ein Suffix, z. B. pai-statement.en.html
+  lang=$($WP post term list "$id" language --field=slug 2>/dev/null | head -1 || true)
+  file="$slug"
+  if [ -n "$lang" ] && [ "$lang" != "de" ]; then file="$slug.$lang"; fi
+  $WP post get "$id" --field=post_content >"content/pages/$file.html" 2>/dev/null
+  echo "Seite: $file"
+done
+
+for m in "menu (EN)" "footer (EN)"; do
+  slug=$(echo "$m" | tr -d '()' | tr ' ' '-' | tr 'A-Z' 'a-z')
+  $WP menu item list "$m" --fields=db_id,menu_item_parent,position,title,link,type,object --format=json 2>/dev/null >"content/menu-$slug.json" || rm -f "content/menu-$slug.json"
 done
 
 for type in et_header_layout et_footer_layout; do
