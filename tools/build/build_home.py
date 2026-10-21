@@ -72,7 +72,7 @@ HERO = SLIDER + """<div class="ip-wrap ip-hero__inner">
 <h1>Real Assets.<br>Klar strukturiert.<br>Wirkungsvoll verwaltet.</h1>
 <p class="ip-lead">Institutionelle Anleger stehen vor wachsenden Anforderungen an Governance, Reporting und Regulierung. Wir schaffen klare Strukturen, verlässliche Prozesse und transparente Informationen, damit Anlageentscheidungen auf einer belastbaren Grundlage getroffen werden können.</p>
 <p><a class="ip-btn" href="#leistungen">Unsere Leistungen</a></p>
-</div>""" % kicker("Master-KVG · AIFM · Beratung")
+</div>""" % kicker("Investoren-Master-KVG · AIFM · Investment Consulting")
 
 UEBERZEUGUNG = """<div class="ip-wrap ip-grid ip-grid--split">
 <div class="ip-col">
@@ -175,8 +175,8 @@ home_sections = [
     section("ip-sec ip-sec--mist", "Assetklassen", ASSETKLASSEN.replace('<div class="ip-wrap">', '<div id="assetklassen" class="ip-wrap">', 1)),
     section("ip-sec ip-sec--white", "Leistungen", LEISTUNGEN.replace('<div class="ip-wrap">', '<div id="leistungen" class="ip-wrap">', 1)),
     section("ip-sec ip-sec--black ip-hidden", "Standorte (ausgeblendet)", STANDORTE.replace('<div class="ip-wrap">', '<div id="standorte" class="ip-wrap">', 1)),
-    section("ip-sec ip-sec--white", "Unser Ansatz", ANSATZ.replace('<div class="ip-wrap">', '<div id="ansatz" class="ip-wrap">', 1)),
     section("ip-sec ip-sec--mist", "Die Gruppe", GRUPPE.replace('<div class="ip-wrap">', '<div id="gruppe" class="ip-wrap">', 1)),
+    section("ip-sec ip-sec--white", "Unser Ansatz", ANSATZ.replace('<div class="ip-wrap">', '<div id="ansatz" class="ip-wrap">', 1)),
     section("ip-sec ip-sec--forest", "Kontakt", KONTAKT.replace('<div class="ip-wrap ip-grid', '<div id="kontakt" class="ip-wrap ip-grid', 1)),
 ]
 home = "<!-- wp:divi/placeholder -->" + "\n".join(home_sections) + "<!-- /wp:divi/placeholder -->"
