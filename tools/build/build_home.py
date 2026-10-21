@@ -88,7 +88,7 @@ UEBERZEUGUNG = """<div class="ip-wrap ip-grid ip-grid--split">
 <li><h3>Ganzheitliche Plattform</h3><p>Verwaltung, Regulierung und Beratung greifen ineinander. Das schafft klare Zuständigkeiten, reduziert Abstimmungsaufwand und erhöht die Steuerungsfähigkeit komplexer Real Asset-Strukturen.</p></li>
 </ul>
 </div>
-</div>""" % (kicker("Unsere Überzeugung"), kicker("Was uns unterscheidet"))
+</div>""" % (kicker("Unser Versprechen"), kicker("Was uns unterscheidet"))
 
 ASSETKLASSEN = """<div class="ip-wrap">
 %s
