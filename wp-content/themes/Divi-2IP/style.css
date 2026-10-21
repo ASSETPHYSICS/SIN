@@ -142,6 +142,11 @@ html body .et_pb_menu.dd-hamburger-menu .mobile_nav .mobile_menu_bar {
 	background: linear-gradient(currentColor, currentColor) center / 30px 2px no-repeat;
 	transition: background-size .25s ease .05s, color .3s ease;
 }
+/* Angemeldet: Die WordPress-Admin-Leiste (32 px, bis 782 px Breite 46 px) schiebt die Kopfzeile nach unten */
+html body.admin-bar .et_pb_menu.dd-hamburger-menu .mobile_nav .mobile_menu_bar { top: 53px; }
+@media (max-width: 782px) {
+	html body.admin-bar .et_pb_menu.dd-hamburger-menu .mobile_nav .mobile_menu_bar { top: 67px; }
+}
 html body .et_pb_menu.dd-hamburger-menu .mobile_nav .mobile_menu_bar:before,
 html body .et_pb_menu.dd-hamburger-menu .mobile_nav .mobile_menu_bar:after {
 	content: "" !important;
