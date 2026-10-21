@@ -87,6 +87,8 @@ WP option update blog_public "$INDEXING"
 WP rewrite structure '/%postname%/' --hard
 WP cache flush
 rm -rf wp-content/et-cache
+# Rollen neu anlegen (der bereinigte Dump enthält wp_user_roles nicht)
+WP eval 'require_once ABSPATH . "wp-admin/includes/schema.php"; populate_roles();'
 ADMIN_PW=$(head -c 48 /dev/urandom | base64 | tr -dc 'A-Za-z0-9' | head -c 20)
 WP user create "$ADMIN_USER" "$ADMIN_MAIL" --role=administrator --user_pass="$ADMIN_PW" --porcelain >/dev/null
 echo "Admin: $ADMIN_USER  Passwort (einmalig, sofort in den Passwortmanager): $ADMIN_PW"
