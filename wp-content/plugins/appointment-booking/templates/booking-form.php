@@ -123,7 +123,7 @@
         
 <?php if ( 'kontakt' === $ab_variant ) : ?>
         <div class="ab-intro">
-            <p>Wir freuen uns, dass Sie Kontakt mit uns aufnehmen wollen.<br>Bitte nutzen Sie das folgende Formular, wir melden uns baldmöglichst bei Ihnen.</p>
+            <p>Wir freuen uns, dass Sie Kontakt mit uns aufnehmen wollen. Bitte nutzen Sie das folgende Formular, wir melden uns baldmöglichst bei Ihnen.</p>
             <p>Sollten Sie eine Anfrage zu einem Objekt haben, das zu einem der von den 2IP-Kapitalverwaltungsgesellschaften verwalteten Fonds gehört, empfehlen wir Ihnen, sich direkt an den verantwortlichen Asset- oder Property Manager (Hausverwaltung) zu wenden. Dort kann Ihnen noch schneller ohne Umweg geholfen werden.</p>
         </div>
 
