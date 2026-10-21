@@ -70,7 +70,7 @@ SLIDER = '<div class="ip-slider ip-slider--5" aria-hidden="true">' + "".join(
 HERO = SLIDER + """<div class="ip-wrap ip-hero__inner">
 %s
 <h1>Real Assets.<br>Klar strukturiert.<br>Wirkungsvoll verwaltet.</h1>
-<p class="ip-lead">Institutionelle Anleger stehen vor steigenden Anforderungen an Governance, Reporting und Regulierung. Wir schaffen die Strukturen, Prozesse und Transparenz, damit Sie sich auf fundierte Investitionsentscheidungen konzentrieren können.</p>
+<p class="ip-lead">Institutionelle Anleger stehen vor wachsenden Anforderungen an Governance, Reporting und Regulierung. Wir schaffen klare Strukturen, verlässliche Prozesse und transparente Informationen, damit Anlageentscheidungen auf einer belastbaren Grundlage getroffen werden können.</p>
 <p><a class="ip-btn" href="#leistungen">Unsere Leistungen</a></p>
 </div>""" % kicker("Master-KVG · AIFM · Beratung")
 
@@ -78,7 +78,7 @@ UEBERZEUGUNG = """<div class="ip-wrap ip-grid ip-grid--split">
 <div class="ip-col">
 %s
 <h2>Transparenz, Kontrolle und Effizienz in der Real Asset-Anlage.</h2>
-<p class="ip-lead">Real Assets bieten langfristige Chancen. Gleichzeitig steigen die Anforderungen an Administration, Risikomanagement, Reporting und Regulierung. Wir unterstützen institutionelle Anleger dabei, Komplexität zu reduzieren, Verantwortlichkeiten klar zu strukturieren und jederzeit den Überblick zu behalten.</p>
+<p class="ip-lead">Real Assets erfordern langfristiges Denken, belastbare Strukturen und einen klaren Überblick über Risiken, Verantwortlichkeiten und Entwicklungen. Gleichzeitig steigen die Anforderungen an Administration, Risikomanagement, Reporting und Regulierung. Wir unterstützen institutionelle Anleger dabei, Komplexität zu reduzieren, Verantwortlichkeiten klar zu strukturieren und jederzeit den Überblick zu behalten.</p>
 </div>
 <div class="ip-col">
 %s
