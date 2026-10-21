@@ -41,6 +41,22 @@ add_action( 'wp_head', function () {
 	}
 }, 1 );
 
+// Viewport ohne Zoom-Sperre (Divi setzt maximum-scale=1 und user-scalable=0; das verhindert Vergrößern auf Mobilgeräten).
+add_action( 'after_setup_theme', function () {
+	remove_action( 'wp_head', 'et_add_viewport_meta' );
+}, 20 );
+add_action( 'wp_head', function () {
+	echo '<meta name="viewport" content="width=device-width, initial-scale=1" />' . "\n";
+}, 1 );
+
+// Kopfbereich aufräumen: keine Feeds (es gibt keinen Blog), kein RSD/oEmbed-Discovery, kein Shortlink.
+remove_action( 'wp_head', 'feed_links', 2 );
+remove_action( 'wp_head', 'feed_links_extra', 3 );
+remove_action( 'wp_head', 'rsd_link' );
+remove_action( 'wp_head', 'wlwmanifest_link' );
+remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+
 // Favicon: Bildmarke ohne Schriftzug (überschreibt das in WordPress hinterlegte Website-Icon).
 add_filter( 'get_site_icon_url', function ( $url, $size ) {
 	$pick = 512;

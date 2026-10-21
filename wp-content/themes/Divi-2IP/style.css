@@ -272,7 +272,6 @@ html body .et_pb_menu.dd-hamburger-menu ul.et_mobile_menu {
 .ip-sec--mist   { background: var(--ip-mist); }
 .ip-sec--black  { background: var(--ip-black);  color: var(--ip-white); }
 .ip-sec--forest { background: var(--ip-forest); color: var(--ip-white); }
-.ip-hidden { display: none !important; }   /* ausgeblendete Sektion (Inhalt bleibt im Builder erhalten) */
 
 .ip-wrap { width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); box-sizing: border-box; }
 
@@ -350,12 +349,7 @@ html body .et_pb_menu.dd-hamburger-menu ul.et_mobile_menu {
 .ip-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4cm; margin-top: 56px; }
 .ip-card { display: flex; flex-direction: column; padding: 28px 28px 12px; border-top: 3px solid var(--ip-green); background: var(--ip-mist); }
 .ip-sec--mist .ip-card { background: var(--ip-white); }
-.ip-cards--rule .ip-card, .ip-sec--mist .ip-cards--rule .ip-card { background: transparent; border-top: 1px solid var(--ip-rule); padding: 24px 24px 12px 0; }
-.ip-sec--black .ip-cards--rule .ip-card { border-top-color: var(--ip-text-2); }
 .ip-card .ip-kicker { margin-bottom: 1.2em; color: var(--ip-forest); }
-.ip-place { font-weight: 500; }
-.ip-role { color: var(--ip-note); }
-.ip-sec--black .ip-role { color: #b5b5b5; }
 
 .ip-values { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 0.4cm; margin-top: 56px; }
 .ip-values article { border-top: 1px solid var(--ip-rule); padding: 24px 40px 24px 0; }

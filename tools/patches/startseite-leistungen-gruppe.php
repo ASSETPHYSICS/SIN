@@ -1,6 +1,7 @@
 <?php
 /**
- * Startseite: Texte der Sections "Leistungen" und "Unser Ansatz" ändern, Section "Die Gruppe" neu setzen (ohne Boxen).
+ * Startseite: Texte der Sections "Leistungen" und "Unser Ansatz" ändern, Section "Die Gruppe" neu setzen (ohne Boxen),
+ * ausgeblendete Section "Standorte" entfernen.
  * Aufruf im WordPress-Stammverzeichnis:  php wp-cli.phar eval-file <Pfad>/startseite-leistungen-gruppe.php
  * Idempotent: bereits angewendete Änderungen werden übersprungen.
  *
@@ -30,6 +31,7 @@ $replacements = array(
 		=> $lt . 'h3' . $gt . 'Investoren-Master-KVG' . $lt . '/h3' . $gt . $lt . 'p' . $gt . 'Professionelle',
 	'für grenzüberschreitende Fondsstrukturen'          => 'für internationale Fondsstrukturen',
 	'bis zur Portfoliooptimierung und Second Opinions'  => 'bis zur Manager Selection und Second Opinions',
+	'Institutional Investment Consulting GmbH'          => 'Institutional Investment Consulting Partners GmbH',
 	// Unser Ansatz, Kachel "Innovation"
 	$lt . 'p' . $gt . 'Technologie setzen wir dort ein' => $lt . 'p' . $gt . 'Innovative Technologie setzen wir dort ein',
 );
@@ -46,10 +48,10 @@ $gruppe_html = <<<'HTML'
 <div class="ip-col">
 <p class="ip-kicker ">Die Gruppe</p>
 <h2>Institutional Solutions Division der Institutional Investment Group</h2>
-<p class="ip-lead">Die Investor Solutions Division vereint alle Leistungen der 2IG, die sich direkt an institutionelle Investoren richten. Neben der Institutional Investment Partners (2IP) als Master-KVG in Deutschland und Luxemburg berät die Institutional Investment Consulting Partners (2ICP) rund um institutionelle Investments in Immobilien und immobiliennahe Real Assets.</p>
+<p class="ip-lead">Die Investor Solutions Division vereint alle Leistungen der 2IG, die sich direkt an institutionelle Investoren richten.</p>
 </div>
 <div class="ip-col">
-<p>Die Institutional Investment Group (2IG) ist eine der führenden unabhängigen Investoren-Plattformen für Immobilien- und Real Asset-Investments in Deutschland und Europa. 2IG hat sich mit ihren beiden Geschäftsbereichen Investor Solutions Division und Asset Servicing Division auf Dienstleistungen für institutionelle Immobilienfonds nach deutschem und luxemburgischem Recht spezialisiert.</p>
+<p>Die Institutional Investment Group (2IG) ist eine der führenden unabhängigen Investoren-Plattformen für Real Asset-Investments in Deutschland und Europa. 2IG hat sich mit ihren Geschäftsbereichen Investor Solutions Division und Asset Servicing Division auf Dienstleistungen für institutionelle Real Asset-Fonds nach deutschem und luxemburgischem Recht spezialisiert.</p>
 <p>Mit mehr als 350 Mitarbeitern verwaltet 2IG über 50 Milliarden Euro Immobilienvermögen in ca. 25 Ländern und nimmt damit eine marktführende Position in der Administration von Real Assets ein.</p>
 <p><strong>100% unabhängig von Banken, Versicherungen, anderen professionellen Immobilieneignern und auch Asset Managern.</strong></p>
 <p class="ip-group-link"><a href="https://www.2ig.de" target="_blank" rel="noopener">→ www.2ig.de</a></p>
@@ -68,6 +70,18 @@ $new_inner = $esc( $gruppe_html );
 if ( $old_inner !== $new_inner ) {
 	$content = substr( $content, 0, $start ) . $new_inner . substr( $content, $end );
 	WP_CLI::log( 'Section "Die Gruppe" neu gesetzt (' . strlen( $old_inner ) . ' -> ' . strlen( $new_inner ) . ' Zeichen).' );
+}
+
+// --- Ausgeblendete Section "Standorte" entfernen
+$parts = preg_split( '/(?=<!-- wp:divi\/section )/', $content );
+foreach ( $parts as $i => $part ) {
+	if ( false !== strpos( $part, 'id=' . $quote . 'standorte' . $quote ) ) {
+		if ( $i === count( $parts ) - 1 || 0 === $i ) { WP_CLI::error( 'Section "Standorte" an unerwarteter Position.' ); }
+		unset( $parts[ $i ] );
+		$content = implode( '', $parts );
+		WP_CLI::log( 'Section "Standorte" entfernt.' );
+		break;
+	}
 }
 
 if ( $content !== $page->post_content ) {

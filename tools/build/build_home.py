@@ -107,20 +107,9 @@ LEISTUNGEN = """<div class="ip-wrap">
 <div class="ip-cards">
 <article class="ip-card"><h3>Investoren-Master-KVG</h3><p>Professionelle Administration, Risikomanagement und Reporting für Spezial-AIF in Real Asset-Assetklassen – reguliert, effizient, skalierbar.</p><p class="ip-conclusion">Institutional Investment Partners GmbH</p></article>
 <article class="ip-card"><h3>AIFM Luxemburg</h3><p>Zugelassener Alternative Investment Fund Manager für internationale Fondsstrukturen aus einem der führenden Fondsstandorte Europas.</p><p class="ip-conclusion">Institutional Investment Partners S.à.r.l.</p></article>
-<article class="ip-card"><h3>Investment Consulting</h3><p>Unabhängige Expertise für institutionelle Anleger – von der Strategie über Strukturierung bis zur Manager Selection und Second Opinions.</p><p class="ip-conclusion">Institutional Investment Consulting GmbH</p></article>
+<article class="ip-card"><h3>Investment Consulting</h3><p>Unabhängige Expertise für institutionelle Anleger – von der Strategie über Strukturierung bis zur Manager Selection und Second Opinions.</p><p class="ip-conclusion">Institutional Investment Consulting Partners GmbH</p></article>
 </div>
 </div>""" % kicker("Leistungen")
-
-STANDORTE = """<div class="ip-wrap">
-%s
-<h2>Präsenz an den Orten, die für unsere Kunden zählen.</h2>
-<p class="ip-lead">Unsere repräsentativen Büros in Frankfurt, Wiesbaden und Hamburg stehen für den Anspruch, mit dem wir arbeiten – und für jede Investition, die wir begleiten.</p>
-<div class="ip-cards ip-cards--rule">
-<article class="ip-card"><h3>Frankfurt am Main</h3><p class="ip-place">ONE Frankfurt</p><p class="ip-role">Hauptsitz · Master-KVG</p><p>Brüsseler Str. 1–3, 60327 Frankfurt am Main</p></article>
-<article class="ip-card"><h3>Wiesbaden</h3><p class="ip-place">Schiersteiner Hafen</p><p class="ip-role">Consulting · Technologie</p></article>
-<article class="ip-card"><h3>Hamburg</h3><p class="ip-place">Louis Vuitton Haus</p><p class="ip-role">Repräsentanz Nord · Neuer Wall</p></article>
-</div>
-</div>""" % kicker("Standorte")
 
 ANSATZ = """<div class="ip-wrap">
 %s
@@ -137,10 +126,10 @@ GRUPPE = """<div class="ip-wrap ip-grid ip-grid--split">
 <div class="ip-col">
 %s
 <h2>Institutional Solutions Division der Institutional Investment Group</h2>
-<p class="ip-lead">Die Investor Solutions Division vereint alle Leistungen der 2IG, die sich direkt an institutionelle Investoren richten. Neben der Institutional Investment Partners (2IP) als Master-KVG in Deutschland und Luxemburg berät die Institutional Investment Consulting Partners (2ICP) rund um institutionelle Investments in Immobilien und immobiliennahe Real Assets.</p>
+<p class="ip-lead">Die Investor Solutions Division vereint alle Leistungen der 2IG, die sich direkt an institutionelle Investoren richten.</p>
 </div>
 <div class="ip-col">
-<p>Die Institutional Investment Group (2IG) ist eine der führenden unabhängigen Investoren-Plattformen für Immobilien- und Real Asset-Investments in Deutschland und Europa. 2IG hat sich mit ihren beiden Geschäftsbereichen Investor Solutions Division und Asset Servicing Division auf Dienstleistungen für institutionelle Immobilienfonds nach deutschem und luxemburgischem Recht spezialisiert.</p>
+<p>Die Institutional Investment Group (2IG) ist eine der führenden unabhängigen Investoren-Plattformen für Real Asset-Investments in Deutschland und Europa. 2IG hat sich mit ihren Geschäftsbereichen Investor Solutions Division und Asset Servicing Division auf Dienstleistungen für institutionelle Real Asset-Fonds nach deutschem und luxemburgischem Recht spezialisiert.</p>
 <p>Mit mehr als 350 Mitarbeitern verwaltet 2IG über 50 Milliarden Euro Immobilienvermögen in ca. 25 Ländern und nimmt damit eine marktführende Position in der Administration von Real Assets ein.</p>
 <p><strong>100% unabhängig von Banken, Versicherungen, anderen professionellen Immobilieneignern und auch Asset Managern.</strong></p>
 <p class="ip-group-link"><a href="https://www.2ig.de" target="_blank" rel="noopener">→ www.2ig.de</a></p>
@@ -177,7 +166,6 @@ home_sections = [
     section("ip-sec ip-sec--white", "Überzeugung", UEBERZEUGUNG.replace('<div class="ip-wrap ip-grid', '<div id="ueberzeugung" class="ip-wrap ip-grid', 1)),
     section("ip-sec ip-sec--mist", "Assetklassen", ASSETKLASSEN.replace('<div class="ip-wrap">', '<div id="assetklassen" class="ip-wrap">', 1)),
     section("ip-sec ip-sec--white", "Leistungen", LEISTUNGEN.replace('<div class="ip-wrap">', '<div id="leistungen" class="ip-wrap">', 1)),
-    section("ip-sec ip-sec--black ip-hidden", "Standorte (ausgeblendet)", STANDORTE.replace('<div class="ip-wrap">', '<div id="standorte" class="ip-wrap">', 1)),
     section("ip-sec ip-sec--mist", "Die Gruppe", GRUPPE.replace('<div class="ip-wrap ip-grid', '<div id="gruppe" class="ip-wrap ip-grid', 1)),
     section("ip-sec ip-sec--white", "Unser Ansatz", ANSATZ.replace('<div class="ip-wrap">', '<div id="ansatz" class="ip-wrap">', 1)),
     section("ip-sec ip-sec--forest", "Kontakt", KONTAKT.replace('<div class="ip-wrap ip-grid', '<div id="kontakt" class="ip-wrap ip-grid', 1)),
