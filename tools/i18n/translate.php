@@ -10,6 +10,7 @@
  * Bereits vorhandene Abschnitte (gleicher deutscher Text) werden nicht neu übersetzt; manuelle Korrekturen im
  * Feld "en" bleiben dadurch erhalten. Ändert sich der deutsche Text eines Abschnitts, wird nur dieser neu übersetzt.
  */
+require_once __DIR__ . '/lib.php';
 $cfg  = require __DIR__ . '/config.php';
 $root = dirname( __DIR__, 2 );
 $key  = getenv( 'DEEPL_API_KEY' );
@@ -108,7 +109,7 @@ $chars = 0;
 
 foreach ( $cfg['pages'] as $de_slug => $page_cfg ) {
 	if ( $only && ! in_array( $de_slug, $only, true ) ) { continue; }
-	$de = get_page_by_path( $de_slug ) ?: get_posts( array( 'post_type' => 'page', 'name' => $de_slug, 'post_status' => 'any', 'numberposts' => 1, 'lang' => 'de' ) )[0] ?? null;
+	$de = ip_i18n_find_page( $de_slug, 'de' );
 	if ( ! $de ) { WP_CLI::warning( 'Seite nicht gefunden: ' . $de_slug ); continue; }
 
 	$file = $dir . '/' . $de_slug . '.json';

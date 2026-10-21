@@ -8,13 +8,13 @@
  */
 if ( ! function_exists( 'pll_set_post_language' ) ) { WP_CLI::error( 'Polylang ist nicht aktiv.' ); }
 
+require_once __DIR__ . '/lib.php';
 $cfg  = require __DIR__ . '/config.php';
 $root = dirname( __DIR__, 2 );
 $dir  = $root . '/content/i18n/en';
 
 $find_de = static function ( $slug ) {
-	$p = get_posts( array( 'post_type' => 'page', 'name' => $slug, 'post_status' => 'any', 'numberposts' => 1, 'lang' => 'de' ) );
-	return $p ? $p[0] : null;
+	return ip_i18n_find_page( $slug, 'de' );
 };
 
 // Meta-Felder, die nicht auf die Übersetzung kopiert werden (Caches, Bearbeitungsstatus, Übersetzungsdaten).
