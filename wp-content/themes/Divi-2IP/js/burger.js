@@ -40,10 +40,23 @@
 		if (!ticking) { ticking = true; requestAnimationFrame(update); }
 	}
 
+	// Vertikale Lage: Mitte des Symbols = Mitte des Logos bei Seitenanfang (berücksichtigt auch die Admin-Leiste).
+	function align() {
+		var logo = document.querySelector('.dd-hamburger-menu .et_pb_menu__logo img, .dd-hamburger-menu .et_pb_menu__logo-wrap img');
+		var bar = document.querySelector('.dd-hamburger-menu .mobile_menu_bar');
+		if (!logo || !bar || !logo.offsetHeight) { return; }
+		var r = logo.getBoundingClientRect();
+		var center = r.top + window.pageYOffset + r.height / 2;
+		root.style.setProperty('--ip-burger-top', Math.round(center - bar.offsetHeight / 2) + 'px');
+	}
+	function alignAndUpdate() { align(); request(); }
+
 	window.addEventListener('scroll', request, { passive: true });
-	window.addEventListener('resize', request);
-	window.addEventListener('load', request);
-	document.addEventListener('DOMContentLoaded', request);
+	window.addEventListener('resize', alignAndUpdate);
+	window.addEventListener('load', alignAndUpdate);
+	document.addEventListener('DOMContentLoaded', alignAndUpdate);
+	var logoImg = document.querySelector('.dd-hamburger-menu .et_pb_menu__logo img');
+	if (logoImg && !logoImg.complete) { logoImg.addEventListener('load', alignAndUpdate); }
 	new MutationObserver(request).observe(root, { attributes: true, attributeFilter: ['class'] });
 	setTimeout(request, 300);
 })();

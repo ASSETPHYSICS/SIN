@@ -131,7 +131,7 @@ a:hover { color: var(--ip-green-print); }
 /* Hamburger-Symbol (fixiert) – drei Linien, die zum Kreuz werden */
 html body .et_pb_menu.dd-hamburger-menu .mobile_nav .mobile_menu_bar {
 	position: fixed;
-	top: 21px;
+	top: var(--ip-burger-top, 21px);   /* burger.js setzt die Lage auf die Logo-Mitte */
 	right: 20px;
 	z-index: 10002;
 	display: block;
@@ -142,10 +142,10 @@ html body .et_pb_menu.dd-hamburger-menu .mobile_nav .mobile_menu_bar {
 	background: linear-gradient(currentColor, currentColor) center / 30px 2px no-repeat;
 	transition: background-size .25s ease .05s, color .3s ease;
 }
-/* Angemeldet: Die WordPress-Admin-Leiste (32 px, bis 782 px Breite 46 px) schiebt die Kopfzeile nach unten */
-html body.admin-bar .et_pb_menu.dd-hamburger-menu .mobile_nav .mobile_menu_bar { top: 53px; }
+/* Angemeldet ohne JavaScript-Wert: Die Admin-Leiste (32 px, bis 782 px Breite 46 px) schiebt die Kopfzeile nach unten */
+html body.admin-bar .et_pb_menu.dd-hamburger-menu .mobile_nav .mobile_menu_bar { top: var(--ip-burger-top, 53px); }
 @media (max-width: 782px) {
-	html body.admin-bar .et_pb_menu.dd-hamburger-menu .mobile_nav .mobile_menu_bar { top: 67px; }
+	html body.admin-bar .et_pb_menu.dd-hamburger-menu .mobile_nav .mobile_menu_bar { top: var(--ip-burger-top, 67px); }
 }
 html body .et_pb_menu.dd-hamburger-menu .mobile_nav .mobile_menu_bar:before,
 html body .et_pb_menu.dd-hamburger-menu .mobile_nav .mobile_menu_bar:after {

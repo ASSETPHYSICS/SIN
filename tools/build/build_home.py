@@ -105,9 +105,9 @@ LEISTUNGEN = """<div class="ip-wrap">
 %s
 <h2>Drei spezialisierte Einheiten. Eine gemeinsame Mission.</h2>
 <div class="ip-cards">
-<article class="ip-card"><h3>Master-KVG</h3><p>Professionelle Administration, Risikomanagement und Reporting für Spezial-AIF in Real Asset-Assetklassen – reguliert, effizient, skalierbar.</p><p class="ip-conclusion">Institutional Investment Partners GmbH</p></article>
-<article class="ip-card"><h3>AIFM Luxemburg</h3><p>Zugelassener Alternative Investment Fund Manager für grenzüberschreitende Fondsstrukturen aus einem der führenden Fondsstandorte Europas.</p><p class="ip-conclusion">Institutional Investment Partners S.à.r.l.</p></article>
-<article class="ip-card"><h3>Investment Consulting</h3><p>Unabhängige Expertise für institutionelle Anleger – von der Strategie über Strukturierung bis zur Portfoliooptimierung und Second Opinions.</p><p class="ip-conclusion">Institutional Investment Consulting GmbH</p></article>
+<article class="ip-card"><h3>Investoren-Master-KVG</h3><p>Professionelle Administration, Risikomanagement und Reporting für Spezial-AIF in Real Asset-Assetklassen – reguliert, effizient, skalierbar.</p><p class="ip-conclusion">Institutional Investment Partners GmbH</p></article>
+<article class="ip-card"><h3>AIFM Luxemburg</h3><p>Zugelassener Alternative Investment Fund Manager für internationale Fondsstrukturen aus einem der führenden Fondsstandorte Europas.</p><p class="ip-conclusion">Institutional Investment Partners S.à.r.l.</p></article>
+<article class="ip-card"><h3>Investment Consulting</h3><p>Unabhängige Expertise für institutionelle Anleger – von der Strategie über Strukturierung bis zur Manager Selection und Second Opinions.</p><p class="ip-conclusion">Institutional Investment Consulting GmbH</p></article>
 </div>
 </div>""" % kicker("Leistungen")
 
@@ -128,20 +128,23 @@ ANSATZ = """<div class="ip-wrap">
 <div class="ip-values">
 <article><h3>Wissen</h3><p>Komplexe Zusammenhänge werden auf die Informationen reduziert, die für Anleger, Anlageausschüsse und Entscheidungsträger tatsächlich relevant sind.</p></article>
 <article><h3>Transparenz</h3><p>Sie erhalten die Informationen, die Sie für Steuerung, Kontrolle und Berichterstattung benötigen – nachvollziehbar, verständlich und zum richtigen Zeitpunkt.</p></article>
-<article><h3>Innovation</h3><p>Technologie setzen wir dort ein, wo sie Prozesse vereinfacht, Datenqualität verbessert und administrativen Aufwand reduziert.</p></article>
+<article><h3>Innovation</h3><p>Innovative Technologie setzen wir dort ein, wo sie Prozesse vereinfacht, Datenqualität verbessert und administrativen Aufwand reduziert.</p></article>
 <article><h3>Verantwortung</h3><p>Klare Verantwortlichkeiten und langfristiges Denken bilden die Grundlage nachhaltiger Investitionsentscheidungen und vertrauensvoller Zusammenarbeit.</p></article>
 </div>
 </div>""" % kicker("Unser Ansatz")
 
-GRUPPE = """<div class="ip-wrap">
+GRUPPE = """<div class="ip-wrap ip-grid ip-grid--split">
+<div class="ip-col">
 %s
-<h2>Drei spezialisierte Einheiten für eine konsistente Anlegerperspektive.</h2>
-<div class="ip-cards ip-cards--rule">
-<article class="ip-card"><span class="ip-kicker">Master-KVG</span><h3>Institutional Investment Partners GmbH</h3><p>Kapitalverwaltung, Administration, Risikomanagement und Reporting bilden die Grundlage für transparente und steuerbare Real Asset-Investments.</p><p class="ip-conclusion">Frankfurt am Main</p></article>
-<article class="ip-card"><span class="ip-kicker">AIFM</span><h3>Institutional Investment Partners S.à.r.l.</h3><p>Luxemburger Fondsstrukturen für institutionelle Anleger mit internationalen Anforderungen und grenzüberschreitenden Investitionsstrategien.</p><p class="ip-conclusion">Luxemburg</p></article>
-<article class="ip-card"><span class="ip-kicker">Beratung</span><h3>Institutional Investment Consulting GmbH</h3><p>Unabhängige Expertise für institutionelle Anleger bei strategischen, operativen und regulatorischen Fragestellungen.</p><p class="ip-conclusion">Frankfurt am Main</p></article>
+<h2>Institutional Solutions Division der Institutional Investment Group</h2>
+<p class="ip-lead">Die Investor Solutions Division vereint alle Leistungen der 2IG, die sich direkt an institutionelle Investoren richten. Neben der Institutional Investment Partners (2IP) als Master-KVG in Deutschland und Luxemburg berät die Institutional Investment Consulting Partners (2ICP) rund um institutionelle Investments in Immobilien und immobiliennahe Real Assets.</p>
 </div>
+<div class="ip-col">
+<p>Die Institutional Investment Group (2IG) ist eine der führenden unabhängigen Investoren-Plattformen für Immobilien- und Real Asset-Investments in Deutschland und Europa. 2IG hat sich mit ihren beiden Geschäftsbereichen Investor Solutions Division und Asset Servicing Division auf Dienstleistungen für institutionelle Immobilienfonds nach deutschem und luxemburgischem Recht spezialisiert.</p>
+<p>Mit mehr als 350 Mitarbeitern verwaltet 2IG über 50 Milliarden Euro Immobilienvermögen in ca. 25 Ländern und nimmt damit eine marktführende Position in der Administration von Real Assets ein.</p>
+<p>Wir sind 100% unabhängig von Banken, Versicherungen, anderen professionellen Immobilieneignern und auch Asset Managern.</p>
 <p class="ip-group-link">Teil der Institutional Investment Group <a href="https://www.2ig.de" target="_blank" rel="noopener">→ www.2ig.de</a></p>
+</div>
 </div>""" % kicker("Die Gruppe")
 
 KONTAKT = """<div class="ip-wrap ip-grid ip-grid--split">
@@ -175,7 +178,7 @@ home_sections = [
     section("ip-sec ip-sec--mist", "Assetklassen", ASSETKLASSEN.replace('<div class="ip-wrap">', '<div id="assetklassen" class="ip-wrap">', 1)),
     section("ip-sec ip-sec--white", "Leistungen", LEISTUNGEN.replace('<div class="ip-wrap">', '<div id="leistungen" class="ip-wrap">', 1)),
     section("ip-sec ip-sec--black ip-hidden", "Standorte (ausgeblendet)", STANDORTE.replace('<div class="ip-wrap">', '<div id="standorte" class="ip-wrap">', 1)),
-    section("ip-sec ip-sec--mist", "Die Gruppe", GRUPPE.replace('<div class="ip-wrap">', '<div id="gruppe" class="ip-wrap">', 1)),
+    section("ip-sec ip-sec--mist", "Die Gruppe", GRUPPE.replace('<div class="ip-wrap ip-grid', '<div id="gruppe" class="ip-wrap ip-grid', 1)),
     section("ip-sec ip-sec--white", "Unser Ansatz", ANSATZ.replace('<div class="ip-wrap">', '<div id="ansatz" class="ip-wrap">', 1)),
     section("ip-sec ip-sec--forest", "Kontakt", KONTAKT.replace('<div class="ip-wrap ip-grid', '<div id="kontakt" class="ip-wrap ip-grid', 1)),
 ]
