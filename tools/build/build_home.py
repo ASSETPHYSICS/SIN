@@ -78,7 +78,7 @@ UEBERZEUGUNG = """<div class="ip-wrap ip-grid ip-grid--split">
 <div class="ip-col">
 %s
 <h2>Transparenz, Kontrolle und Effizienz in der Real Asset-Anlage.</h2>
-<p class="ip-lead">Real Assets erfordern langfristiges Denken, belastbare Strukturen und einen klaren Überblick über Risiken, Verantwortlichkeiten und Entwicklungen. Gleichzeitig steigen die Anforderungen an Administration, Risikomanagement, Reporting und Regulierung. Wir unterstützen institutionelle Anleger dabei, Komplexität zu reduzieren, Verantwortlichkeiten klar zu strukturieren und jederzeit den Überblick zu behalten.</p>
+<p class="ip-lead">Real Assets erfordern langfristiges Denken, belastbare Strukturen und einen klaren Überblick über Risiken, Verantwortlichkeiten und Entwicklungen. Gleichzeitig steigen die Anforderungen an Administration, Risikomanagement, Reporting und Regulierung. Wir unterstützen institutionelle Anleger dabei, sich auf das Wesentliche zu konzentrieren, klare Entscheidungen zu treffen und jederzeit den Überblick zu behalten.</p>
 </div>
 <div class="ip-col">
 %s
