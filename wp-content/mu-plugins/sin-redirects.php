@@ -40,21 +40,22 @@ add_action( 'template_redirect', function () {
 		'/serviceinvest-kapitalverwaltungsgesellschaft-und-bonventure-kooperieren-pro-bono' => '/',
 	);
 
-	// Englische Seiten: vorübergehend (302) auf die deutsche Entsprechung, bis die englische Fassung online ist
-	$temporary = array(
-		'/home-en'                              => '/',
-		'/home-en/serviceinvest-imprint'        => '/serviceinvest-impressum/',
-		'/sustainability'                       => '/nachhaltigkeit-2/',
-		'/statement-on-principal-adverse-impacts-of-investment-decisions-on-sustainability-factors' => $pai,
-		'/dataprotectionnote'                   => '/datenschutzhinweisefuermieter/',
-		'/privacy-policy-2'                     => '/datenschutzerklaerung/',
-		'/complaints-office'                    => '/beschwerdestelle/',
-		'/verguetungspolitik-2'                 => '/verguetungspolitik/',
-		'/kontakt-2'                            => '/#kontakt',
-		'/insights-english'                     => '/',
-		'/debeka-immobilien-invest-i-english'   => '/debeka-immobilien-invest-i/',
-		'/tas-wohnen-1-en'                      => '/tas-wohnen-1/',
+	// Englische Seiten der alten Website: dauerhaft auf die englischen Seiten unter /en/
+	$permanent += array(
+		'/home-en'                              => '/en/',
+		'/home-en/serviceinvest-imprint'        => '/en/imprint/',
+		'/sustainability'                       => '/en/sustainability/',
+		'/statement-on-principal-adverse-impacts-of-investment-decisions-on-sustainability-factors' => '/en/statement-on-principal-adverse-impacts/',
+		'/dataprotectionnote'                   => '/en/data-protection-information/',
+		'/privacy-policy-2'                     => '/en/privacy-policy/',
+		'/complaints-office'                    => '/en/complaints-office/',
+		'/verguetungspolitik-2'                 => '/en/remuneration-policy/',
+		'/kontakt-2'                            => '/en/#kontakt',
+		'/insights-english'                     => '/en/',
+		'/debeka-immobilien-invest-i-english'   => '/en/debeka-immobilien-invest-i-en/',
+		'/tas-wohnen-1-en'                      => '/en/tas-wohnen-1-en/',
 	);
+	$temporary = array();
 
 	$target = null;
 	$status = 301;

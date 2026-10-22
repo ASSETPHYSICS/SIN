@@ -10,9 +10,20 @@ return array(
 	'source'   => 'DE',
 	'target'   => 'EN-GB',
 
+	// Startseite: DeepL. Alle übrigen Seiten: offizielle englische Texte (tools/build/build_sin_en.py + tools/i18n/official.php).
+	// Die alten englischen Adressen (/sustainability/, /home-en/ …) leiten per mu-plugins/sin-redirects.php hierher um.
 	'pages'    => array(
-		// 'startseite'     => array( 'slug' => 'home',           'title' => 'Home',           'status' => 'publish' ),
-		// 'nachhaltigkeit' => array( 'slug' => 'sustainability', 'title' => 'Sustainability', 'status' => 'publish' ),
+		'startseite'                    => array( 'slug' => 'home',                          'title' => 'Home',                        'status' => 'publish' ),
+		'nachhaltigkeit-2'              => array( 'slug' => 'sustainability',                'title' => 'Sustainability',              'status' => 'publish' ),
+		'erklaerung-zu-den-wichtigsten-nachteiligen-auswirkungen-auf-die-nachhaltigkeitsfaktoren-2'
+		                                => array( 'slug' => 'statement-on-principal-adverse-impacts', 'title' => 'PAI Statement',  'status' => 'publish' ),
+		'debeka-immobilien-invest-i'    => array( 'slug' => 'debeka-immobilien-invest-i-en', 'title' => 'Debeka Immobilien Invest I',  'status' => 'publish' ),
+		'tas-wohnen-1'                  => array( 'slug' => 'tas-wohnen-1-en',               'title' => 'TAS Wohnen I',                'status' => 'publish' ),
+		'serviceinvest-impressum'       => array( 'slug' => 'imprint',                       'title' => 'Imprint',                     'status' => 'publish' ),
+		'datenschutzerklaerung'         => array( 'slug' => 'privacy-policy',                'title' => 'Privacy Policy',              'status' => 'publish' ),
+		'datenschutzhinweisefuermieter' => array( 'slug' => 'data-protection-information',   'title' => 'Data Protection Information', 'status' => 'publish' ),
+		'beschwerdestelle'              => array( 'slug' => 'complaints-office',             'title' => 'Complaints Office',           'status' => 'publish' ),
+		'verguetungspolitik'            => array( 'slug' => 'remuneration-policy',           'title' => 'Remuneration Policy',         'status' => 'publish' ),
 	),
 
 	// Menüs, an deren Ende der Sprachumschalter steht (Slug des deutschen Menüs).
@@ -23,13 +34,18 @@ return array(
 		'Nachhaltigkeit'                 => 'Sustainability',
 		'Karriere'                       => 'Careers',
 		'Kontakt'                        => 'Contact',
-		'Impressum'                      => 'Legal notice',
+		'Impressum'                      => 'Imprint',
 		'Datenschutzerklärung'           => 'Privacy policy',
-		'Datenschutzhinweise für Mieter' => 'Privacy notice for tenants',
+		'Datenschutzhinweise für Mieter' => 'Data protection information',
+		'Fonds'                          => 'Funds',
+		'Beschwerdestelle'               => 'Complaints office',
+		'Vergütungspolitik'              => 'Remuneration policy',
 	),
 
 	'glossary' => array(
-		'Kapitalverwaltungsgesellschaft' => 'KVG (German capital management company)',
+		// Firmennamen bleiben unverändert
+		'ServiceInvest Kapitalverwaltungsgesellschaft mbH' => 'ServiceInvest Kapitalverwaltungsgesellschaft mbH',
+		'ServiceInvest Kapitalverwaltungsgesellschaft'     => 'ServiceInvest Kapitalverwaltungsgesellschaft',
 		'KVG-Insourcing'                 => 'KVG insourcing',
 		'Asset Servicing Division'       => 'Asset Servicing Division',
 		'Partner-Fonds'                  => 'partner funds',

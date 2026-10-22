@@ -56,16 +56,58 @@
         "menu_order": 0
     },
     {
-        "id": 14606,
-        "slug": "debeka-immobilien-invest-i",
-        "title": "Debeka Immobilien Invest I",
+        "id": 14708,
+        "slug": "home",
+        "title": "Home",
         "parent": 0,
         "menu_order": 0
     },
     {
-        "id": 14607,
-        "slug": "tas-wohnen-1",
-        "title": "TAS Wohnen I",
+        "id": 14709,
+        "slug": "sustainability",
+        "title": "Sustainability",
+        "parent": 0,
+        "menu_order": 0
+    },
+    {
+        "id": 14710,
+        "slug": "statement-on-principal-adverse-impacts",
+        "title": "PAI Statement",
+        "parent": 0,
+        "menu_order": 0
+    },
+    {
+        "id": 14713,
+        "slug": "imprint",
+        "title": "Imprint",
+        "parent": 0,
+        "menu_order": 0
+    },
+    {
+        "id": 14714,
+        "slug": "privacy-policy",
+        "title": "Privacy Policy",
+        "parent": 0,
+        "menu_order": 0
+    },
+    {
+        "id": 14715,
+        "slug": "data-protection-information",
+        "title": "Data Protection Information",
+        "parent": 0,
+        "menu_order": 0
+    },
+    {
+        "id": 14716,
+        "slug": "complaints-office",
+        "title": "Complaints Office",
+        "parent": 0,
+        "menu_order": 0
+    },
+    {
+        "id": 14717,
+        "slug": "remuneration-policy",
+        "title": "Remuneration Policy",
         "parent": 0,
         "menu_order": 0
     }

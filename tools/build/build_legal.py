@@ -10,7 +10,11 @@ PAGES = {
     14296: ("Datenschutzhinweise für Mieter", "SI-Datenschutzhinweise für Mieter.txt", "mieter"),
 }
 KV = ("Zweck der Verarbeitung", "Rechtsgrundlage", "Datenkategorien", "Empfänger der Daten",
-      "Beabsichtigte Drittlandübermittlung", "Betroffenenrechte", "Domainname", "Ablauf", "Dienst")
+      "Beabsichtigte Drittlandübermittlung", "Betroffenenrechte", "Domainname", "Ablauf", "Dienst",
+      # englische Fassungen (build_sin_en.py)
+      "Purpose of processing", "Legal basis", "Data categories", "Recipients of the data",
+      "Intended third country transfer", "Domain name", "Expiration", "Service")
+STORE_Q = ("Speichern wir auf Ihrem Endger", "Do we store or read personal data")
 ROMAN = re.compile(r"^(I|II|III|IV|V|VI|VII|VIII)\.\s+\S")
 
 
@@ -43,7 +47,7 @@ def render(kind, title, text):
     blocks = [[l.rstrip() for l in b.split("\n") if l.strip()] for b in re.split(r"\n[ \t]*\n", text)]
     blocks = [b for b in blocks if b]
     # Fußzeilen-Boilerplate der Altseite entfernen
-    blocks = [b for b in blocks if not b[0].strip().startswith(("Impressum / Datenschutzerkl", "©2025"))]
+    blocks = [b for b in blocks if not b[0].strip().startswith(("Impressum / Datenschutzerkl", "©20"))]
     out = []
     if kind == "impressum" and blocks and blocks[0][0].strip() == "Impressum":
         blocks[0] = blocks[0][1:]
@@ -114,9 +118,9 @@ def render(kind, title, text):
             if re.search(r"\(Art\. [^)]*\)[^)]*\):$", l):
                 flush(); out.append("<h3>%s</h3>" % esc(l)); i += 1; continue
             if kind == "web":
-                if any(l.startswith(k + ":") for k in KV) or l.startswith("Speichern wir auf Ihrem Endger"):
+                if any(l.startswith(k + ":") for k in KV) or l.startswith(STORE_Q):
                     flush()
-                    if l.startswith("Speichern wir"):
+                    if l.startswith(STORE_Q):
                         q, _, rest = l.partition("?")
                         out.append('<p class="ip-kv"><strong>%s?</strong>%s</p>' % (esc(q), (" " + esc(rest)) if rest.strip() else ""))
                     else:
@@ -165,8 +169,8 @@ def divi(inner):
             "<!-- /wp:divi/column -->\n<!-- /wp:divi/row -->\n<!-- /wp:divi/section --><!-- /wp:divi/placeholder -->" % (j(sec), j(row), j(col), j(txt)))
 
 
-outdir = sys.argv[1]
-for pid, (title, fn, kind) in PAGES.items():
+def main(outdir):
+  for pid, (title, fn, kind) in PAGES.items():
     raw = open(SRC + fn, encoding="utf-8-sig").read().replace("\r\n", "\n")
     src_raw = raw
     if pid == 14200:  # Google Fonts und Google Maps entfernen (die neue Seite nutzt beides nicht)
@@ -185,3 +189,7 @@ for pid, (title, fn, kind) in PAGES.items():
     norm = lambda s: re.sub(r"\s+", "", s)
     miss = [w for w in re.split(r"\s+", raw) if w and norm(w) not in norm(plain) and not w.startswith(("©2025",))]
     print(pid, title, "| Zeichen:", len(body), "| im Original, aber nicht im Ergebnis:", [m for m in miss if m not in ("Impressum", "/", "Datenschutzerklärung", "All", "rights", "reserved", "by", "ServiceInvest", "Kapitalverwaltungsgesellschaft", "mbH")][:12])
+
+
+if __name__ == "__main__":
+    main(sys.argv[1])

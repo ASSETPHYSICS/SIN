@@ -79,7 +79,7 @@ function divi_2ip_legal_path( $key ) {
 add_shortcode( 'ip_legal_links', function () {
 	$en    = ( 'en' === divi_2ip_lang() );
 	$links = array(
-		divi_2ip_legal_path( 'impressum' )   => $en ? 'Legal notice' : 'Impressum',
+		divi_2ip_legal_path( 'impressum' )   => $en ? 'Imprint' : 'Impressum',
 		divi_2ip_legal_path( 'datenschutz' ) => $en ? 'Privacy policy' : 'Datenschutz',
 	);
 	$out = array();

@@ -37,7 +37,7 @@ if ( ! empty( $cfg['glossary'] ) ) {
 	$tsv = '';
 	foreach ( $cfg['glossary'] as $de => $en ) { $tsv .= $de . "\t" . $en . "\n"; }
 	$hash  = sha1( $tsv );
-	$cache = getenv( 'HOME' ) . '/.config/2ip/deepl-glossary.json';
+	$cache = getenv( 'HOME' ) . '/.config/2ip/deepl-glossary-' . substr( md5( $root ), 0, 8 ) . '.json';   // je Projekt (2IP/SIN) getrennt
 	$c     = file_exists( $cache ) ? json_decode( file_get_contents( $cache ), true ) : array();
 	if ( ! empty( $c['hash'] ) && $c['hash'] === $hash ) {
 		$glossary_id = $c['id'];
