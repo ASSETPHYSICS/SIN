@@ -1,9 +1,9 @@
-# 2IP – .htaccess für IONOS (Apache). Als ".htaccess" in das WordPress-Stammverzeichnis legen.
+# ServiceInvest – .htaccess für IONOS (Apache). Als ".htaccess" in das WordPress-Stammverzeichnis legen.
 # Ersetzt die Schutzfunktionen des lokalen router.php.
 
 # --- Staging-Schutz (nur bis zum Livegang aktiv lassen; Datei .htpasswd mit "htpasswd -c" anlegen) ---
 # AuthType Basic
-# AuthName "2IP Staging"
+# AuthName "SIN Staging"
 # AuthUserFile /kunden/homepages/XX/dXXXXXXXX/htdocs/.htpasswd
 # Require valid-user
 
@@ -15,11 +15,10 @@ RewriteEngine On
 # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # --- Livegang: www -> Hauptdomain (Zeilen erst dann aktivieren) ---
-# RewriteCond %{HTTP_HOST} ^www\.2ip\.de$ [NC]
-# RewriteRule ^ https://2ip.de%{REQUEST_URI} [L,R=301]
+# RewriteCond %{HTTP_HOST} ^www\.serviceinvest\.de$ [NC]
+# RewriteRule ^ https://serviceinvest.de%{REQUEST_URI} [L,R=301]
 
-# --- Livegang: alte URLs -> neue URLs (aus der Weiterleitungstabelle ergänzen) ---
-# RewriteRule ^alter-pfad/?$ /neuer-pfad/ [L,R=301]
+# Alte URLs leitet wp-content/mu-plugins/sin-redirects.php weiter.
 </IfModule>
 
 # --- Sicherheits-Header ---

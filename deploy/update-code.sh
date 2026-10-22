@@ -2,7 +2,7 @@
 # Spielt nur Code-Änderungen (Theme, Plugin, MU-Plugin) ein; die Datenbank bleibt unberührt.
 #
 #   cd <WordPress-Stammverzeichnis>
-#   SRC_DIR=$HOME/2ip-code bash $SRC_DIR/deploy/update-code.sh
+#   SRC_DIR=$HOME/sin-code bash $SRC_DIR/deploy/update-code.sh
 #
 # SRC_DIR = entpacktes Code-Paket ("git archive"). Schriften im Theme-Ordner bleiben erhalten.
 set -euo pipefail
