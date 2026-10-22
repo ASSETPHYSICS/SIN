@@ -64,6 +64,7 @@ else
 fi
 copy_dir "$TMP/repo/wp-content/plugins/appointment-booking" wp-content/plugins/appointment-booking
 cp -a "$TMP/repo/wp-content/mu-plugins/." wp-content/mu-plugins/
+HTACCESS_SRC=$(mktemp); cp "$TMP/repo/deploy/htaccess" "$HTACCESS_SRC"
 rm -rf "$TMP"
 [ -d wp-content/plugins/polylang ] || WP plugin install polylang
 [ -f wp-content/themes/Divi-SIN/fonts/NeueHaasGroteskDisplay-Roman.woff2 ] || echo "!! WARNUNG: Schriften fehlen in wp-content/themes/Divi-SIN/fonts/ (Assets-Paket entpacken)"
@@ -95,7 +96,13 @@ WP theme activate Divi-SIN
 WP plugin activate polylang appointment-booking
 WP option update blog_public "$INDEXING"
 WP option update admin_email "$ADMIN_MAIL"
-WP rewrite structure '/%postname%/' --hard
+WP rewrite structure '/%postname%/'
+# WP-CLI darf die .htaccess nicht schreiben; ohne sie liefern alle Unterseiten 404
+if [ ! -f .htaccess ] || ! grep -q "BEGIN WordPress" .htaccess; then
+  [ -f .htaccess ] && cp .htaccess "$HOME/htaccess-vorher-$STAMP.bak"
+  cp "$HTACCESS_SRC" .htaccess; chmod 644 .htaccess
+  echo ".htaccess aus deploy/htaccess angelegt"
+fi
 WP cache flush
 rm -rf wp-content/et-cache
 # Rollen neu anlegen (der bereinigte Dump enthält wp_user_roles nicht)
