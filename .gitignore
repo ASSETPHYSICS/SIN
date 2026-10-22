@@ -30,3 +30,7 @@ wp-config.php
 .env
 *.log
 .DS_Store
+
+# Python-Cache
+__pycache__/
+*.pyc
