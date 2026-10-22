@@ -48,6 +48,9 @@
 		var r = logo.getBoundingClientRect();
 		var center = r.top + window.pageYOffset + r.height / 2;
 		root.style.setProperty('--ip-burger-top', Math.round(center - bar.offsetHeight / 2) + 'px');
+		// Höhe der Kopfzeile (für Sektionen, die den restlichen Bildschirm füllen)
+		var header = document.querySelector('.et-l--header');
+		if (header) { root.style.setProperty('--ip-header-h', Math.round(header.getBoundingClientRect().height) + 'px'); }
 	}
 	function alignAndUpdate() { align(); request(); }
 

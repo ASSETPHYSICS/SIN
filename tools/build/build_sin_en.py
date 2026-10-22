@@ -28,7 +28,16 @@ PDF = {
     "tas_en": UP + "2025/04/2024-04-19-website-disclosure-Art.-10-SFDR-TAS-Wohnen-I-c.pdf",
     "stewardship": UP + "2024/12/2023-10-31-2IG-Stewardship-Policy.pdf",
 }
-EN = {"remuneration": "/en/remuneration-policy/", "pai": "/en/statement-on-principal-adverse-impacts/"}
+EN = {"remuneration": "/en/remuneration-policy/", "pai": "/en/statement-on-principal-adverse-impacts/", "complaints": "/en/complaints-office/"}
+DPO = "Sascha Kremer, c/o KREMER LEGAL, Bahnhofstraße 66, 41236 Mönchengladbach, sascha.kremer@kremer.legal"   # wie in den deutschen Texten
+
+
+def patch(raw, fixes):
+    """Redaktionelle Änderungen (Freigabe 22.10.2026); jede Fundstelle muss genau einmal vorkommen."""
+    for a, b in fixes:
+        assert raw.count(a) == 1, ("nicht eindeutig gefunden", a[:60])
+        raw = raw.replace(a, b)
+    return raw
 BOILER = ("Impressum / Datenschutzerkl", "©20", "Bildquelle:")
 
 
@@ -77,16 +86,25 @@ PRINCIPAL = (("Principle Adverse Impacts", "Principal Adverse Impacts"),)
 
 # ------------------------------------------------------------------ Imprint
 raw = src("Imprint.txt")
+COMPLAINTS_H = 'Complaints Office for Fund Investors of ServiceInvest Kapitalverwaltungsgesellschaft mbH ("ServiceInvest")'
+raw = patch(raw, (  # Abschnitt Beschwerdestelle ergänzt (wie in der deutschen Fassung)
+    ("Information on remuneration policy\n",
+     COMPLAINTS_H + "\nInformation on the complaints office for fund investors of ServiceInvest Kapitalverwaltungsgesellschaft mbH "
+     "can be found via this link.\n\nInformation on remuneration policy\n"),
+))
 body = render("impressum", "Imprint", raw.replace("Imprint\n", "", 1))
 body, n = re.subn(r"under this link", 'under <a href="%s">this link</a>' % EN["remuneration"], body)
-assert n == 1
-for h in ("Image rights:", "Information on remuneration policy"):
+body, m = re.subn(r"via this link", 'via <a href="%s">this link</a>' % EN["complaints"], body)
+assert n == 1 and m == 1
+for h in ("Image rights:", COMPLAINTS_H, "Information on remuneration policy"):
+    assert "<p>%s<br>" % e(h) in body, h
     body = body.replace("<p>%s<br>" % e(h), "<h3>%s</h3>\n<p>" % e(h))
 pages["serviceinvest-impressum"] = ("Imprint", [legal(body)])
 check("Imprint", raw, pages["serviceinvest-impressum"][1])
 
 # ------------------------------------------------------------------ Privacy Policy (ohne Google Fonts / Google Maps, wie die deutsche Fassung)
 raw = src("Privacy Policy.txt")
+raw = patch(raw, (("Sascha Kremer\nDisch-Haus\nBrückenstraße 21\n50667 Cologne", DPO),))   # Anschrift des Datenschutzbeauftragten aktualisiert
 raw2, n = re.subn(r"Google Fonts\n.*?(?=III\. Data processing on our career site)", "", raw, flags=re.S)
 assert n == 1 and "Google" not in raw2
 body = render("web", "Privacy Policy", raw2.replace("Privacy Policy\n", "", 1))
@@ -95,9 +113,20 @@ check("Privacy Policy", raw2, pages["datenschutzerklaerung"][1])
 
 # ------------------------------------------------------------------ Data Protection Information (Mieter)
 raw = src("Data Protection Information.txt")
+raw = patch(raw, (  # an die aktuelle deutsche Fassung (Stand März 2026) angeglichen
+    ("Sascha Kremer\nDisch-Haus\nBrückenstrasse 21\n50667 Köln\nPhone: +49(221)27 14 18 74\nE-mail: sascha.kremer@kremer-recht.de", DPO),
+    ("Up-to-date information on data protection is always available at http://s1085564301.online.de/datenschutzerklaerung/",
+     "Please note that links on our website may take you to other websites that are not operated by us but by third parties. "
+     "Such links are either clearly marked by us or are recognizable by a change in the address line of your browser. We are not "
+     "responsible for compliance with data protection regulations and secure handling of your personal data on these websites "
+     "operated by third parties."),
+    ("3. Type of data collected, purposes", "2. Type of data collected, purposes"),
+    ("Without the data transfer to and processing by us, this could not be provided by us as the landlord and (indirect) owner. ", ""),
+    ("If possible, please contact us first to assert your rights:\n\nServiceInvest Kapitalverwaltungsgesellschaft mbH\n",
+     "If possible, please contact us first to assert your rights:\n\nServiceInvest Kapitalverwaltungsgesellschaft mbH\nacting on behalf of the investment funds it manages\n"),
+    ("Date: 22.01.2021", "Date: March 2026"),
+))
 body = render("mieter", "Data Protection Information", raw.replace("Data Protection Information\n", "", 1))
-# Verweis auf eine frühere temporäre Server-Adresse nicht verlinken (nur Text, siehe Hinweis an die Redaktion)
-body = re.sub(r'<a href="(http://s1085564301\.online\.de/[^"]*)"[^>]*>[^<]*</a>', r"\1", body)
 pages["datenschutzhinweisefuermieter"] = ("Data Protection Information", [legal(body)])
 check("Data Protection Information", raw, pages["datenschutzhinweisefuermieter"][1])
 
@@ -136,6 +165,18 @@ while i < len(L):
     else:
         h.append(p(l))
     i += 1
+# Ergänzt wie in der deutschen Fassung: Abschnitt 2.3 (Text identisch mit "Sustainability in the remuneration policy"
+# der Seite Acting sustainably) und Fußnote zum Begriff "employee"
+SUS = lines(src("Acting sustainably.txt"))
+sus_text = SUS[SUS.index("Sustainability in the remuneration policy") + 1]
+h.append("<h3>2.3 Sustainability in the remuneration policy</h3>")
+h.append(p(sus_text))
+marker = "performance of the individual employees."
+first = [k for k, x in enumerate(h) if marker in x]
+assert len(first) == 1
+h[first[0]] = h[first[0]].replace(marker, 'performance of the individual employees<sup><a href="#fn1" id="fnref1">[1]</a></sup>.')
+h.append('<p class="ip-note-line" id="fn1"><a href="#fnref1">[1]</a> The term “employee” used in this text was chosen for better '
+         'readability and includes all female, male and intersex persons working for the Company.</p>')
 pages["verguetungspolitik"] = ("Remuneration Policy", [legal("".join(h))])
 check("Remuneration Policy", raw, pages["verguetungspolitik"][1], ignore=("of",))
 
@@ -160,6 +201,17 @@ check("Debeka Immobilien Invest I", raw, pages["debeka-immobilien-invest-i"][1])
 
 # ------------------------------------------------------------------ TAS Wohnen I
 raw = src("TAS Wohnen I (en).txt")
+raw = patch(raw, (  # Korrekturen (Freigabe 22.10.2026)
+    ("Product disclosure TAS Wohnen I (PDF, englisch)", "Product disclosure TAS Wohnen I (PDF, English)"),
+    ("(Energy Saving Ordinance -contribution to climate protection)", "(Energy Saving Ordinance)) (contribution to climate protection)"),
+    ("to ensure that they meet the Fund’s ESG criteria applicable to the Fund", "to ensure that they meet the ESG criteria applicable to the Fund"),
+    ("deemed high risk in respect to the Fund’s ESG criteria", "deemed high risk with respect to the Fund’s ESG criteria"),
+    ("The maximum share of investments is  are in residential real estate assets", "The largest share of investments is in residential real estate assets"),
+    ("not compliant with the promoted environmental criterias is applied", "not compliant with the promoted environmental criteria is applied"),
+    ("the requirements of the current german Energieeinsparverordnung", "the requirements of the current German Energieeinsparverordnung"),
+    ("h) Datesources and processing", "h) Data sources and processing"),
+    ("in the transaction due diligence in order verify", "in the transaction due diligence in order to verify"),
+))
 L = lines(raw)
 # 0 Titel, 1-2 Downloads, 3 Disclosure…regarding…, 4 Name, 5 ISIN, 6 Stand, danach a)…l), Hinweise
 intro, _, regarding = L[3].partition(" regarding ")
@@ -226,7 +278,12 @@ icons = ("Pollution", "Carbon", "Bomb", "ShakeHands", "Money", "Money")
 crit = T[a + 2:a + 14]
 seg.append(split(e(T[a]), p(T[a + 1]) + '<ul class="ip-criteria">%s</ul>' % "".join(
     '<li><img src="%s/icon-%s.svg" alt="" width="56" height="56"><div><span class="ip-kicker">%s</span><p><strong>%s</strong></p></div></li>'
-    % (IMG, icons[k], e(crit[2 * k]), e(crit[2 * k + 1])) for k in range(6)) + p(T[a + 14])))
+    % (IMG, icons[k], e(crit[2 * k]), e(crit[2 * k + 1])) for k in range(6))
+    # ergänzt wie in der deutschen Fassung: Fokus des PAI-Statements
+    + '<p>In our <a href="%s">Principal Adverse Impact Statement</a>, we focus on the following three indicators: (i) fossil fuels, '
+      '(ii) energy efficiency and (iii) intensity of energy consumption. Our strategies for identifying and weighting these '
+      'sustainability indicators are described in the statement.</p>' % EN["pai"]
+    + p(T[a + 14])))
 a = ix("Stewardship")
 seg.append(split("Stewardship", "%s\n%s\n%s\n<p><a href=\"%s\" target=\"_blank\" rel=\"noopener\">%s</a></p>"
                  % (p(T[a + 1]), p(T[a + 2]), p(T[a + 3]), PDF["stewardship"], e(T[a + 4]))))

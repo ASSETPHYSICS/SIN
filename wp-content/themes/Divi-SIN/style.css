@@ -691,6 +691,12 @@ html body .ip-divi-sec .ip-link-toggle:hover { color: var(--ip-green); }
    (Abschnitte 1–8) konfliktarm übernommen werden können.
    ================================================================== */
 
+/* Startseite: Header-Sektion füllt den sichtbaren Bereich unter der Kopfzeile (Höhe misst burger.js: --ip-header-h) */
+html body .ip-hero.ip-fund-hero--home {
+	min-height: calc(100vh - var(--ip-header-h, 80px));
+	min-height: calc(100svh - var(--ip-header-h, 80px));
+}
+
 /* Logo: Wort-Bild-Marke ist breiter als die 2IP-Marke */
 .et_pb_menu .et_pb_menu__logo img,
 .et_pb_menu .et_pb_menu__logo-wrap img { width: 190px; }

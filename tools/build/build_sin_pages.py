@@ -152,6 +152,15 @@ check("debeka-immobilien-invest-i", raw, pages["debeka-immobilien-invest-i"])
 
 # ------------------------------------------------------------------ TAS Wohnen I
 raw = src("SI-TAS Wohnen I.txt")
+# Redaktionelle Korrekturen (Freigabe 22.10.2026)
+TAS_FIXES = (
+    ("in dem er die folgenden Kriterien", "indem er die folgenden Kriterien"),
+    ("Schutz und der Wiederherstellung der Biodiversität und Ökosysteme.", "Schutz und Wiederherstellung der Biodiversität und Ökosysteme."),
+    ("Die einzelnen Due Diligence-Prozesse werden die jeweils von", "Die einzelnen Due Diligence-Prozesse werden jeweils von"),
+)
+for a, b in TAS_FIXES:
+    assert raw.count(a) == 1, a
+    raw = raw.replace(a, b)
 L = [l.strip() for l in raw.split("\n") if l.strip() and not l.strip().startswith("(https://")]
 # 0 Titel, 1-2 Downloads, 3 Offenlegung…, 4 betreffend…, 5 Name, 6 ISIN, 7 Stand, danach a)…l), Hinweise
 downloads = dls([(L[1], "2024-06-19-VOe_Internetseite-Art.-10-SFDR-TAS-Wohnen-I-c.pdf"),
