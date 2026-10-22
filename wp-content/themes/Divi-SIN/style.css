@@ -713,9 +713,11 @@ html body .ip-hero.ip-fund-hero--home {
 html body .ip-divi-sec .ip-link-toggle { text-decoration-color: var(--ip-light-green); }
 html body .ip-divi-sec .ip-link-toggle:hover { color: var(--ip-light-green); }
 .ip-sec--forest a:not(.ip-btn):not(.ip-link-toggle) { color: var(--ip-white); text-decoration: underline; text-decoration-color: var(--ip-light-green); text-underline-offset: 4px; }
+/* … außer im weißen Formular (z. B. Link zur Datenschutzerklärung) */
+.ip-sec--forest .appointment-booking-wrapper a:not(.ip-btn) { color: var(--ip-green-print); text-decoration-color: currentColor; }
 
-/* Abschluss-Fläche in SI Red (laut Farbpalette), Text weiß */
-.ip-sec--brand { background: var(--ip-green); color: var(--ip-white); }
+/* Fläche „Ihr Nutzen“ im dunklen SI Red (das helle SI Red wirkt als Fläche zu grell), Text weiß */
+.ip-sec--brand { background: var(--ip-green-print); color: var(--ip-white); }
 .ip-sec--brand .ip-kicker { color: var(--ip-white); opacity: .85; }
 .ip-sec--brand .ip-conclusion { color: var(--ip-white); }
 
