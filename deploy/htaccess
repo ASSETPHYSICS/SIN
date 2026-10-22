@@ -14,9 +14,9 @@ RewriteEngine On
 # RewriteCond %{HTTP:X-Forwarded-Proto} !https
 # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# --- Livegang: www -> Hauptdomain (Zeilen erst dann aktivieren) ---
-# RewriteCond %{HTTP_HOST} ^www\.serviceinvest\.de$ [NC]
-# RewriteRule ^ https://serviceinvest.de%{REQUEST_URI} [L,R=301]
+# --- Livegang: Hauptdomain -> www (wie bisher bei serviceinvest.de; Zeilen erst dann aktivieren) ---
+# RewriteCond %{HTTP_HOST} ^serviceinvest\.de$ [NC]
+# RewriteRule ^ https://www.serviceinvest.de%{REQUEST_URI} [L,R=301]
 
 # Alte URLs leitet wp-content/mu-plugins/sin-redirects.php weiter.
 </IfModule>
