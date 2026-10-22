@@ -16,6 +16,8 @@ add_action( 'wp_enqueue_scripts', function () {
 	// Navigation (Sidebar) und Hamburger-Farbwechsel nach Hintergrund.
 	wp_enqueue_script( 'divi-2ip-nav', $uri . '/js/nav.js', array(), divi_2ip_ver( 'js/nav.js' ), true );
 	wp_enqueue_script( 'divi-2ip-burger', $uri . '/js/burger.js', array(), divi_2ip_ver( 'js/burger.js' ), true );
+	// Kennzahlen: Einblenden und Hochzählen beim Scrollen.
+	wp_enqueue_script( 'divi-sin-figures', $uri . '/js/figures.js', array(), divi_2ip_ver( 'js/figures.js' ), true );
 
 	// Logo im Header (Divi-Layout, Link "/") führt auf die Startseite der aktuellen Sprache.
 	if ( function_exists( 'pll_home_url' ) && 'de' !== divi_2ip_lang() ) {

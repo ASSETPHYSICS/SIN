@@ -2,8 +2,8 @@
 (function () {
 	'use strict';
 	var root = document.documentElement;
-	var DARK = '.ip-hero, .ip-sec--black, .ip-sec--forest, .ip-sec--brand, .ip-nh-photo, .ip-fund-hero, .ip-footer, .ip-disclaimer';
-	var LIGHT = '.ip-sec--white, .ip-sec--mist, .et-l--header';
+	var DARK = '.ip-hero, .ip-sec--black, .ip-sec--forest, .ip-nh-photo, .ip-fund-hero, .ip-footer, .ip-disclaimer';
+	var LIGHT = '.ip-sec--white, .ip-sec--mist, .ip-sec--brand, .et-l--header';
 	var ticking = false;
 
 	function luminance(rgb) {

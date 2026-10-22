@@ -716,10 +716,10 @@ html body .ip-divi-sec .ip-link-toggle:hover { color: var(--ip-light-green); }
 /* … außer im weißen Formular (z. B. Link zur Datenschutzerklärung) */
 .ip-sec--forest .appointment-booking-wrapper a:not(.ip-btn) { color: var(--ip-green-print); text-decoration-color: currentColor; }
 
-/* Fläche „Ihr Nutzen“ im dunklen SI Red (das helle SI Red wirkt als Fläche zu grell), Text weiß */
-.ip-sec--brand { background: var(--ip-green-print); color: var(--ip-white); }
-.ip-sec--brand .ip-kicker { color: var(--ip-white); opacity: .85; }
-.ip-sec--brand .ip-conclusion { color: var(--ip-white); }
+/* Fläche „Ihr Nutzen“: weiß mit dunklen Kennzahlen (folgt auf die hellgraue Section „Was uns unterscheidet“) */
+.ip-sec--brand { background: var(--ip-white); color: var(--ip-black); }
+.ip-sec--brand .ip-figure { border-top-color: var(--ip-rule); }
+.ip-divi-sec.ip-sec--brand .ip-figure__value { color: var(--ip-black); font-variant-numeric: tabular-nums; }
 
 /* Kennzahlen (z. B. „100 %“): drei Spalten, große Ziffern in der Kennzahl-Schrift */
 .ip-figures { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 4vw, 64px); margin-top: 56px; }
@@ -728,6 +728,9 @@ html body .ip-divi-sec .ip-link-toggle:hover { color: var(--ip-light-green); }
 .ip-divi-sec .ip-figure__value { display: block; font-family: var(--ip-font-figure); font-weight: 700; font-size: clamp(56px, 6.4vw, 96px); line-height: 1; letter-spacing: -0.01em; margin: 0 0 .25em; }
 .ip-divi-sec .ip-figure h3 { margin-bottom: .45em; }
 .ip-divi-sec .ip-figure p { max-width: 34ch; }
+/* Einblenden beim Scrollen (js/figures.js setzt die Klassen; ohne JavaScript bleibt alles sichtbar) */
+.ip-figure.ip-reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.ip-figure.ip-reveal.ip-in { opacity: 1; transform: none; }
 
 /* Leistungen: Einleitung und hervorgehobener Absatz über den Kacheln */
 .ip-divi-sec .ip-intro { max-width: 70ch; }
