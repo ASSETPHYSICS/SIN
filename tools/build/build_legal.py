@@ -175,8 +175,8 @@ for pid, (title, fn, kind) in PAGES.items():
         assert not re.search(r"Google Fonts|Google Maps|Vimeo|vimeo", raw), re.findall(r".{40}(?:Google|imeo).{40}", raw)
     body = render(kind, title, raw)
     if pid == 14195:  # Verweise auf Beschwerdestelle und Vergütungspolitik verlinken
-        body, a = re.subn(r"über diesen Link", 'über <a href="/impressum/beschwerdestelle/">diesen Link</a>', body)
-        body, b = re.subn(r"unter diesem Link", 'unter <a href="/impressum/verguetungspolitik/">diesem Link</a>', body)
+        body, a = re.subn(r"über diesen Link", 'über <a href="/beschwerdestelle/">diesen Link</a>', body)
+        body, b = re.subn(r"unter diesem Link", 'unter <a href="/verguetungspolitik/">diesem Link</a>', body)
         assert a == 1 and b == 1, (a, b)
     open("%s/legal_%d.txt" % (outdir, pid), "w", encoding="utf-8").write(divi(body))
     # Textvergleich: sichtbarer Text muss dem Original entsprechen (ohne Boilerplate)

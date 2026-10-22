@@ -1,7 +1,7 @@
 [
     {
         "id": 14195,
-        "slug": "impressum",
+        "slug": "serviceinvest-impressum",
         "title": "Impressum",
         "parent": 0,
         "menu_order": 0
@@ -10,7 +10,7 @@
         "id": 14200,
         "slug": "datenschutzerklaerung",
         "title": "Datenschutzerklärung",
-        "parent": 14195,
+        "parent": 0,
         "menu_order": 0
     },
     {
@@ -22,51 +22,51 @@
     },
     {
         "id": 14286,
-        "slug": "nachhaltigkeit",
+        "slug": "nachhaltigkeit-2",
         "title": "Nachhaltigkeit",
         "parent": 0,
         "menu_order": 0
     },
     {
         "id": 14287,
-        "slug": "pai-statement",
+        "slug": "erklaerung-zu-den-wichtigsten-nachteiligen-auswirkungen-auf-die-nachhaltigkeitsfaktoren-2",
         "title": "PAI Statement",
-        "parent": 14286,
+        "parent": 0,
         "menu_order": 0
     },
     {
         "id": 14296,
-        "slug": "datenschutzhinweise-mieter",
+        "slug": "datenschutzhinweisefuermieter",
         "title": "Datenschutzhinweise für Mieter",
-        "parent": 14195,
+        "parent": 0,
         "menu_order": 0
     },
     {
         "id": 14603,
         "slug": "beschwerdestelle",
         "title": "Beschwerdestelle für Fondsanleger",
-        "parent": 14195,
+        "parent": 0,
         "menu_order": 0
     },
     {
         "id": 14604,
         "slug": "verguetungspolitik",
         "title": "Vergütungspolitik",
-        "parent": 14195,
+        "parent": 0,
         "menu_order": 0
     },
     {
         "id": 14606,
         "slug": "debeka-immobilien-invest-i",
         "title": "Debeka Immobilien Invest I",
-        "parent": 14605,
+        "parent": 0,
         "menu_order": 0
     },
     {
         "id": 14607,
-        "slug": "tas-wohnen-i",
+        "slug": "tas-wohnen-1",
         "title": "TAS Wohnen I",
-        "parent": 14605,
+        "parent": 0,
         "menu_order": 0
     }
 ]

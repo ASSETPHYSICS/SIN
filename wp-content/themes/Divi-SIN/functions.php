@@ -68,12 +68,19 @@ add_filter( 'wp_nav_menu_args', function ( $args ) {
 	return $args;
 } );
 
+// Seitenpfade von Impressum und Datenschutzerklärung. ServiceInvest übernimmt die Adressen der bisherigen
+// Website (flache Struktur), damit bestehende externe Links weiter funktionieren.
+function divi_2ip_legal_path( $key ) {
+	$paths = array( 'impressum' => 'serviceinvest-impressum', 'datenschutz' => 'datenschutzerklaerung' );
+	return $paths[ $key ];
+}
+
 // [ip_legal_links] – Impressum und Datenschutz in der aktuellen Sprache (Fußzeile).
 add_shortcode( 'ip_legal_links', function () {
 	$en    = ( 'en' === divi_2ip_lang() );
 	$links = array(
-		'impressum'                       => $en ? 'Legal notice' : 'Impressum',
-		'impressum/datenschutzerklaerung' => $en ? 'Privacy policy' : 'Datenschutz',
+		divi_2ip_legal_path( 'impressum' )   => $en ? 'Legal notice' : 'Impressum',
+		divi_2ip_legal_path( 'datenschutz' ) => $en ? 'Privacy policy' : 'Datenschutz',
 	);
 	$out = array();
 	foreach ( $links as $path => $label ) {
@@ -93,14 +100,17 @@ add_shortcode( 'ip_legal_links', function () {
 
 // Kontaktformular: Link zur Datenschutzerklärung in der Sprache der Seite (sofern übersetzt).
 add_filter( 'appointment_booking_privacy_url', function ( $url ) {
-	$page = get_page_by_path( 'impressum/datenschutzerklaerung' );
-	if ( $page && function_exists( 'pll_get_post' ) && 'de' !== divi_2ip_lang() ) {
+	$page = get_page_by_path( divi_2ip_legal_path( 'datenschutz' ) );
+	if ( ! $page ) {
+		return $url;
+	}
+	if ( function_exists( 'pll_get_post' ) && 'de' !== divi_2ip_lang() ) {
 		$tr = pll_get_post( $page->ID, divi_2ip_lang() );
 		if ( $tr && 'publish' === get_post_status( $tr ) ) {
 			return get_permalink( $tr );
 		}
 	}
-	return $url;
+	return get_permalink( $page );
 } );
 
 // Titel und Beschreibung der Startseite für Suchmaschinen auf Englisch.

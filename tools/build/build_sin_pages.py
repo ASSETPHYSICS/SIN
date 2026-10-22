@@ -3,13 +3,21 @@
 
 Aufruf:  IP_CONTENT_DIR="SIN Content" python3 tools/build/build_sin_pages.py <Ausgabeverzeichnis>
 Schreibt je Seite <slug>.txt und prüft, dass jedes Wort der Quelldatei im Ergebnis vorkommt.
-Der Wortlaut der Offenlegungen bleibt unverändert; PDFs liegen unter /wp-content/uploads/offenlegung/.
+Der Wortlaut der Offenlegungen bleibt unverändert; PDFs liegen unter ihren bisherigen Upload-Pfaden.
 """
 import html, json, os, re, sys
 
 SRC = os.environ.get("IP_CONTENT_DIR", "SIN Content") + "/"
 VER = "5.0.0-public-beta.2"
-DL = "/wp-content/uploads/offenlegung/"
+# PDFs liegen unter ihren bisherigen Adressen (wie auf der alten Website), damit externe Links weiter funktionieren.
+DL_PATHS = {
+    "2026-06-22_SIN_Annex_I-PAI-Statement_v2.2_DE-clean.pdf": "2026/06",
+    "2026-06-22_SIN_Annex_I-PAI-Statement_v2.2_ENG-clean.pdf": "2026/06",
+    "Debeka-Immo-Invest-Entwurf-VOe_Internetseite-Art.-10-SFDR_Art_8-c-final.pdf": "2025/08",
+    "Debeka-Immo-Invest-Entwurf-VOe_Internetseite-Art.10-SFDR-english.pdf": "2025/08",
+    "2024-06-19-VOe_Internetseite-Art.-10-SFDR-TAS-Wohnen-I-c.pdf": "2025/04",
+    "2024-04-19-website-disclosure-Art.-10-SFDR-TAS-Wohnen-I-c.pdf": "2025/04",
+}
 
 
 def j(obj):
@@ -46,7 +54,7 @@ def p(t, cls=""):
 
 def dls(items):
     return '<ul class="ip-dls">%s</ul>' % "".join(
-        '<li><a class="ip-dl" href="%s%s" target="_blank" rel="noopener">%s</a></li>' % (DL, f, e(label)) for label, f in items)
+        '<li><a class="ip-dl" href="/wp-content/uploads/%s/%s" target="_blank" rel="noopener">%s</a></li>' % (DL_PATHS[f], f, e(label)) for label, f in items)
 
 
 def hero(mod, h1, lead=""):

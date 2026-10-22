@@ -101,13 +101,13 @@ AUSWIRKUNGEN = split("Systematische Berücksichtigung von nachteiligen Nachhalti
                      '<ul class="ip-criteria">%s</ul>' % "".join(
                          '<li><img src="%s/icon-%s.svg" alt="" width="56" height="56"><div><span class="ip-kicker">%s</span><p><strong>%s</strong></p></div></li>' % (IMG, ic, t, d)
                          for ic, t, d in KRITERIEN)
-                     + '<p>Wobei wir uns in unserem <a href="/nachhaltigkeit/pai-statement/">Principal Adverse Impact Statement</a> auf folgende drei Indikatoren fokussieren: (i) fossile Energieträger, (ii) Energie-Effizienz und (iii) Intensität des Energieverbrauchs. Unsere Strategien zur Feststellung und Gewichtung dieser Nachhaltigkeitsindikatoren sind in dem Statement beschrieben.</p>'
+                     + '<p>Wobei wir uns in unserem <a href="/erklaerung-zu-den-wichtigsten-nachteiligen-auswirkungen-auf-die-nachhaltigkeitsfaktoren-2/">Principal Adverse Impact Statement</a> auf folgende drei Indikatoren fokussieren: (i) fossile Energieträger, (ii) Energie-Effizienz und (iii) Intensität des Energieverbrauchs. Unsere Strategien zur Feststellung und Gewichtung dieser Nachhaltigkeitsindikatoren sind in dem Statement beschrieben.</p>'
                      "<p>Die Ergebnisse des Adverse Sustainable Screenings fließen in die abschließende Investitionsentscheidung ein und führen im Fall der Überschreitung von Wesentlichkeitsgrenzen zu unserem Veto aus Nachhaltigkeitsgründen.</p>")
 
 STEWARDSHIP = split("Stewardship", """<p>Befördert durch unsere gewonnene Marktstellung und die damit gestiegene gesellschaftliche Verantwortung – aber auch durch die generelle gesellschaftliche Entwicklung – ist es unser wesentliches Bestreben den eigenen Wirkungskreis zu nutzen, um einen bedeutsamen Unternehmensbeitrag für eine nachhaltige Umwelt und Gesellschaft zu leisten.</p>
 <p>Dazu zählt auch die Nutzung des eigenen Einflusses (Stewardship) auf Dritte zur Optimierung des langfristigen Gesamtwerts, einschließlich gemeinsamer wirtschaftlicher, sozialer und ökologischer Werte, von denen die Renditen und die Interessen der Anleger und Begünstigten abhängen.</p>
 <p>Wie wir als Institutional Investment Group im Sinne der Nachhaltigkeit verantwortungsvoll Einfluss nehmen wollen beschreibt die folgende Leitlinie:</p>
-<p><a href="/wp-content/themes/Divi-SIN/downloads/2023-10-31-2IG-Stewardship-Policy.pdf" target="_blank" rel="noopener">Stewardship-Policy</a>.</p>""")
+<p><a href="/wp-content/uploads/2024/12/2023-10-31-2IG-Stewardship-Policy.pdf" target="_blank" rel="noopener">Stewardship-Policy</a>.</p>""")
 
 VERGUETUNG = """<div class="ip-wrap"><div class="ip-nh-card">
 <h2>Nachhaltigkeit in der Vergütungspolitik</h2>
