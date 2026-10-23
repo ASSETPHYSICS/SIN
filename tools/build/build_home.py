@@ -62,9 +62,8 @@ def kicker(t, cls=""):
     return '<p class="ip-kicker %s">%s</p>' % (cls, e(t))
 
 
-SLIDES = [("01-immobilien", 2200, 1228), ("02-erneuerbare-energien", 2200, 924), ("03-infrastruktur", 2200, 924), ("04-private-debt", 2200, 924), ("05-logistik", 2200, 924)]
-# Platzhalter: Motive der 2IP-Seite, bis eigene ServiceInvest-Bilder vorliegen.
-SLIDER = '<div class="ip-slider ip-slider--5" aria-hidden="true">' + "".join(
+SLIDES = [("01-dashboard-rot", 2200, 924), ("02-dashboard-blau", 2200, 924)]
+SLIDER = '<div class="ip-slider ip-slider--2" aria-hidden="true">' + "".join(
     '<img class="ip-slide" src="/wp-content/themes/Divi-SIN/images/hero/%s.jpg" alt="" width="%d" height="%d" %s style="--i:%d">' % (s, w, h, 'fetchpriority="high"' if i == 0 else 'loading="lazy"', i)
     for i, (s, w, h) in enumerate(SLIDES)) + "</div>"
 
