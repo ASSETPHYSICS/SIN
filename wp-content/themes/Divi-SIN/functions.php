@@ -18,6 +18,8 @@ add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_script( 'divi-2ip-burger', $uri . '/js/burger.js', array(), divi_2ip_ver( 'js/burger.js' ), true );
 	// Scroll-Animation der Sections (Einblenden von unten, Kennzahlen zählen hoch).
 	wp_enqueue_script( 'divi-sin-reveal', $uri . '/js/reveal.js', array(), divi_2ip_ver( 'js/reveal.js' ), true );
+	// Hintergrundvideo im Header (Zeitlupe).
+	wp_enqueue_script( 'divi-sin-hero-video', $uri . '/js/hero-video.js', array(), divi_2ip_ver( 'js/hero-video.js' ), true );
 
 	// Logo im Header (Divi-Layout, Link "/") führt auf die Startseite der aktuellen Sprache.
 	if ( function_exists( 'pll_home_url' ) && 'de' !== divi_2ip_lang() ) {

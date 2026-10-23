@@ -62,12 +62,14 @@ def kicker(t, cls=""):
     return '<p class="ip-kicker %s">%s</p>' % (cls, e(t))
 
 
-SLIDES = [("01-dashboard-rot", 2200, 924), ("02-dashboard-blau", 2200, 924)]
-SLIDER = '<div class="ip-slider ip-slider--2" aria-hidden="true">' + "".join(
-    '<img class="ip-slide" src="/wp-content/themes/Divi-SIN/images/hero/%s.jpg" alt="" width="%d" height="%d" %s style="--i:%d">' % (s, w, h, 'fetchpriority="high"' if i == 0 else 'loading="lazy"', i)
-    for i, (s, w, h) in enumerate(SLIDES)) + "</div>"
+# Hintergrundvideo in Zeitlupe (Abspielgeschwindigkeit data-rate, gesetzt von js/hero-video.js);
+# das Vorschaubild zeigt dieselbe Szene, bis das Video läuft bzw. bei „Bewegung reduzieren“.
+HERO_VIDEO = ('<div class="ip-slider ip-hero-video" aria-hidden="true">'
+              '<video class="ip-hero-video__media" src="/wp-content/themes/Divi-SIN/video/hero.mp4" '
+              'poster="/wp-content/themes/Divi-SIN/images/hero/01-dashboard-rot.jpg" '
+              'autoplay muted loop playsinline preload="auto" data-rate="0.5"></video></div>')
 
-HERO = SLIDER + """<div class="ip-wrap ip-hero__inner">
+HERO = HERO_VIDEO + """<div class="ip-wrap ip-hero__inner">
 %s
 <h1>Unleash<br>Capacities.</h1>
 <p class="ip-lead">Asset Servicing und Partner-Fonds für Asset Manager und KVGen<br class="ip-br-wide"> von Real Asset-Vermögen.</p>
