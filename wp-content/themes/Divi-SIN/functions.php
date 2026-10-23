@@ -120,7 +120,7 @@ add_filter( 'et_get_option_et_divi_divi_seo_home_titletext', function ( $value )
 	return 'en' === divi_2ip_lang() ? 'ServiceInvest – Asset Servicing and Partner Funds' : $value;
 } );
 add_filter( 'et_get_option_et_divi_divi_seo_home_descriptiontext', function ( $value ) {
-	return 'en' === divi_2ip_lang() ? 'Asset servicing and partner funds for asset managers and KVGs of real estate assets – KVG insourcing in the middle and back office.' : $value;
+	return 'en' === divi_2ip_lang() ? 'Asset servicing and partner funds for asset managers and KVGs of real assets – KVG insourcing in the middle and back office.' : $value;
 } );
 
 // Viewport ohne Zoom-Sperre (Divi setzt maximum-scale=1 und user-scalable=0; das verhindert Vergrößern auf Mobilgeräten).

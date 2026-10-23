@@ -732,6 +732,13 @@ html body .ip-divi-sec .ip-link-toggle:hover { color: var(--ip-light-green); }
 .ip-figure.ip-reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
 .ip-figure.ip-reveal.ip-in { opacity: 1; transform: none; }
 
+/* Zeilenumbruch nur bei mehrspaltiger Darstellung (z. B. „Zentralisierte / Plattform“ wie die Nachbarboxen) */
+@media (max-width: 980px) { .ip-br-wide { display: none; } }
+
+/* Textlinks in Kacheln (z. B. „fund-reporting.com“) in Deep Red wie die übrigen Links */
+.ip-divi-sec .ip-values a { color: var(--ip-green-print); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.ip-divi-sec .ip-values a:hover { color: var(--ip-forest); }
+
 /* Leistungen: Einleitung und hervorgehobener Absatz über den Kacheln */
 .ip-divi-sec .ip-intro { max-width: 70ch; }
 .ip-values--3 { grid-template-columns: repeat(3, 1fr); }

@@ -71,7 +71,7 @@ SLIDER = '<div class="ip-slider ip-slider--5" aria-hidden="true">' + "".join(
 HERO = SLIDER + """<div class="ip-wrap ip-hero__inner">
 %s
 <h1>Unleash<br>Capacities.</h1>
-<p class="ip-lead">Asset Servicing und Partner-Fonds für Asset Manager und KVGen von Immobilienvermögen.</p>
+<p class="ip-lead">Asset Servicing und Partner-Fonds für Asset Manager und KVGen von Real Asset-Vermögen.</p>
 <p><a class="ip-btn" href="#gruppe">Mehr erfahren</a></p>
 </div>""" % kicker("ServiceInvest Kapitalverwaltungsgesellschaft")
 
@@ -79,13 +79,13 @@ GRUPPE = """<div class="ip-wrap ip-grid ip-grid--split">
 <div class="ip-col">
 %s
 <h2>Exzellenz in der Fondsadministration.</h2>
-<p class="ip-lead">Die ServiceInvest Kapitalverwaltungsgesellschaft mbH ist Teil der Institutional Investment Group (2IG), einer der führenden unabhängigen Administrationsplattformen für Immobilieninvestments in Deutschland und Europa. Die 2IG hat sich auf Dienstleistungen für institutionelle Immobilienfonds nach deutschem und luxemburgischem Recht spezialisiert. Mit mehr als 350 Mitarbeitern verwaltet 2IG über 50 Milliarden Euro Immobilienvermögen in ca. 25 Ländern und nimmt damit eine marktführende Position in der Administration von Immobilienvermögen ein.</p>
+<p class="ip-lead">Die ServiceInvest Kapitalverwaltungsgesellschaft mbH ist Teil der Institutional Investment Group (2IG), einer der führenden unabhängigen Administrationsplattformen für Real Asset-Investments in Deutschland und Europa. Die 2IG hat sich auf Dienstleistungen für institutionelle Real Asset-Fonds nach deutschem und luxemburgischem Recht spezialisiert. Mit mehr als 350 Mitarbeitern verwaltet 2IG über 50 Milliarden Euro Real Asset-Vermögen in ca. 25 Ländern und nimmt damit eine marktführende Position in der Administration von Real Asset-Vermögen ein.</p>
 </div>
 <div class="ip-col">
-<h3>Die Asset Servicing Division</h3>
-<p>Die Asset Servicing Division vereint alle KVG-Insourcing-Leistungen der 2IG. Die drei Einheiten ServiceInvest Kapitalverwaltungsgesellschaft, acb und CONNOS der Division übernehmen für Immobilienmanager und Kapitalverwaltungsgesellschaften aufwendige Leistungen des Middle- und Back-Office wie Risikomanagement/-controlling, Fondsrechnungswesen, Investorenberichtswesen oder behördliches Meldewesen.</p>
-<p><strong>Wir sind 100%% unabhängig von Banken, Versicherungen, anderen professionellen Immobilieneignern und auch Asset Managern.</strong></p>
-<p>Durch die hohe Spezialisierung der Einheiten und die für Immobilien-Kapitalverwaltungsgesellschaften entwickelte Software-Suite AIFMControl als Rückgrat einer leistungsstarken, verschränkten IT-Plattform ist das Leistungsangebot der Asset Servicing Division der 2IG in höchstem Maße skalierbar und schafft bei unseren Kunden Raum für Wachstum.</p>
+<h3>KVG-Insourcing durch die ServiceInvest</h3>
+<p>Die ServiceInvest übernimmt für Asset Manager und Kapitalverwaltungsgesellschaften aufwendige Leistungen des Middle- und Back-Office wie Risikomanagement/-controlling, Fondsrechnungswesen, Investorenberichtswesen oder behördliches Meldewesen.</p>
+<p><strong>Wir sind 100%% unabhängig von Banken, Versicherungen, anderen professionellen Eigentümern von Real Assets und auch Asset Managern.</strong></p>
+<p>Durch unsere hohe Spezialisierung und eine eigens für Kapitalverwaltungsgesellschaften entwickelte Software-Lösung als Rückgrat einer leistungsstarken, verschränkten IT-Plattform ist das Leistungsangebot der ServiceInvest in höchstem Maße skalierbar und schafft bei unseren Kunden Raum für Wachstum.</p>
 <p class="ip-group-link"><a href="#leistungen">→ Unsere Leistungen</a></p>
 </div>
 </div>""" % kicker("Die Institutional Investment Group")
@@ -94,10 +94,10 @@ VISION = """<div class="ip-wrap ip-grid ip-grid--split">
 <div class="ip-col">
 %s
 <h2>Unleash Capacities</h2>
-<p class="ip-lead">Die Digitalisierung der Kapitalmärkte schreitet immer schneller voran, gleichzeitig nehmen die regulatorischen Anforderungen kontinuierlich zu. Wir sind überzeugt, dass diesen wachsenden Herausforderungen nur durch eine zunehmende Arbeitsteilung zwischen Asset-Managern und spezialisierten Verwaltungsdienstleistern zu begegnen ist.</p>
+<p class="ip-lead">Die Digitalisierung der Kapitalmärkte schreitet immer schneller voran, gleichzeitig nehmen die regulatorischen Anforderungen kontinuierlich zu. Wir sind überzeugt, dass diesen wachsenden Herausforderungen nur durch eine zunehmende Arbeitsteilung zwischen Asset Managern und spezialisierten Verwaltungsdienstleistern zu begegnen ist.</p>
 </div>
 <div class="ip-col">
-<p>Das Segment der Real Assets folgt dabei dem Wertpapierbereich, in dem sich schon längst eine hohe Arbeitsteilung etabliert und bewährt hat. Allerdings bringen gerade Immobilieninvestments ihre ganz eigene Komplexität und hohe Anforderungen mit sich.</p>
+<p>Das Segment der Real Assets folgt dabei dem Wertpapierbereich, in dem sich schon längst eine hohe Arbeitsteilung etabliert und bewährt hat. Allerdings bringen gerade Real Asset-Investments ihre ganz eigene Komplexität und hohe Anforderungen mit sich.</p>
 <p>Wir begleiten unsere Kunden Schritt für Schritt in diese digitale Zukunft des Real Asset-Marktes.</p>
 <p>Unsere Kunden sollen sich ganz auf ihre Kernkompetenz, das Asset Management, konzentrieren können. Die durch unsere skalierbaren Services für sie frei werdenden Kapazitäten sollen für weiteres Wachstum in ihren Kernleistungsbereichen zur Verfügung stehen und nicht durch administrative Aufgaben gebunden werden.</p>
 </div>
@@ -105,16 +105,16 @@ VISION = """<div class="ip-wrap ip-grid ip-grid--split">
 
 LEISTUNGEN = """<div class="ip-wrap">
 %s
-<h2>Insourcing durch zugelassene KVG</h2>
-<p class="ip-lead">Gemeinsam mit weiteren hoch spezialisierten Unternehmen der Asset Servicing Division der 2IG bietet die ServiceInvest neben der Auflage von Partner-Fonds Asset Managern und KVGen die Übernahme spezifischer Leistungspakete im Middle und Back Office an – das KVG-Insourcing.</p>
+<h2>Insourcing durch zugelassene Kapitalverwaltungsgesellschaft (KVG)</h2>
+<p class="ip-lead">Neben der Auflage von Partner-Fonds bietet die ServiceInvest Asset Managern und KVGen die Übernahme spezifischer Leistungspakete im Middle und Back Office an – das KVG-Insourcing.</p>
 <p class="ip-intro">Durch die Zulassung als Kapitalverwaltungsgesellschaft nach § 22 KAGB können wir unseren Kunden das Insourcing von Dienstleistungen in einem vollständig regulierten Rahmen bieten, was für unsere Kunden mit einer signifikanten Erleichterung des Auslagerungscontrollings einhergeht.</p>
 <div class="ip-values ip-values--3">
 <article><h3>Fonds- und Gesellschaftsbuchhaltung</h3><p>Asset Managern und ihren KVGen bieten wir eine vollständig digitale Fonds- und Gesellschaftsbuchhaltung auf Basis eines zentralen Datenhaushalts. Dabei übersetzen wir internationale Rechnungsvorschriften (local GAAP) in deutsches Investmentrecht. Durch die vollständige Generierung des Buchungsstoffes im System erhalten unsere Kunden die Möglichkeit eines lückenlosen Data-Tracings und die Voll-Durchschau in ihren Fonds.</p></article>
-<article><h3>Meldewesen</h3><p>Über unsere einzigartige Management Software AIFMControl generieren wir die obligatorischen XML-Meldungen an Bundesbank und BaFin sowie jegliche weitere Meldungen an andere Behörden und Verbände auf Knopfdruck. Auch die mittelbaren Meldungsanforderungen institutioneller Investoren z.B. nach Solvency II, GroMiKV oder CRR erfüllen wir termingerecht und komfortabel.</p><p>Weitere Informationen: <a href="https://fund-reporting.com" target="_blank" rel="noopener">fund-reporting.com</a></p></article>
-<article><h3>Investorenberichtswesen</h3><p>Den quantitativen Teil der Monats-, Quartals-, Halbjahres-, und Jahresberichte liefern wir automatisiert und im Corporate Design unserer Kunden, die nur noch qualitative Teile wie Marktberichte oder Lagebeschreibung im Berichtssystem (AIFMC) zu ergänzen brauchen. Auf Wunsch produzieren wir auch individuelle Berichte nach den Anforderungen bestimmter Zielgruppen.</p></article>
-<article><h3>Risikomanagement</h3><p>Auf Basis unserer Management Software AIFMControl bieten wir unseren Kunden umfassende Unterstützung im Risikomanagement und -controlling. Das gilt für die Entwicklung und Formulierung der Risikostrategie ebenso wie bei der Risikoinventur (Erstellung Risikoatlas und -kataloge je AIF) sowie Festlegung von Schwellenwerten und des Risikotragfähigkeitskonzeptes.</p><p>Wir liefern die quantitative Grundlage für ein effektives Risikomanagement und unterstützen mit unserer Software das entsprechende Maßnahmenmanagement. Eine umfassende Schadenfalldatenbank und die automatische Erstellung von Risikoberichten und aufsichtsrechtlich konformer Dokumentation runden unsere Services ab.</p></article>
-<article><h3>Hedging Services</h3><p>Über das quantitative Risikomanagement hinaus bietet die Asset Servicing Division auch Leistungen des Absicherungsmanagements. Dazu zählen insbesondere die Set-up-Beratung bei Absicherungsgeschäften, Handelsunterstützung von OTC-Derivaten und Grundgeschäften (inkl. Vertragsmanagement) sowie Bewertungsleistungen in einer ganzheitlich aufeinander abgestimmten Prozesslandschaft. Ergänzt werden diese Services um das entsprechende Risikomanagement, Liquiditätsmanagement sowie Reporting dieser Vermögensgegenstände.</p></article>
-<article><h3>Partner-Fonds</h3><p>Unseren Fondspartnern ohne eigene KVG bieten wir darüber hinaus die Konzeption, Auflage und Verwaltung von Immobilien-AIF. Gemeinsam mit unseren Kunden finden wir die adäquate Struktur und sorgen in enger Abstimmung mit den Aufsichtsbehörden für eine zügige Auflage des Fonds.</p></article>
+<article><h3>Meldewesen</h3><p>Über unsere einzigartige Software-Lösung generieren wir die obligatorischen XML-Meldungen an Bundesbank und BaFin sowie jegliche weitere Meldungen an andere Behörden und Verbände auf Knopfdruck. Auch die mittelbaren Meldungsanforderungen institutioneller Investoren z.B. nach Solvency II, GroMiKV oder CRR erfüllen wir termingerecht und komfortabel.</p><p>Weitere Informationen: <a href="https://fund-reporting.com" target="_blank" rel="noopener">fund-reporting.com</a></p></article>
+<article><h3>Investorenberichtswesen</h3><p>Den quantitativen Teil der Monats-, Quartals-, Halbjahres-, und Jahresberichte liefern wir automatisiert und im Corporate Design unserer Kunden, die nur noch qualitative Teile wie Marktberichte oder Lagebeschreibung in unserem Berichtssystem zu ergänzen brauchen. Auf Wunsch produzieren wir auch individuelle Berichte nach den Anforderungen bestimmter Zielgruppen.</p></article>
+<article><h3>Risikomanagement</h3><p>Auf Basis unserer Software-Lösung bieten wir unseren Kunden umfassende Unterstützung im Risikomanagement und -controlling. Das gilt für die Entwicklung und Formulierung der Risikostrategie ebenso wie bei der Risikoinventur (Erstellung Risikoatlas und -kataloge je AIF) sowie Festlegung von Schwellenwerten und des Risikotragfähigkeitskonzeptes.</p><p>Wir liefern die quantitative Grundlage für ein effektives Risikomanagement und unterstützen mit unserer Software das entsprechende Maßnahmenmanagement. Eine umfassende Schadenfalldatenbank und die automatische Erstellung von Risikoberichten und aufsichtsrechtlich konformer Dokumentation runden unsere Services ab.</p></article>
+<article><h3>Hedging Services</h3><p>Über das quantitative Risikomanagement hinaus bietet die ServiceInvest auch Leistungen des Absicherungsmanagements. Dazu zählen insbesondere die Set-up-Beratung bei Absicherungsgeschäften, Handelsunterstützung von OTC-Derivaten und Grundgeschäften (inkl. Vertragsmanagement) sowie Bewertungsleistungen in einer ganzheitlich aufeinander abgestimmten Prozesslandschaft. Ergänzt werden diese Services um das entsprechende Risikomanagement, Liquiditätsmanagement sowie Reporting dieser Vermögensgegenstände.</p></article>
+<article><h3>Partner-Fonds</h3><p>Unseren Fondspartnern ohne eigene KVG bieten wir darüber hinaus die Konzeption, Auflage und Verwaltung von Real Asset-AIF. Gemeinsam mit unseren Kunden finden wir die adäquate Struktur und sorgen in enger Abstimmung mit den Aufsichtsbehörden für eine zügige Auflage des Fonds.</p></article>
 </div>
 </div>""" % kicker("Unsere Leistungen")
 
@@ -125,20 +125,20 @@ UNTERSCHIED = """<div class="ip-wrap ip-grid ip-grid--split">
 </div>
 <div class="ip-col">
 <ul class="ip-list">
-<li><h3>Erfahrenes Onboarding-Team</h3><p>Als einziger Insourcing-Anbieter verfügt die Asset Servicing Division der 2IG über ein Onboarding-Team mit der Erfahrung von rund 20 KVG-Gründungen und der entsprechend nachweislichen Prozess- und Organisationskompetenz – sowohl mit Blick auf wirtschaftliche Effizienz als auch auf aktuelle regulatorische Anforderungen. So wird auch die Migration großer Datenbestände sicher durchgeführt und eine optimale Abstimmung interner wie externer Prozesse erreicht.</p></li>
+<li><h3>Erfahrenes Onboarding-Team</h3><p>Als einziger Insourcing-Anbieter verfügt die ServiceInvest über ein Onboarding-Team mit der Erfahrung von rund 20 KVG-Gründungen und der entsprechend nachweislichen Prozess- und Organisationskompetenz – sowohl mit Blick auf wirtschaftliche Effizienz als auch auf aktuelle regulatorische Anforderungen. So wird auch die Migration großer Datenbestände sicher durchgeführt und eine optimale Abstimmung interner wie externer Prozesse erreicht.</p></li>
 <li><h3>Insourcing Management als SPOC</h3><p>Für eine reibungslose Zusammenarbeit sorgt der Insourcing-Manager als Single-Point-of-Contact (SPOC).</p><p>Er überwacht und begleitet die vereinbarten Service-Level-Agreements (SLA) anhand definierter Key Performance Indicators (KPI) und vereinfacht das Auslagerungscontrolling unserer Kunden mit regelmäßigen SLA/KPI-Berichten.</p></li>
-<li><h3>Verschränkte IT-Plattform</h3><p>Mit der bewährten AIFMControl-Suite steht eine einzigartige IT-Plattform zur Verfügung, die speziell für das Management von Immobilienfonds entwickelt wurde. Kunde und ServiceInvest greifen über AIFMControl auf eine zentrale Datenhaltung zu. Durch diese Verschränkung der IT wird eine medienbruchfreie Kommunikation zwischen allen Beteiligten hergestellt, so dass ein aufsichtsrechtlich wertvolles, vollständiges Data Tracing und eine Voll-Durchschau für den Kunden möglich sind.</p></li>
+<li><h3>Verschränkte IT-Plattform</h3><p>Mit unserer bewährten Software-Lösung steht eine einzigartige IT-Plattform zur Verfügung, die speziell für das Management von Real Asset-Fonds entwickelt wurde. Kunde und ServiceInvest greifen über diese Plattform auf eine zentrale Datenhaltung zu. Durch diese Verschränkung der IT wird eine medienbruchfreie Kommunikation zwischen allen Beteiligten hergestellt, so dass ein aufsichtsrechtlich wertvolles, vollständiges Data Tracing und eine Voll-Durchschau für den Kunden möglich sind.</p></li>
 </ul>
 </div>
-</div>""" % kicker("Asset Servicing Division")
+</div>""" % kicker("ServiceInvest")
 
 NUTZEN = """<div class="ip-wrap">
 %s
 <h2>Ihr Nutzen als unser Kunde.</h2>
 <div class="ip-figures">
 <article class="ip-figure"><span class="ip-figure__value">100%%</span><h3>Transparenz &amp; Skalierbarkeit</h3><p>Unsere Kunden behalten mit der eigenen Kapitalverwaltungsgesellschaft die Hoheit über ihre Fonds und Daten, wir sorgen für Transparenz und Skalierbarkeit.</p></article>
-<article class="ip-figure"><span class="ip-figure__value">100%%</span><h3>Zentralisierte Plattform</h3><p>Unsere Kunden erhalten eine einzigartige zentralisierte sowie revisionssichere Daten-, Prozess-, Berichts- und Meldeplattform zur Abbildung nationaler und internationaler Anforderungen.</p></article>
-<article class="ip-figure"><span class="ip-figure__value">100%%</span><h3>Fokus auf Kernkompetenzen</h3><p>Unsere Kunden erhalten den Raum und die Sicherheit, sich voll auf ihre Kernkompetenz konzentrieren zu können: das Immobilienmanagement.</p></article>
+<article class="ip-figure"><span class="ip-figure__value">100%%</span><h3>Zentralisierte<br class="ip-br-wide"> Plattform</h3><p>Unsere Kunden erhalten eine einzigartige zentralisierte sowie revisionssichere Daten-, Prozess-, Berichts- und Meldeplattform zur Abbildung nationaler und internationaler Anforderungen.</p></article>
+<article class="ip-figure"><span class="ip-figure__value">100%%</span><h3>Fokus auf Kernkompetenzen</h3><p>Unsere Kunden erhalten den Raum und die Sicherheit, sich voll auf ihre Kernkompetenz konzentrieren zu können: das Asset Management.</p></article>
 </div>
 </div>""" % kicker("Ihr Nutzen")
 
