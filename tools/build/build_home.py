@@ -62,12 +62,12 @@ def kicker(t, cls=""):
     return '<p class="ip-kicker %s">%s</p>' % (cls, e(t))
 
 
-# Hintergrundvideo in Zeitlupe (Abspielgeschwindigkeit data-rate, gesetzt von js/hero-video.js);
-# das Vorschaubild zeigt dieselbe Szene, bis das Video läuft bzw. bei „Bewegung reduzieren“.
+# Hintergrundvideo: Zeitlupe und nahtlose Schleife (vorwärts/rückwärts) sind in die Datei eingerechnet;
+# das Vorschaubild ist ihr erstes Bild und steht bis zum Start bzw. bei „Bewegung reduzieren“.
 HERO_VIDEO = ('<div class="ip-slider ip-hero-video" aria-hidden="true">'
-              '<video class="ip-hero-video__media" src="/wp-content/themes/Divi-SIN/video/hero.mp4" '
-              'poster="/wp-content/themes/Divi-SIN/images/hero/01-dashboard-rot.jpg" '
-              'autoplay muted loop playsinline preload="auto" data-rate="0.5"></video></div>')
+              '<video class="ip-hero-video__media" src="/wp-content/themes/Divi-SIN/video/hero-loop.mp4" '
+              'poster="/wp-content/themes/Divi-SIN/images/hero/hero-poster.jpg" '
+              'autoplay muted loop playsinline preload="auto"></video></div>')
 
 HERO = HERO_VIDEO + """<div class="ip-wrap ip-hero__inner">
 %s

@@ -1,4 +1,5 @@
-/* ServiceInvest – Hintergrundvideo im Header: Zeitlupe (data-rate), bei „Bewegung reduzieren“ nur das Vorschaubild */
+/* ServiceInvest – Hintergrundvideo im Header: optionale Geschwindigkeit (data-rate, Standard 1),
+   bei „Bewegung reduzieren“ nur das Vorschaubild */
 (function () {
 	'use strict';
 	var videos = document.querySelectorAll('.ip-hero-video__media');
