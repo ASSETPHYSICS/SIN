@@ -736,6 +736,11 @@ html body .ip-divi-sec .ip-link-toggle:hover { color: var(--ip-light-green); }
 
 /* Zeilenumbruch nur bei mehrspaltiger Darstellung (z. B. „Zentralisierte / Plattform“ wie die Nachbarboxen) */
 @media (max-width: 980px) { .ip-br-wide { display: none; } }
+/* Lange Wörter in Überschriften (z. B. „Kapitalverwaltungsgesellschaft“) auf schmalen Bildschirmen trennen,
+   statt die Seite zu verbreitern */
+@media (max-width: 600px) {
+	.ip-divi-sec h1, .ip-divi-sec h2, .ip-divi-sec h3 { -webkit-hyphens: auto; hyphens: auto; overflow-wrap: break-word; }
+}
 
 /* Textlinks in Kacheln (z. B. „fund-reporting.com“) in Deep Red wie die übrigen Links */
 .ip-divi-sec .ip-values a { color: var(--ip-green-print); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }

@@ -71,8 +71,8 @@ SLIDER = '<div class="ip-slider ip-slider--5" aria-hidden="true">' + "".join(
 HERO = SLIDER + """<div class="ip-wrap ip-hero__inner">
 %s
 <h1>Unleash<br>Capacities.</h1>
-<p class="ip-lead">Asset Servicing und Partner-Fonds für Asset Manager und KVGen von Real Asset-Vermögen.</p>
-<p><a class="ip-btn" href="#gruppe">Mehr erfahren</a></p>
+<p class="ip-lead">Asset Servicing und Partner-Fonds für Asset Manager und KVGen<br class="ip-br-wide"> von Real Asset-Vermögen.</p>
+<p><a class="ip-btn" href="#vision">Mehr erfahren</a></p>
 </div>""" % kicker("ServiceInvest Kapitalverwaltungsgesellschaft")
 
 GRUPPE = """<div class="ip-wrap ip-grid ip-grid--split">
@@ -170,8 +170,8 @@ FOOTER = """<div class="ip-wrap ip-footer__inner">
 
 home_sections = [
     section("ip-hero ip-fund-hero ip-fund-hero--home", "Hero", HERO),
-    section("ip-sec ip-sec--white", "Die Gruppe", GRUPPE.replace('<div class="ip-wrap ip-grid', '<div id="gruppe" class="ip-wrap ip-grid', 1)),
-    section("ip-sec ip-sec--mist", "Unsere Vision", VISION.replace('<div class="ip-wrap ip-grid', '<div id="vision" class="ip-wrap ip-grid', 1)),
+    section("ip-sec ip-sec--white", "Unsere Vision", VISION.replace('<div class="ip-wrap ip-grid', '<div id="vision" class="ip-wrap ip-grid', 1)),
+    section("ip-sec ip-sec--mist", "Die Gruppe", GRUPPE.replace('<div class="ip-wrap ip-grid', '<div id="gruppe" class="ip-wrap ip-grid', 1)),
     section("ip-sec ip-sec--white", "Unsere Leistungen", LEISTUNGEN.replace('<div class="ip-wrap">', '<div id="leistungen" class="ip-wrap">', 1)),
     section("ip-sec ip-sec--mist", "Was uns unterscheidet", UNTERSCHIED.replace('<div class="ip-wrap ip-grid', '<div id="unterschied" class="ip-wrap ip-grid', 1)),
     section("ip-sec ip-sec--brand", "Ihr Nutzen", NUTZEN.replace('<div class="ip-wrap">', '<div id="nutzen" class="ip-wrap">', 1)),

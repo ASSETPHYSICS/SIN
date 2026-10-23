@@ -152,6 +152,24 @@ add_filter( 'get_site_icon_url', function ( $url, $size ) {
 }, 10, 2 );
 add_filter( 'has_site_icon', '__return_true' );
 
+// Weiche Trennstellen in sehr langen Wörtern (nur im Text, nicht in Tags/Attributen): Auf schmalen Bildschirmen
+// trennt der Browser dort mit Bindestrich, statt mitten im Wort umzubrechen oder die Seite zu verbreitern.
+add_filter( 'the_content', function ( $html ) {
+	static $words = array(
+		'Kapitalverwaltungsgesellschaft' => "Kapital\u{00AD}verwaltungs\u{00AD}gesellschaft",
+		'Gesellschaftsbuchhaltung'       => "Gesellschafts\u{00AD}buchhaltung",
+		'Investorenberichtswesen'        => "Investoren\u{00AD}berichtswesen",
+		'Fondsadministration'            => "Fonds\u{00AD}administration",
+	);
+	$parts = preg_split( '/(<[^>]*>)/', $html, -1, PREG_SPLIT_DELIM_CAPTURE );
+	foreach ( $parts as $i => $part ) {
+		if ( '' !== $part && '<' !== $part[0] ) {
+			$parts[ $i ] = strtr( $part, $words );
+		}
+	}
+	return implode( '', $parts );
+}, 20 );
+
 // Menüeinträge mit Anker (#…) gelten nie als „aktuelle Seite“; der Startseiten-Link ist auf der Startseite aktuell.
 add_filter( 'nav_menu_css_class', function ( $classes, $item ) {
 	if ( empty( $item->url ) ) {
