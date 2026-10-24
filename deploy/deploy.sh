@@ -71,7 +71,6 @@ HTACCESS_SRC=$(mktemp); cp "$TMP/repo/deploy/htaccess" "$HTACCESS_SRC"
 cp "$TMP/repo/router.php" .deploy-router.php   # für die Prüfung in Schritt 9
 trap 'rm -f .deploy-router.php deploy-check-*.txt "$HTACCESS_SRC"; [ -z "${SRV:-}" ] || kill "$SRV" 2>/dev/null' EXIT
 rm -rf "$TMP"
-WP plugin is-installed polylang || WP plugin install polylang ${POLYLANG_VERSION:+--version="$POLYLANG_VERSION"}
 [ -f wp-content/themes/Divi-SIN/fonts/NeueHaasGroteskDisplay-Roman.woff2 ] || echo "!! WARNUNG: Schriften fehlen in wp-content/themes/Divi-SIN/fonts/ (Assets-Paket entpacken)"
 [ -f wp-content/uploads/2026/06/2026-06-22_SIN_Annex_I-PAI-Statement_v2.2_DE-clean.pdf ] || echo "!! WARNUNG: PDFs fehlen in wp-content/uploads/ (Assets-Paket entpacken)"
 
@@ -98,6 +97,7 @@ echo "Verbleibende Treffer für $OLD_HOST:"; WP db query "select count(*) from w
 echo "== 7/9 Divi-Lizenz zurückschreiben, Theme/Plugins aktivieren, Admin anlegen"
 if grep -q "{" "$HOME/.divi-lizenz.json"; then WP option update et_automatic_updates_options --format=json < "$HOME/.divi-lizenz.json"; fi
 WP theme activate Divi-SIN
+WP plugin is-installed polylang || WP plugin install polylang ${POLYLANG_VERSION:+--version="$POLYLANG_VERSION"}
 WP plugin activate polylang appointment-booking
 WP option update blog_public "$INDEXING"
 WP option update admin_email "$ADMIN_MAIL"
