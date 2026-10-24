@@ -20,6 +20,9 @@ OLD_URL=${OLD_URL:-http://localhost:8081}
 INDEXING=${INDEXING:-0}          # 0 = Suchmaschinen sperren (Staging), 1 = Livegang
 REPO=${REPO:-https://github.com/ASSETPHYSICS/SIN.git}
 NEW_URL=${NEW_URL%/}
+# Bei IONOS ist /tmp zu klein (WordPress-, Plugin-Downloads scheitern) – eigenes Temp-Verzeichnis im Home
+export TMPDIR=${DEPLOY_TMPDIR:-$HOME/temp}
+mkdir -p "$TMPDIR"
 
 [ -f wp-config.php ] || { echo "Bitte im WordPress-Stammverzeichnis ausführen (wp-config.php fehlt)."; exit 1; }
 [ -f "$DUMP" ] || { echo "Dump nicht gefunden: $DUMP"; exit 1; }
@@ -65,8 +68,10 @@ fi
 copy_dir "$TMP/repo/wp-content/plugins/appointment-booking" wp-content/plugins/appointment-booking
 cp -a "$TMP/repo/wp-content/mu-plugins/." wp-content/mu-plugins/
 HTACCESS_SRC=$(mktemp); cp "$TMP/repo/deploy/htaccess" "$HTACCESS_SRC"
+cp "$TMP/repo/router.php" .deploy-router.php   # für die Prüfung in Schritt 9
+trap 'rm -f .deploy-router.php deploy-check-*.txt "$HTACCESS_SRC"; [ -z "${SRV:-}" ] || kill "$SRV" 2>/dev/null' EXIT
 rm -rf "$TMP"
-[ -d wp-content/plugins/polylang ] || WP plugin install polylang
+WP plugin is-installed polylang || WP plugin install polylang ${POLYLANG_VERSION:+--version="$POLYLANG_VERSION"}
 [ -f wp-content/themes/Divi-SIN/fonts/NeueHaasGroteskDisplay-Roman.woff2 ] || echo "!! WARNUNG: Schriften fehlen in wp-content/themes/Divi-SIN/fonts/ (Assets-Paket entpacken)"
 [ -f wp-content/uploads/2026/06/2026-06-22_SIN_Annex_I-PAI-Statement_v2.2_DE-clean.pdf ] || echo "!! WARNUNG: PDFs fehlen in wp-content/uploads/ (Assets-Paket entpacken)"
 
@@ -87,7 +92,7 @@ WP option update home "$NEW_URL"
 WP search-replace "$OLD_URL" "$NEW_URL" --all-tables --skip-columns=guid
 OLD_ESC=${OLD_URL//\//\\/}; NEW_ESC=${NEW_URL//\//\\/}
 WP search-replace "$OLD_ESC" "$NEW_ESC" --all-tables --skip-columns=guid
-OLD_HOST=${OLD_URL#*://}
+OLD_HOST=${OLD_URL#*://}; NEW_HOST=${NEW_URL#*://}
 echo "Verbleibende Treffer für $OLD_HOST:"; WP db query "select count(*) from wp_posts where post_content like '%${OLD_HOST}%'" --skip-column-names
 
 echo "== 7/9 Divi-Lizenz zurückschreiben, Theme/Plugins aktivieren, Admin anlegen"
@@ -116,10 +121,26 @@ fix_perms wp-content/themes/Divi-SIN wp-content/plugins/appointment-booking wp-c
 chmod 600 wp-config.php
 
 echo "== 9/9 Prüfung (erwartet: 200 für Seiten und PDF, 301 für alte Adressen, 403/404/405 für xmlrpc.php und die Benutzerliste)"
-for p in "" nachhaltigkeit-2/ serviceinvest-impressum/ datenschutzerklaerung/ datenschutzhinweisefuermieter/ beschwerdestelle/ verguetungspolitik/ \
-         tas-wohnen-1/ en/ en/imprint/ en/sustainability/ nachhaltigkeit/ home-en/ \
-         wp-content/uploads/2026/06/2026-06-22_SIN_Annex_I-PAI-Statement_v2.2_DE-clean.pdf xmlrpc.php wp-json/wp/v2/users; do
-  AUTH=(); [ -n "${BASIC_AUTH:-}" ] && AUTH=(-u "$BASIC_AUTH")   # BASIC_AUTH=user:passwort, falls Staging-Schutz aktiv
-  printf "%-60s %s\n" "/$p" "$(curl -s -o /dev/null -w '%{http_code}' "${AUTH[@]}" "$NEW_URL/$p" 2>/dev/null || echo '-')"
-done
+PAGES=("" nachhaltigkeit-2/ serviceinvest-impressum/ datenschutzerklaerung/ datenschutzhinweisefuermieter/ beschwerdestelle/ verguetungspolitik/
+       tas-wohnen-1/ en/ en/imprint/ en/sustainability/ nachhaltigkeit/ home-en/
+       wp-content/uploads/2026/06/2026-06-22_SIN_Annex_I-PAI-Statement_v2.2_DE-clean.pdf xmlrpc.php wp-json/wp/v2/users)
+AUTH=(); [ -n "${BASIC_AUTH:-}" ] && AUTH=(-u "$BASIC_AUTH")   # BASIC_AUTH=user:passwort, falls Staging-Schutz aktiv
+check() { # Basis-URL [curl-Optionen]
+  local base=$1 p; shift
+  for p in "${PAGES[@]}"; do
+    printf "%-60s %s\n" "/$p" "$(curl -s -m 30 -o /dev/null -w '%{http_code} %{redirect_url}' "$@" "$base/$p" 2>/dev/null || true)"
+  done
+}
+# Zeigt NEW_URL schon auf diese Installation? Sonst (Domain noch nicht umgestellt) über einen lokalen PHP-Server prüfen.
+MARK=deploy-check-$$.txt; echo "$STAMP" > "$MARK"
+if [ "$(curl -s -m 15 "${AUTH[@]}" "$NEW_URL/$MARK" 2>/dev/null)" = "$STAMP" ]; then
+  echo "$NEW_URL zeigt auf diese Installation:"
+  check "$NEW_URL" "${AUTH[@]}"
+else
+  PORT=${CHECK_PORT:-8099}
+  echo "$NEW_URL zeigt noch nicht auf diese Installation – Prüfung über lokalen PHP-Server (ohne .htaccess):"
+  $PHP -S "127.0.0.1:$PORT" .deploy-router.php >/dev/null 2>&1 & SRV=$!
+  sleep 2
+  check "http://127.0.0.1:$PORT" -H "Host: $NEW_HOST"
+fi
 echo "Fertig. Backup: ~/backup-vor-deploy-$STAMP.sql  |  Indexierung: blog_public=$INDEXING"
