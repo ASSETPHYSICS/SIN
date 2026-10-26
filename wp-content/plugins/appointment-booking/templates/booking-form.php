@@ -152,7 +152,7 @@ if ( 'kontakt' === $ab_variant ) : ?>
 
             <div class="form-group">
                 <label for="anfrage-reason"><?php esc_html_e( 'Grund Ihrer Anfrage', 'appointment-booking' ); ?> *</label>
-                <select id="anfrage-reason" name="anfrage_reason" aria-controls="anfrage-objekt" required>
+                <select id="anfrage-reason" name="anfrage_reason" aria-controls="anfrage-objekt" data-object-index="<?php echo (int) Appointment_Booking::KONTAKT_OBJECT_REASON; ?>" required>
                     <option value=""><?php esc_html_e( '- Bitte auswählen -', 'appointment-booking' ); ?></option>
                     <?php foreach ( $ab_reasons as $ab_reason ) : /* Wert bleibt deutsch (Prüfung und interne Mail), nur die Anzeige wird übersetzt */ ?>
                     <option value="<?php echo esc_attr( $ab_reason ); ?>"><?php echo esc_html( __( $ab_reason, 'appointment-booking' ) ); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?></option>

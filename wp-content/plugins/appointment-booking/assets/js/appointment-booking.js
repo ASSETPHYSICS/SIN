@@ -228,13 +228,14 @@ jQuery(document).ready(function($) {
         location.reload();
     });
     
-    // Kontaktformular (Startseite): Objektadresse nur bei "Anfrage bezüglich Verwaltung eines bestimmten Fondsobjektes"
+    // Kontaktformular (Startseite): Objektadresse nur beim Anliegen mit Index data-object-index (Anfrage zu einem Fondsobjekt)
     const $reason = $('#anfrage-reason');
     const isKontakt = $reason.length > 0;
     const objectFields = '#anfrage-street, #anfrage-zip, #anfrage-city';
+    const isObject = () => isKontakt && $reason.prop('selectedIndex') === Number($reason.data('object-index')) + 1;   // +1: Platzhalter-Option
 
     function toggleObject() {
-        const show = isKontakt && $reason.prop('selectedIndex') === 1;
+        const show = isObject();
         $('#anfrage-objekt').prop('hidden', !show);
         $(objectFields).prop('required', show);
     }
@@ -260,7 +261,7 @@ jQuery(document).ready(function($) {
         };
         if (isKontakt) {
             formData.reason = $reason.val();
-            if ($reason.prop('selectedIndex') === 1) {
+            if (isObject()) {
                 formData.street = $('#anfrage-street').val();
                 formData.unit = $('#anfrage-unit').val();
                 formData.zip = $('#anfrage-zip').val();
@@ -279,7 +280,7 @@ jQuery(document).ready(function($) {
             showErrorAnfrage(t('required', 'Bitte füllen Sie alle Pflichtfelder aus.'));
             return;
         }
-        if (isKontakt && $reason.prop('selectedIndex') === 1 && (!formData.street || !formData.zip || !formData.city)) {
+        if (isObject() && (!formData.street || !formData.zip || !formData.city)) {
             showErrorAnfrage(t('objectAddress', 'Bitte geben Sie die Objektadresse an (Straße, Hausnummer, Postleitzahl und Ort).'));
             return;
         }

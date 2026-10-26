@@ -40,16 +40,18 @@ class Appointment_Booking {
 
 	private static $instance = null;
 
-	/** Anliegen des Kontaktformulars (Startseite); der Wert ist der Anzeigetext, der erste Eintrag verlangt eine Objektadresse. */
+	/** Anliegen des Kontaktformulars (Startseite); der Wert ist der Anzeigetext. */
 	public static $kontakt_reasons = array(
-		'Anfrage bezüglich Verwaltung eines bestimmten Fondsobjektes',
-		'Angebotsanfrage',
+		'Ich interessiere mich für die Auflage eines Partner-Fonds',
+		'Ich interessiere mich für Insourcing-Services',
+		'Ich habe eine Anfrage bezüglich der Verwaltung eines bestimmten Fondsobjekts',
 		'Presseanfrage',
 		'Bewerbung',
-		'Kooperationsangebot',
-		'Dienstleistungsangebot',
 		'Sonstiges',
 	);
+
+	/** Index in $kontakt_reasons, der eine Objektadresse verlangt (Formular: data-object-index). */
+	const KONTAKT_OBJECT_REASON = 2;
 
 	public static function get_instance() {
 		if ( null === self::$instance ) {
@@ -396,7 +398,7 @@ class Appointment_Booking {
 		}
 
 		$object = array();
-		if ( self::$kontakt_reasons[0] === $reason ) {
+		if ( self::$kontakt_reasons[ self::KONTAKT_OBJECT_REASON ] === $reason ) {
 			$object = array(
 				'street' => $this->field( 'street', 120 ),
 				'unit'   => $this->field( 'unit', 60 ),
