@@ -2,16 +2,17 @@
 # Header-Video: Zeitlupe mit berechneten Zwischenbildern, nahtlose Vorwaerts-/Rueckwaerts-Schleife, Vorschaubild.
 # Aufruf (WSL, ffmpeg noetig):  SRC=<quellvideo.mp4> bash tools/build/build_hero_video.sh
 #
-# FIRST/LAST: verwendeter Bildbereich des Quellvideos. Voreinstellung = ruhiger Abschnitt 1,08–3,46 s des
-# Gemini-Videos (gemini_generated_video_0e1e6e69_2.mp4); dort springt die Kamera bei 1,0 / 3,5 / 4,5 s.
+# FIRST/LAST: verwendeter Bildbereich des Quellvideos. Voreinstellung = Kamerafahrt hinter der Analystin zu den
+# Dashboards, 3,9–7,2 s des Gemini-Videos (gemini_generated_video_9dd5846f.mp4, 24 fps); dort springt die Kamera
+# bzw. blendet über bei 1,5 / 2,5 / 3,5 / 7,3 s.
 # Ruckler im Quellvideo finden: Bildänderung je Bild (scene_score) – Ausreißer über ca. 0,03 sind Sprünge.
 set -euo pipefail
 SRC=${SRC:?SRC fehlt (Quellvideo)}
 THEME="$(cd "$(dirname "$0")/../.." && pwd)/wp-content/themes/Divi-SIN"
 WORK=$(mktemp -d)
-FIRST=${FIRST:-26}   # erstes verwendetes Bild
-LAST=${LAST:-82}     # letztes verwendetes Bild
-SLOW=${SLOW:-6}      # Verlangsamung: 6 = ein Sechstel der Originalgeschwindigkeit
+FIRST=${FIRST:-94}   # erstes verwendetes Bild
+LAST=${LAST:-172}    # letztes verwendetes Bild
+SLOW=${SLOW:-4}      # Verlangsamung: 4 = ein Viertel der Originalgeschwindigkeit
 
 # 1) Abschnitt wählen und verlangsamen; Zwischenbilder per Bewegungsschätzung (überlappende Blöcke,
 #    bilaterale Suche, keine Szenenerkennung) – deutlich weniger Verzerrungen an Gesicht/Brille als die Voreinstellung.
