@@ -37,7 +37,6 @@ return array(
 
 		// Kontaktformular (Startseite)
 		'Wir freuen uns, dass Sie Kontakt mit uns aufnehmen wollen. Bitte nutzen Sie das folgende Formular, wir melden uns baldmöglichst bei Ihnen.' => 'We are pleased that you would like to get in touch with us. Please use the form below and we will get back to you as soon as possible.',
-		'Sollten Sie eine Anfrage zu einem Objekt haben, das zu einem der von der ServiceInvest verwalteten Fonds gehört, empfehlen wir Ihnen, sich direkt an den verantwortlichen Asset- oder Property Manager (Hausverwaltung) zu wenden. Dort kann Ihnen noch schneller ohne Umweg geholfen werden.' => 'If your enquiry concerns a property belonging to one of the funds managed by ServiceInvest, we recommend contacting the responsible asset or property manager (property management) directly. They will be able to help you more quickly.',
 		'Ihr Name' => 'Your name',
 		'Ihre E-Mail-Adresse' => 'Your email address',
 		'Ihr Unternehmen' => 'Your company',

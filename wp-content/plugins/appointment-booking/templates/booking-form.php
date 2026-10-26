@@ -126,7 +126,6 @@ $ab_privacy_link = '<a href="' . esc_url( Appointment_Booking::privacy_url() ) .
 if ( 'kontakt' === $ab_variant ) : ?>
         <div class="ab-intro">
             <p><?php esc_html_e( 'Wir freuen uns, dass Sie Kontakt mit uns aufnehmen wollen. Bitte nutzen Sie das folgende Formular, wir melden uns baldmöglichst bei Ihnen.', 'appointment-booking' ); ?></p>
-            <p><?php esc_html_e( 'Sollten Sie eine Anfrage zu einem Objekt haben, das zu einem der von der ServiceInvest verwalteten Fonds gehört, empfehlen wir Ihnen, sich direkt an den verantwortlichen Asset- oder Property Manager (Hausverwaltung) zu wenden. Dort kann Ihnen noch schneller ohne Umweg geholfen werden.', 'appointment-booking' ); ?></p>
         </div>
 
         <form id="anfrage-form" class="kontakt-form">
