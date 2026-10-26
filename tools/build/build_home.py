@@ -147,12 +147,8 @@ KONTAKT = """<div class="ip-wrap ip-grid ip-grid--split">
 <div class="ip-col">
 %s
 <h2>Wir freuen uns auf den Austausch.</h2>
-<address class="ip-address">
-<a href="tel:+494022636430">+49 (0) 40 22 63 64 30</a>
-</address>
 <div class="ip-locations">
 <div><p class="ip-kicker ip-kicker--light">Hauptsitz München</p><p>ServiceInvest Kapitalverwaltungsgesellschaft mbH<br>Fürstenrieder Straße 61<br>80686 München</p></div>
-<div><p class="ip-kicker ip-kicker--light">Standort Hamburg</p><p>ServiceInvest Kapitalverwaltungsgesellschaft mbH<br>Am Kaiserkai 13<br>20457 Hamburg</p></div>
 </div>
 <p class="ip-toggle-wrap"><a href="#kontaktanfrage" class="ip-link-toggle" id="ip-contact-toggle" aria-controls="ip-contact-form" aria-expanded="true">Kontaktanfrage</a></p>
 </div>
