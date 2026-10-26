@@ -94,8 +94,7 @@ GRUPPE = """<div class="ip-wrap ip-grid ip-grid--split">
 VISION = """<div class="ip-wrap ip-grid ip-grid--split">
 <div class="ip-col">
 %s
-<h2>Freiräume schaffen</h2>
-<p class="ip-lead"><strong>Aufgaben abgeben. Kontrolle behalten.</strong></p>
+<h2>Aufgaben abgeben. Kontrolle behalten.</h2>
 <p class="ip-lead">Die Anforderungen von Aufsicht, Bundesbank und Investoren wachsen jedes Jahr. Fondsbuchhaltung, Meldewesen, Reporting und Risikocontrolling binden Fachleute, die Sie eigentlich für Asset Management und Investorenbetreuung brauchen.</p>
 </div>
 <div class="ip-col">
@@ -104,7 +103,7 @@ VISION = """<div class="ip-wrap ip-grid ip-grid--split">
 <p>So gewinnen Sie Kapazität für das, was Ihren Erfolg ausmacht: Ihre Investments.</p>
 <h3>Unleash Capacities.</h3>
 </div>
-</div>""" % kicker("Unsere Vision")
+</div>""" % kicker("Freiräume schaffen")
 
 # Meldewesen, bis auf Weiteres ausgeblendet: <p>Weitere Informationen: <a href="https://fund-reporting.com" target="_blank" rel="noopener">fund-reporting.com</a></p>
 LEISTUNGEN = """<div class="ip-wrap">
