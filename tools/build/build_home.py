@@ -94,13 +94,15 @@ GRUPPE = """<div class="ip-wrap ip-grid ip-grid--split">
 VISION = """<div class="ip-wrap ip-grid ip-grid--split">
 <div class="ip-col">
 %s
-<h2>Unleash Capacities</h2>
-<p class="ip-lead">Die Digitalisierung der Kapitalmärkte schreitet immer schneller voran, gleichzeitig nehmen die regulatorischen Anforderungen kontinuierlich zu. Wir sind überzeugt, dass diesen wachsenden Herausforderungen nur durch eine zunehmende Arbeitsteilung zwischen Asset Managern und spezialisierten Verwaltungsdienstleistern zu begegnen ist.</p>
+<h2>Freiräume schaffen</h2>
+<p class="ip-lead"><strong>Aufgaben abgeben. Kontrolle behalten.</strong></p>
+<p class="ip-lead">Die Anforderungen von Aufsicht, Bundesbank und Investoren wachsen jedes Jahr. Fondsbuchhaltung, Meldewesen, Reporting und Risikocontrolling binden Fachleute, die Sie eigentlich für Asset Management und Investorenbetreuung brauchen.</p>
 </div>
 <div class="ip-col">
-<p>Das Segment der Real Assets folgt dabei dem Wertpapierbereich, in dem sich schon längst eine hohe Arbeitsteilung etabliert und bewährt hat. Allerdings bringen gerade Real Asset-Investments ihre ganz eigene Komplexität und hohe Anforderungen mit sich.</p>
-<p>Wir begleiten unsere Kunden Schritt für Schritt in diese digitale Zukunft des Real Asset-Marktes.</p>
-<p>Unsere Kunden sollen sich ganz auf ihre Kernkompetenz, das Asset Management, konzentrieren können. Die durch unsere skalierbaren Services für sie frei werdenden Kapazitäten sollen für weiteres Wachstum in ihren Kernleistungsbereichen zur Verfügung stehen und nicht durch administrative Aufgaben gebunden werden.</p>
+<p>Im Wertpapiergeschäft ist die Arbeitsteilung zwischen Asset Managern und spezialisierten Verwaltungsdienstleistern längst Standard. Bei Real Assets war das bisher schwieriger, denn jedes Objekt, jede Gesellschaftsstruktur und jede Finanzierung bringt eigene Komplexität mit. Genau darauf haben wir uns spezialisiert.</p>
+<p>Sie entscheiden, welche Aufgaben Sie abgeben. Wir übernehmen sie als zugelassene Kapitalverwaltungsgesellschaft in einem vollständig regulierten Rahmen, mit einem festen Ansprechpartner und regelmäßigen SLA-Berichten für Ihr Auslagerungscontrolling. Die Verantwortung bleibt bei Ihnen. Die Arbeit und die Nachweise liefern wir.</p>
+<p>So gewinnen Sie Kapazität für das, was Ihren Erfolg ausmacht: Ihre Investments.</p>
+<h3>Unleash Capacities.</h3>
 </div>
 </div>""" % kicker("Unsere Vision")
 
@@ -111,7 +113,7 @@ LEISTUNGEN = """<div class="ip-wrap">
 <p class="ip-lead">Neben der Auflage von Partner-Fonds bietet die ServiceInvest Asset Managern und KVGen die Übernahme spezifischer Leistungspakete im Middle und Back Office an – das KVG-Insourcing.</p>
 <p class="ip-intro">Durch die Zulassung als Kapitalverwaltungsgesellschaft nach § 22 KAGB können wir unseren Kunden das Insourcing von Dienstleistungen in einem vollständig regulierten Rahmen bieten, was für unsere Kunden mit einer signifikanten Erleichterung des Auslagerungscontrollings einhergeht.</p>
 <div class="ip-values ip-values--4">
-<article><h3>Partner-Fonds</h3><p>Unseren Fondspartnern ohne eigene KVG bieten wir darüber hinaus die Konzeption, Auflage und Verwaltung von Real Asset-AIF. Gemeinsam mit unseren Kunden finden wir die adäquate Struktur und sorgen in enger Abstimmung mit den Aufsichtsbehörden für eine zügige Auflage des Fonds.</p></article>
+<article><h3>Partner-Fonds</h3><p>Unseren Fondspartnern ohne eigene KVG bieten wir die Konzeption, Auflage und Verwaltung von Real Asset-AIF. Gemeinsam mit unseren Kunden finden wir die adäquate Struktur und sorgen in enger Abstimmung mit den Aufsichtsbehörden für eine zügige Auflage des Fonds.</p></article>
 <article><h3>Fonds- und Gesellschaftsbuchhaltung</h3><p>Asset Managern und ihren KVGen bieten wir eine vollständig digitale Fonds- und Gesellschaftsbuchhaltung auf Basis eines zentralen Datenhaushalts. Dabei übersetzen wir internationale Rechnungsvorschriften (local GAAP) in deutsches Investmentrecht. Durch die vollständige Generierung des Buchungsstoffes im System erhalten unsere Kunden die Möglichkeit eines lückenlosen Data-Tracings und die Voll-Durchschau in ihren Fonds.</p></article>
 <article><h3>Meldewesen</h3><p>Über unsere einzigartige Software-Lösung generieren wir die obligatorischen XML-Meldungen an Bundesbank und BaFin sowie jegliche weitere Meldungen an andere Behörden und Verbände auf Knopfdruck. Auch die mittelbaren Meldungsanforderungen institutioneller Investoren z.B. nach Solvency II, GroMiKV oder CRR erfüllen wir termingerecht und komfortabel.</p></article>
 <article><h3>Investorenberichtswesen</h3><p>Den quantitativen Teil der Monats-, Quartals-, Halbjahres-, und Jahresberichte liefern wir automatisiert und im Corporate Design unserer Kunden, die nur noch qualitative Teile wie Marktberichte oder Lagebeschreibung in unserem Berichtssystem zu ergänzen brauchen. Auf Wunsch produzieren wir auch individuelle Berichte nach den Anforderungen bestimmter Zielgruppen.</p></article>
@@ -136,9 +138,9 @@ NUTZEN = """<div class="ip-wrap">
 %s
 <h2>Ihr Nutzen als unser Kunde.</h2>
 <div class="ip-figures">
-<article class="ip-figure"><span class="ip-figure__value">100%%</span><h3>Transparenz &amp; Skalierbarkeit</h3><p>Unsere Kunden behalten mit der eigenen Kapitalverwaltungsgesellschaft die Hoheit über ihre Fonds und Daten, wir sorgen für Transparenz und Skalierbarkeit.</p></article>
-<article class="ip-figure"><span class="ip-figure__value">100%%</span><h3>Zentralisierte<br class="ip-br-wide"> Plattform</h3><p>Unsere Kunden erhalten eine einzigartige zentralisierte sowie revisionssichere Daten-, Prozess-, Berichts- und Meldeplattform zur Abbildung nationaler und internationaler Anforderungen.</p></article>
 <article class="ip-figure"><span class="ip-figure__value">100%%</span><h3>Fokus auf Kernkompetenzen</h3><p>Unsere Kunden erhalten den Raum und die Sicherheit, sich voll auf ihre Kernkompetenz konzentrieren zu können: das Asset Management.</p></article>
+<article class="ip-figure"><span class="ip-figure__value">100%%</span><h3>Zentralisierte<br class="ip-br-wide"> Plattform</h3><p>Unsere Kunden erhalten eine einzigartige zentralisierte sowie revisionssichere Daten-, Prozess-, Berichts- und Meldeplattform zur Abbildung nationaler und internationaler Anforderungen.</p></article>
+<article class="ip-figure"><span class="ip-figure__value">100%%</span><h3>Transparenz &amp; Skalierbarkeit</h3><p>Unsere Kunden behalten mit der eigenen Kapitalverwaltungsgesellschaft die Hoheit über ihre Fonds und Daten, wir sorgen für Transparenz und Skalierbarkeit.</p></article>
 </div>
 </div>""" % kicker("Ihr Nutzen")
 
