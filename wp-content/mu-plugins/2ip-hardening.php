@@ -53,10 +53,22 @@ add_filter( 'login_errors', function () {
 	return 'Die Anmeldung ist fehlgeschlagen.';
 } );
 
-// Sicherheits-Header (ohne CSP, da Divi Inline-Code verwendet).
-add_action( 'send_headers', function () {
+// Sicherheits-Header (ohne CSP, da Divi Inline-Code verwendet). Die .htaccess setzt sie auf IONOS
+// nur für statische Dateien, PHP-Antworten bekommen sie nur von hier.
+function hardening_security_headers() {
+	if ( headers_sent() ) {
+		return;
+	}
 	header( 'X-Content-Type-Options: nosniff' );
 	header( 'Referrer-Policy: strict-origin-when-cross-origin' );
 	header( 'X-Frame-Options: SAMEORIGIN' );
 	header( 'Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()' );
-} );
+	if ( is_ssl() ) {
+		// Ohne includeSubDomains: nicht alle Subdomains sind sicher auf HTTPS.
+		header( 'Strict-Transport-Security: max-age=31536000' );
+	}
+	header_remove( 'X-Powered-By' );
+}
+add_action( 'send_headers', 'hardening_security_headers' );
+add_action( 'login_init', 'hardening_security_headers' );
+add_action( 'admin_init', 'hardening_security_headers' );

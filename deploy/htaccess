@@ -27,22 +27,28 @@ Header always set X-Content-Type-Options "nosniff"
 Header always set X-Frame-Options "SAMEORIGIN"
 Header always set Referrer-Policy "strict-origin-when-cross-origin"
 Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
-# HSTS erst nach stabilem Livegang aktivieren:
-# Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+# HSTS ohne includeSubDomains: nicht alle Subdomains sind sicher auf HTTPS.
+Header always set Strict-Transport-Security "max-age=31536000"
 </IfModule>
 
 Options -Indexes
 ServerSignature Off
 
 # --- Sensible Dateien und Angriffsflächen sperren ---
-<FilesMatch "^(wp-config\.php|wp-config-sample\.php|xmlrpc\.php|readme\.html|license\.txt|\.htpasswd|.*\.(sql|gz|log|bak|sh))$">
+<FilesMatch "^(wp-config\.php|wp-config-sample\.php|xmlrpc\.php|readme\.html|liesmich\.html|license\.txt|\.htpasswd|.*\.(sql|gz|log|bak|sh))$">
   Require all denied
 </FilesMatch>
-RedirectMatch 404 /\.git
+RedirectMatch 404 /\.(?!well-known)
 
 # --- PHP-Ausführung im Uploads-Ordner verbieten ---
 <IfModule mod_rewrite.c>
-RewriteRule ^wp-content/uploads/.*\.php$ - [F,L]
+RewriteRule ^wp-content/uploads/.*\.(php[0-9]?|phtml|phar)$ - [F,L]
+# --- Interne WP-Dateien nicht direkt aufrufbar ---
+RewriteRule ^wp-admin/includes/ - [F,L]
+RewriteRule !^wp-includes/ - [S=3]
+RewriteRule ^wp-includes/[^/]+\.php$ - [F,L]
+RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F,L]
+RewriteRule ^wp-includes/theme-compat/ - [F,L]
 </IfModule>
 
 # --- WordPress ---
