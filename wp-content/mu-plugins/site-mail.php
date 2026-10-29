@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Site Mail
  * Description: Einheitlicher Mailversand (Must-Use-Plugin): Absender contact@2ig.de mit Alias je Seite, Versand über Amazon SES (SMTP). Gleiche Datei auf 2ip, 2ig, sin und acb.
- * Version: 1.0.0
+ * Version: 1.1.0
  *
  * Konfiguration in der wp-config.php (Alias) und in ~/config/mail-smtp.php (Zugangsdaten, für alle Seiten gemeinsam):
  *   SITE_MAIL_FROM_NAME   Alias vor der Absenderadresse, z. B. 'Institutional Investment Partners (2IP)'
@@ -44,9 +44,46 @@ add_action( 'phpmailer_init', function ( $phpmailer ) {
 	$phpmailer->Timeout    = 15;
 }, PHP_INT_MAX );
 
-// Fehlschläge ins PHP-Fehlerprotokoll schreiben (nur Fehlertext und Empfänger, keine Inhalte).
+/*
+ * Protokoll ~/logs/site-mail.log (außerhalb der Webroots, für alle Seiten gemeinsam): eine Zeile je Mail mit Seite,
+ * Versandweg, Empfänger und Ergebnis. Keine Betreffzeilen oder Inhalte; externe Empfänger nur gekürzt (m***@example.de).
+ * Fehlt der Ordner (z. B. lokal), gehen nur Fehlschläge ins PHP-Fehlerprotokoll.
+ */
+function site_mail_log( $to, $result ) {
+	$internal = array( '2ig.de', '2ip.de', 'serviceinvest.de', 'acb-gmbh.de' );
+	$masked   = array();
+	foreach ( (array) $to as $address ) {
+		$parts    = explode( '@', (string) $address, 2 );
+		$domain   = strtolower( $parts[1] ?? '' );
+		$masked[] = in_array( $domain, $internal, true ) ? $address : substr( $parts[0], 0, 1 ) . '***@' . $domain;
+	}
+	$smtp = defined( 'SITE_MAIL_SMTP_PASS' ) && '' !== SITE_MAIL_SMTP_PASS;
+	$line = sprintf( "%s %s %s an %s: %s\n", wp_date( 'Y-m-d H:i:s' ), wp_parse_url( home_url(), PHP_URL_HOST ),
+		$smtp ? 'SES' : 'mail()', implode( ', ', $masked ), str_replace( array( "\r", "\n" ), ' ', $result ) );
+
+	$dir = dirname( ABSPATH, 2 ) . '/logs';
+	if ( ! is_dir( $dir ) || ! is_writable( $dir ) ) {
+		if ( 'OK' !== $result ) {
+			error_log( 'site-mail: ' . trim( $line ) );
+		}
+		return;
+	}
+	$file = $dir . '/site-mail.log';
+	if ( is_file( $file ) && filesize( $file ) > 1048576 ) {
+		rename( $file, $file . '.1' ); // höchstens ca. 2 MB: aktuelle Datei + eine Vorgängerin
+	}
+	$new = ! is_file( $file );
+	file_put_contents( $file, $line, FILE_APPEND | LOCK_EX );
+	if ( $new ) {
+		chmod( $file, 0600 );
+	}
+}
+
+add_action( 'wp_mail_succeeded', function ( $mail ) {
+	site_mail_log( $mail['to'] ?? array(), 'OK' );
+} );
+
 add_action( 'wp_mail_failed', function ( $error ) {
 	$data = $error->get_error_data();
-	$to   = isset( $data['to'] ) ? implode( ', ', (array) $data['to'] ) : '';
-	error_log( 'site-mail: Versand an ' . $to . ' fehlgeschlagen: ' . $error->get_error_message() );
+	site_mail_log( $data['to'] ?? array(), 'FEHLER ' . $error->get_error_message() );
 } );
