@@ -1,5 +1,3 @@
-*.sh text eol=lf
-*.php text eol=lf
-*.css text eol=lf
-*.js text eol=lf
-deploy/htaccess text eol=lf
+# Zeilenenden nie umwandeln: Das Paket muss Byte für Byte erhalten bleiben (tools/v1/check.php vergleicht exakt),
+# Shell-Skripte laufen auf dem Server und in WSL.
+* -text

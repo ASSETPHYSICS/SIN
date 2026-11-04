@@ -1,4 +1,4 @@
-# Allowlist: alles ignorieren, nur Eigenes versionieren.
+# Allowlist: alles ignorieren, nur Eigenes versionieren (Branch v1-website: Paket serviceinvest-website auf WordPress).
 /*
 !/.gitignore
 !/.gitattributes
@@ -9,18 +9,21 @@
 !/content/
 !/wp-content/
 /wp-content/*
-!/wp-content/mu-plugins/
-!/wp-content/plugins/
-/wp-content/plugins/*
-!/wp-content/plugins/appointment-booking/
 !/wp-content/themes/
 /wp-content/themes/*
-!/wp-content/themes/Divi-SIN/
+!/wp-content/themes/sin-v1/
+!/wp-content/mu-plugins/
+/wp-content/mu-plugins/*
+!/wp-content/mu-plugins/sin-hardening.php
+!/wp-content/mu-plugins/site-mail.php
+!/wp-content/mu-plugins/local-mail-capture.php
 
-# Lizenzierte Schriften (Repo ist öffentlich) und große Mediendateien
-/wp-content/themes/Divi-SIN/fonts/
-*.woff
-*.woff2
+# Vom Import erzeugt
+/wp-content/themes/sin-v1/fallback-*.html
+# Zwischenschritt des Favicons
+/content/v1-build/favicon-64.png
+
+# Große Dateien, Dumps
 *.zip
 *.sql
 *.sql.gz
@@ -30,7 +33,3 @@ wp-config.php
 .env
 *.log
 .DS_Store
-
-# Python-Cache
-__pycache__/
-*.pyc

@@ -1,0 +1,28 @@
+/* Ergänzungen zum Paket (nicht von ServiceInvest geliefert, siehe README „Abweichungen“). Wird von tools/v1/build.php hinter das
+   CSS jeder Seite gesetzt. Nur Farben aus HA 3.3. */
+[hidden]{display:none !important}
+picture{display:contents}
+/* Zum Inhalt springen (HA 11) */
+.skip{position:absolute;left:16px;top:-200px;z-index:100;padding:14px 22px;background:#FFFFFF;color:#000000 !important;font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+.skip:focus{top:16px}
+/* Sichtbare Fokusrahmen auf schwarzem und weißem Grund (HA 11) */
+a:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid #FFFFFF;outline-offset:3px}
+.light a:focus-visible,.light button:focus-visible{outline-color:#000000}
+.skip:focus-visible{outline:2px solid #000000;outline-offset:-6px}
+/* Bildwechsel anhalten (HA 4.2, WCAG 2.2.2) */
+.seg-pause{flex:none;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin-left:6px;padding:0;background:none;border:0;color:#FFFFFF;cursor:pointer}
+.seg-pause svg{display:block}
+.seg-pause .i-play{display:none}
+.seg-pause[aria-pressed="true"] .i-play{display:block}
+.seg-pause[aria-pressed="true"] .i-pause{display:none}
+.hero.paused .slide img,.hero.paused .seg.on i{animation-play-state:paused}
+@media (max-width:960px){
+.sg.hide-m{display:flex !important}
+.sg .seg{display:none}
+.sg .seg-pause{margin-left:-12px}
+}
+/* Fonds-Offenlegungen nach Passwortprüfung (HA 7) */
+.az-msg{flex:1 1 100%;margin:0;font-size:16px;line-height:1.5;font-weight:600;color:#FFFFFF}
+.az-docs{flex:1 1 100%;display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin:0;padding:0;list-style:none}
+.az-docs li{padding:0 !important;border:0 !important}
+.az-docs .doc{min-height:44px;text-align:left;line-height:1.3;padding:8px 16px}

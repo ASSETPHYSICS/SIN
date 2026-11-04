@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="../assets/logo/serviceinvest-bildmarke-farbe.svg">
+<title>Contact – ServiceInvest Kapitalverwaltungsgesellschaft</title>
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:'Source Sans 3';font-style:normal;font-display:swap;font-weight:200 900;src:url(../assets/fonts/source-sans-3-variable.woff2) format('woff2')}
+body{margin:0;background:#000}
+a{color:#fff}a:hover{color:#fff}
+a:focus-visible,button:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.wrap{max-width:1440px;margin:0 auto;padding:0 64px;box-sizing:border-box}
+.nav{color:#fff;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:8px 0;border-bottom:1px solid transparent;transition:border-color .25s;white-space:nowrap}
+.nav:hover{border-bottom-color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 34px;border:2px solid #fff;color:#fff;background:transparent;text-decoration:none;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;box-sizing:border-box;cursor:pointer;transition:background .3s ease,color .3s ease}
+.btn:hover{background:#fff;color:#000}
+.btn-fill{background:#fff;color:#000}
+.btn-fill:hover{background:transparent;color:#fff}
+.kicker{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#BFBFBF}
+.logo img{display:block;width:220px;height:auto}
+.fadeup{animation:fu 1.2s cubic-bezier(.16,1,.3,1) .2s both}
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.bgimg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}
+section:has(> img.bgimg) :is(h1,h2,h3,p,li,.kicker){text-shadow:0 1px 2px rgba(0,0,0,.45),0 0 20px rgba(0,0,0,.35)}
+.subhero{position:relative;min-height:clamp(560px,78vh,820px);overflow:hidden;color:#fff;display:flex;align-items:flex-end;background:#000}
+.cap{border-top:1px solid #4D4D4D;padding-top:24px}
+.ext{display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.5);padding-bottom:4px}
+.ext:hover{border-bottom-color:#fff}
+.flink{color:#fff;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
+.flink:hover{opacity:1}
+.mbtn{display:none;align-items:center;justify-content:center;width:44px;height:44px;padding:0;margin:0 -10px 0 0;background:transparent;border:0;color:#FFFFFF;cursor:pointer}
+.mmenu{position:fixed;top:0;right:0;bottom:0;left:0;z-index:60;background:#000000;color:#FFFFFF;overflow-y:auto}
+.mtop{display:flex;align-items:center;justify-content:flex-end;height:104px}
+.mlist{display:flex;flex-direction:column;padding-top:8px;padding-bottom:56px}
+.mlink{display:block;padding:14px 0;font-size:clamp(28px,5.5vw,44px);line-height:1.1;font-weight:700;text-transform:uppercase;color:#FFFFFF !important;text-decoration:none;border-bottom:1px solid #262626}
+.msub{display:inline-block;padding:10px 0;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#BFBFBF !important;text-decoration:none}
+.msec{display:flex;flex-wrap:wrap;gap:0 28px;margin-top:28px}
+.mlink:hover,.msub:hover{opacity:.75}
+.field{display:flex;flex-direction:column;gap:10px;min-width:0}
+.lab{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E0E0E0}
+.inp{display:block;width:100%;box-sizing:border-box;margin:0;font-family:inherit;font-size:18px;line-height:1.4;color:#FFFFFF;background:#000000;border:1px solid #8C8C8C;border-radius:0;min-height:52px;padding:12px 16px;color-scheme:dark}
+.inp:focus{outline:2px solid #FFFFFF;outline-offset:2px;border-color:#FFFFFF}
+.inp[aria-invalid="true"]{border-color:#FF8A80}
+textarea.inp{min-height:200px;resize:vertical}
+.selwrap{position:relative}
+select.inp{-webkit-appearance:none;appearance:none;padding-right:52px;cursor:pointer}
+select.inp option{background:#000000;color:#FFFFFF}
+.selwrap svg{position:absolute;right:18px;top:50%;transform:translateY(-50%);pointer-events:none}
+.err{margin:0;font-size:15px;line-height:1.45;font-weight:600;color:#FF8A80}
+.check{display:flex;gap:14px;align-items:flex-start;font-size:17px;line-height:1.5;color:#E0E0E0;cursor:pointer}
+.check input{width:22px;height:22px;margin:2px 0 0;flex:none;accent-color:#FFFFFF;cursor:pointer}
+.check input:focus-visible{outline:2px solid #FFFFFF;outline-offset:3px}
+.check a{color:#FFFFFF;text-decoration:underline;text-underline-offset:3px}
+.hint{margin:0;padding:16px 20px;border:1px solid #8C8C8C;font-size:16px;line-height:1.55;color:#E6E6E6}
+.hint a{color:#FFFFFF;text-decoration:underline;text-underline-offset:3px}
+.addr{border-top:1px solid #4D4D4D;padding-top:24px;margin-top:40px}
+.addr h2{margin:0}
+.addr p{margin:12px 0 0;font-size:18px;line-height:1.6;color:#E0E0E0}
+.addr .ext{margin-top:20px}
+@media (max-width:1439px){header nav{gap:22px !important}.nav{font-size:12px;letter-spacing:.1em}}
+@media (max-width:1359px){header nav,header .util{display:none !important}.mbtn{display:inline-flex}header .wrap > div{gap:14px !important}}
+@media (max-width:960px){
+.wrap{padding:0 20px}
+.hide-m{display:none !important}
+.stack{grid-template-columns:minmax(0,1fr) !important}
+.stack>*{grid-column:auto !important}
+.h1{font-size:min(40px,10.5vw) !important}
+.h2{font-size:min(34px,10vw) !important}
+.subhero{min-height:600px}
+.formsec{padding:80px 0 96px !important}
+p,li,label{-webkit-hyphens:auto;hyphens:auto}
+h1,h2,h3,p,li,.kicker{overflow-wrap:break-word}
+}
+@media (max-width:480px){.logo img{width:140px}header .btn{padding:0 14px !important}.formsec .btn{width:100%}}
+@media (prefers-reduced-motion:reduce){.fadeup{animation:none}}
+</style>
+</helmet>
+
+<div lang="en" style="font-family: 'Source Sans 3', 'Source Sans Pro', Arial, sans-serif; color: #FFFFFF; background: #000000; -webkit-font-smoothing: antialiased">
+
+<!-- HERO -->
+<section class="subhero" aria-labelledby="page-title">
+<img class="bgimg" src="../assets/img/kontakt.jpg" alt="Reception area of an office, a member of staff greeting a visitor" style="object-position: 62% 50%">
+<div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: linear-gradient(90deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.36) 45%, rgba(0,0,0,0.04) 85%)"></div>
+<div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.72) 100%)"></div>
+
+<header style="position: absolute; top: 0; left: 0; right: 0; z-index: 5">
+<div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 104px">
+<a href="index.html" class="logo" aria-label="ServiceInvest Kapitalverwaltungsgesellschaft – Home" style="display: block; line-height: 0"><img src="../assets/logo/serviceinvest-logo-weiss.svg" alt="" width="220" height="72"></a>
+<nav aria-label="Main navigation" style="display: flex; gap: 34px">
+<a href="index.html#partner" class="nav">Partner funds</a>
+<a href="index.html#leistungen" class="nav">Services</a>
+<a href="index.html#technologie" class="nav">Technology</a>
+<a href="index.html#anleger" class="nav">Investors</a>
+<a href="sustainability.html" class="nav">Sustainability</a>
+</nav>
+<div style="display: flex; align-items: center; gap: 28px">
+<a href="investor-access.html" class="nav util">Investor access</a>
+<a href="../kontakt.html" class="nav util" lang="de" style="opacity: 0.75">DE</a>
+<a href="contact.html" class="btn" aria-current="page" style="min-height: 44px; padding: 0 22px; font-size: 13px">Contact</a>
+<button type="button" class="mbtn" aria-label="Open menu" aria-controls="mmenu" aria-expanded="{{menuExp}}" onClick="{{openMenu}}"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" focusable="false"><path d="M2 7h22M2 13h22M2 19h22"></path></svg></button>
+</div>
+</div>
+</header>
+<sc-if value="{{menuOpen}}" hint-placeholder-val="{{ false }}">
+<div id="mmenu" class="mmenu" role="dialog" aria-modal="true" aria-label="Menu">
+<div class="wrap mtop"><button type="button" class="mbtn" style="display: inline-flex" aria-label="Close menu" onClick="{{closeMenu}}"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" focusable="false"><path d="M5 5l16 16M21 5L5 21"></path></svg></button></div>
+<nav aria-label="Navigation" class="wrap mlist">
+<a class="mlink" href="index.html#partner">Partner funds</a><a class="mlink" href="index.html#leistungen">Services</a><a class="mlink" href="index.html#technologie">Technology</a><a class="mlink" href="index.html#anleger">Investors</a><a class="mlink" href="sustainability.html">Sustainability</a><a class="mlink" href="contact.html" aria-current="page" onClick="{{closeMenu}}">Contact</a>
+<div class="msec"><a class="msub" href="investor-access.html">Investor access</a><a class="msub" href="tenants.html">For tenants</a><a class="msub" href="../kontakt.html" lang="de">Deutsch</a></div>
+</nav>
+</div>
+</sc-if>
+
+<div class="wrap fadeup" style="position: relative; z-index: 3; width: 100%; padding-top: 160px; padding-bottom: clamp(48px, 8vh, 96px)">
+<div class="kicker" style="color: #E0E0E0">Contact</div>
+<h1 id="page-title" class="h1" style="margin: 18px 0 0; font-size: clamp(48px, min(7vw, 12vh), 104px); line-height: 0.96; font-weight: 700; text-transform: uppercase; max-width: 1000px">Let’s talk about your plans</h1>
+<p style="margin: 28px 0 0; font-size: clamp(19px, 2.4vh, 22px); line-height: 1.5; max-width: 680px; color: #F0F0F0">Whether partner fund or individual service: describe your request to us. We will get back to you and agree the next steps with you.</p>
+</div>
+</section>
+
+<!-- FORMULAR UND KONTAKTDATEN -->
+<section class="formsec" aria-labelledby="form-title" style="background: #000000; padding: 120px 0 120px">
+<div class="wrap">
+<div class="stack" style="display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 64px 96px; align-items: start">
+
+<div>
+<div class="kicker" style="color: #E0E0E0">Enquiry</div>
+<h2 id="form-title" class="h2" style="margin: 16px 0 0; font-size: 48px; line-height: 1.04; font-weight: 700; text-transform: uppercase">Write to us</h2>
+
+<sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="margin-top: 40px; border-top: 2px solid #FFFFFF; padding-top: 32px">
+<h3 id="thanks-title" tabindex="-1" style="margin: 0; font-size: 30px; line-height: 1.15; font-weight: 700; text-transform: uppercase">Thank you for your message</h3>
+<p style="margin: 16px 0 32px; font-size: 19px; line-height: 1.6; color: #D9D9D9">We have received your message and will get back to you.</p>
+<button type="button" class="btn" onClick="{{reset}}">Write a new message</button>
+</div>
+</sc-if>
+
+<sc-if value="{{notSent}}" hint-placeholder-val="{{ true }}">
+<p style="margin: 24px 0 0; font-size: 19px; line-height: 1.6; color: #D9D9D9; max-width: 640px">The more precisely you describe your request, the more specifically we can respond.</p>
+<form aria-labelledby="form-title" style="display: flex; flex-direction: column; gap: 28px; margin-top: 48px" onSubmit="{{submit}}">
+
+<div class="field">
+<label class="lab" for="f-anliegen">Subject</label>
+<div class="selwrap">
+<select id="f-anliegen" name="anliegen" class="inp" value="{{anliegen}}" onChange="{{setAnliegen}}">
+<option value="">Please select</option>
+<option value="partnerfonds">Launching a partner fund</option>
+<option value="leistungen">Individual services</option>
+<optgroup label="Investors">
+<option value="anleger-institutionell">Institutional investor</option>
+<option value="anleger-privat">Private investor</option>
+</optgroup>
+<option value="mieter">For tenants</option>
+<option value="presse">Press</option>
+<option value="sonstiges">Other</option>
+</select>
+<svg width="14" height="9" viewBox="0 0 14 9" fill="none" stroke="#FFFFFF" stroke-width="1.6" aria-hidden="true" focusable="false"><path d="M1 1l6 6 6-6"></path></svg>
+</div>
+</div>
+
+<sc-if value="{{isInst}}" hint-placeholder-val="{{ false }}">
+<p class="hint">Are you looking for the sustainability-related disclosures for your fund? You will find them in the <a href="investor-access.html">Investor access</a> area. Your contact person will also be happy to help you directly.</p>
+</sc-if>
+<sc-if value="{{isPriv}}" hint-placeholder-val="{{ false }}">
+<p class="hint">You will find the sales documents and reports for your fund in the <a href="investor-access.html">Investor access</a> area. Questions about your securities account are answered by the institution that maintains it. For complaints, our <a href="complaints.html">complaints office</a> is at your disposal.</p>
+</sc-if>
+<sc-if value="{{isMieter}}" hint-placeholder-val="{{ false }}">
+<p class="hint">Are you a tenant in a property held by one of our funds? Please use our <a href="tenants.html">page for tenants</a>. You can also write to us here.</p>
+</sc-if>
+
+<div class="stack" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px">
+<div class="field">
+<label class="lab" for="f-name">Name <span aria-hidden="true">*</span></label>
+<input id="f-name" name="name" type="text" class="inp" autocomplete="name" aria-required="true" aria-invalid="{{invName}}" aria-describedby="{{dbName}}" value="{{name}}" onChange="{{setName}}">
+<sc-if value="{{errName}}" hint-placeholder-val="{{ false }}"><p id="e-name" class="err">Please enter your name.</p></sc-if>
+</div>
+<div class="field">
+<label class="lab" for="f-firma">Company</label>
+<input id="f-firma" name="unternehmen" type="text" class="inp" autocomplete="organization" value="{{firma}}" onChange="{{setFirma}}">
+</div>
+</div>
+
+<div class="stack" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px">
+<div class="field">
+<label class="lab" for="f-email">Email <span aria-hidden="true">*</span></label>
+<input id="f-email" name="email" type="email" class="inp" autocomplete="email" inputmode="email" aria-required="true" aria-invalid="{{invEmail}}" aria-describedby="{{dbEmail}}" value="{{email}}" onChange="{{setEmail}}">
+<sc-if value="{{errEmail}}" hint-placeholder-val="{{ false }}"><p id="e-email" class="err">{{errEmailText}}</p></sc-if>
+</div>
+<div class="field">
+<label class="lab" for="f-tel">Telephone</label>
+<input id="f-tel" name="telefon" type="tel" class="inp" autocomplete="tel" value="{{tel}}" onChange="{{setTel}}">
+</div>
+</div>
+
+<div class="field">
+<label class="lab" for="f-msg">Message <span aria-hidden="true">*</span></label>
+<textarea id="f-msg" name="nachricht" class="inp" rows="7" aria-required="true" aria-invalid="{{invMsg}}" aria-describedby="{{dbMsg}}" value="{{msg}}" onChange="{{setMsg}}"></textarea>
+<sc-if value="{{errMsg}}" hint-placeholder-val="{{ false }}"><p id="e-msg" class="err">Please enter your message.</p></sc-if>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<label class="check" for="f-ds"><input id="f-ds" name="datenschutz" type="checkbox" aria-required="true" aria-invalid="{{invDs}}" aria-describedby="{{dbDs}}" onChange="{{setDs}}"><span>I have read the <a href="privacy.html">privacy policy</a>. <span aria-hidden="true">*</span></span></label>
+<sc-if value="{{errDs}}" hint-placeholder-val="{{ false }}"><p id="e-ds" class="err" style="padding-left: 36px">Please confirm that you have read the privacy policy.</p></sc-if>
+</div>
+
+<sc-if value="{{hasErr}}" hint-placeholder-val="{{ false }}">
+<p class="err" role="alert">Please check the highlighted fields.</p>
+</sc-if>
+
+<div>
+<button type="submit" class="btn btn-fill">Send message</button>
+<p style="margin: 16px 0 0; font-size: 15px; line-height: 1.5; color: #BFBFBF">Required fields are marked with *.</p>
+</div>
+</form>
+</sc-if>
+</div>
+
+<div>
+<h2 class="kicker" style="margin: 0; color: #E0E0E0">Address</h2>
+<p style="margin: 16px 0 0; font-size: 20px; line-height: 1.55; color: #FFFFFF"><strong>ServiceInvest Kapital&shy;verwaltungs&shy;gesellschaft mbH</strong><br>Fürstenrieder Straße 61<br>80686 München</p>
+<div class="addr">
+<h2 class="kicker">For tenants</h2>
+<p style="color: #FFFFFF; font-weight: 600">Are you a tenant in a property held by one of our funds?</p>
+<p>For questions about your rented premises, please use our page for tenants.</p>
+<a href="tenants.html" class="ext">Go to the page for tenants <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" focusable="false"><path d="M1 6h10M7 2l4 4-4 4"></path></svg></a>
+</div>
+<div class="addr">
+<h2 class="kicker">Press and communications</h2>
+<p>Michael Benninghoff<br>Head of Communication<br><a href="mailto:michael.benninghoff@2ig.de">michael.benninghoff@2ig.de</a></p>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background: #000000; padding: 64px 0 48px; border-top: 1px solid #262626">
+<div class="wrap" style="text-align: center">
+<img src="../assets/logo/serviceinvest-logo-weiss.svg" alt="ServiceInvest Kapitalverwaltungsgesellschaft" width="150" height="49" style="display: block; margin: 0 auto 40px; opacity: 0.9">
+<nav aria-label="Footer" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 32px">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.8">ServiceInvest © 2026</span>
+<a href="index.html#partner" class="flink">Partner funds</a>
+<a href="index.html#leistungen" class="flink">Services</a>
+<a href="sustainability.html" class="flink">Sustainability</a>
+<a href="investor-access.html" class="flink">Investor access</a>
+<a href="tenants.html" class="flink">For tenants</a>
+<a href="contact.html" class="flink" aria-current="page">Contact</a>
+<a href="legal-notice.html" class="flink">Legal notice</a>
+<a href="privacy.html" class="flink">Privacy</a>
+<a href="remuneration-policy.html" class="flink">Remuneration policy</a>
+<a href="complaints.html" class="flink">Complaints office</a>
+<a href="https://www.2ig.de/jobs/" class="flink">Careers</a>
+<a href="https://www.2ig.de" class="flink">2IG</a>
+<a href="../kontakt.html" class="flink" lang="de">Deutsch</a>
+</nav>
+<p style="margin: 32px auto 0; font-size: 12px; line-height: 1.6; color: #8C8C8C; max-width: 900px">This website presents ServiceInvest Kapitalverwaltungsgesellschaft mbH and its services. It is provided for general information purposes only and constitutes neither investment advice nor an offer or solicitation to acquire units or shares in investment funds. Investments in real assets involve risks; the value of an investment may fluctuate and a loss of the capital invested is possible. Past performance is not a reliable indicator of future results. Images AI-generated.</p>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2400}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      menuOpen: false,
+      anliegen: '', name: '', firma: '', email: '', tel: '', msg: '', ds: false,
+      tried: false, errs: {}, sent: false
+    };
+  }
+  _validate(s) {
+    const errs = {};
+    if (!String(s.name || '').trim()) errs.name = 'empty';
+    const mail = String(s.email || '').trim();
+    if (!mail) errs.email = 'empty';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) errs.email = 'format';
+    if (!String(s.msg || '').trim()) errs.msg = 'empty';
+    if (!s.ds) errs.ds = 'unchecked';
+    return errs;
+  }
+  _focus(id) {
+    setTimeout(() => { try { const el = document.getElementById(id); if (el) el.focus(); } catch (err) {} }, 0);
+  }
+  _setter(key, useChecked) {
+    return (e) => {
+      const val = useChecked ? !!e.target.checked : e.target.value;
+      const upd = { [key]: val };
+      if (this.state.tried) upd.errs = this._validate(Object.assign({}, this.state, upd));
+      this.setState(upd);
+    };
+  }
+  renderVals() {
+    const s = this.state;
+    const errs = s.errs || {};
+    return {
+      menuOpen: !!s.menuOpen,
+      menuExp: s.menuOpen ? 'true' : 'false',
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+
+      sent: !!s.sent,
+      notSent: !s.sent,
+
+      anliegen: s.anliegen, name: s.name, firma: s.firma, email: s.email, tel: s.tel, msg: s.msg,
+      isMieter: s.anliegen === 'mieter',
+      isInst: s.anliegen === 'anleger-institutionell',
+      isPriv: s.anliegen === 'anleger-privat',
+
+      setAnliegen: this._setter('anliegen'),
+      setName: this._setter('name'),
+      setFirma: this._setter('firma'),
+      setEmail: this._setter('email'),
+      setTel: this._setter('tel'),
+      setMsg: this._setter('msg'),
+      setDs: this._setter('ds', true),
+
+      errName: !!errs.name, invName: errs.name ? 'true' : 'false', dbName: errs.name ? 'e-name' : '',
+      errEmail: !!errs.email, invEmail: errs.email ? 'true' : 'false', dbEmail: errs.email ? 'e-email' : '',
+      errEmailText: errs.email === 'format' ? 'Please check the email address, for example name@company.com.' : 'Please enter your email address.',
+      errMsg: !!errs.msg, invMsg: errs.msg ? 'true' : 'false', dbMsg: errs.msg ? 'e-msg' : '',
+      errDs: !!errs.ds, invDs: errs.ds ? 'true' : 'false', dbDs: errs.ds ? 'e-ds' : '',
+      hasErr: !!s.tried && Object.keys(errs).length > 0,
+
+      submit: (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        const found = this._validate(this.state);
+        const order = ['name', 'email', 'msg', 'ds'];
+        const first = order.find((k) => found[k]);
+        if (first) {
+          this.setState({ tried: true, errs: found });
+          this._focus('f-' + first);
+        } else {
+          this.setState({ sent: true, tried: false, errs: {} });
+          this._focus('thanks-title');
+        }
+      },
+      reset: () => {
+        this.setState({ sent: false, anliegen: '', name: '', firma: '', email: '', tel: '', msg: '', ds: false, tried: false, errs: {} });
+        this._focus('f-anliegen');
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
