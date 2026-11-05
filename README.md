@@ -57,7 +57,7 @@ Nur über eine neue Fassung des Pakets von ServiceInvest: `content/v1-vorlage/` 
   `fetchpriority="high"` und Preload, übrige `loading="lazy"`; Schrift-Preload; Kompression und Cache-Header (`.htaccess`).
 - **10 Suchmaschinen:** Beschreibungen aus HA 10, canonical, hreflang de/en/x-default, Open Graph/Twitter mit eigenem Vorschaubild
   (Hero 1 mit weißem Logo), JSON-LD Organization auf den Startseiten, `sitemap.xml` mit hreflang, `robots.txt`.
-- **11 Barrierefreiheit:** Skip-Link, Pause-Schaltfläche für den Slider (auch mobil), Menü mit Fokusführung/Escape, Reiter mit
+- **11 Barrierefreiheit:** Skip-Link, Slider hält bei Hover/Tastaturfokus der Bildsteuerung, Menü mit Fokusführung/Escape, Reiter mit
   Pfeiltasten, Fehlermeldungen per `role="alert"`, sichtbare Fokusrahmen auf Schwarz und Weiß.
 - **12 Sicherheit:** HTTPS mit HSTS, eine Hauptadresse (www), CSP nur eigene Quellen, keine Cookies außer der Sitzung des
   geschützten Bereichs, keine Drittanbieter.
@@ -66,7 +66,7 @@ Nur über eine neue Fassung des Pakets von ServiceInvest: `content/v1-vorlage/` 
 
 | Abweichung | Begründung |
 |---|---|
-| Pause-Schaltfläche im Hero; mobil steht sie allein unter den Schaltflächen | HA 4.2/11 (WCAG 2.2.2). Halten auch bei Hover/Tastaturfokus der Bildsteuerung; bei „Bewegung reduzieren“ kein automatischer Wechsel |
+| Slider hält bei Hover/Tastaturfokus der Bildsteuerung; bei „Bewegung reduzieren“ kein automatischer Wechsel | HA 4.2/11. Die Pause-Schaltfläche (WCAG 2.2.2) wurde am 5. November 2026 auf Wunsch entfernt |
 | Skip-Link („Zum Inhalt springen“), nur bei Fokus sichtbar | HA 11 |
 | Fokusrahmen auf allen Seiten (im Export nur auf Kontakt) | HA 11 |
 | Passwortfeld: Schaltfläche „Öffnen“ ist Absende-Schaltfläche (Enter funktioniert), darunter Meldung bzw. Dokumentliste | HA 7; Inhalt nach dem Öffnen liefert ServiceInvest |

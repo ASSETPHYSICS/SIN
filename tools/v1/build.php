@@ -12,7 +12,7 @@
  *   - Body: Vorlagen-Elemente (x-dc, helmet, sc-if, sc-for, {{…}}) im Anfangszustand des Pakets aufgelöst; was das Paket
  *     erst nach einer Aktion zeigt, steht mit [hidden] im HTML (data-if = Name der Bedingung im Paket).
  *   - Adressen nach HA 5.1 (/kontakt/, /en/contact/ …), Bilder als <picture> mit AVIF/WebP/JPEG (HA 9), externe Links in
- *     neuem Tab mit Hinweis für Screenreader (HA 8), PAI-PDFs unter /dokumente/ (HA 8), Skip-Link, Pause-Schaltfläche (HA 11).
+ *     neuem Tab mit Hinweis für Screenreader (HA 8), PAI-PDFs unter /dokumente/ (HA 8), Skip-Link (HA 11).
  * Texte bleiben unverändert (HA 3.1); tools/v1/check.php vergleicht den Text jeder Seite mit dem Paket.
  */
 
@@ -69,8 +69,6 @@ function texts( string $lang ): array {
 		'de' => array(
 			'skip'       => 'Zum Inhalt springen',
 			'newwin'     => '(öffnet in neuem Fenster)',
-			'pause'      => 'Bildwechsel anhalten',
-			'play'       => 'Bildwechsel fortsetzen',
 			'senderror'  => 'Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut oder schreiben Sie an <a href="mailto:info@serviceinvest.de">info@serviceinvest.de</a>.',
 			'msenderror' => 'Ihr Anliegen konnte nicht gesendet werden. Bitte versuchen Sie es später erneut oder schreiben Sie an <a href="mailto:info@serviceinvest.de">info@serviceinvest.de</a>.',
 			'expired'    => 'Die Seite war zu lange geöffnet. Bitte laden Sie sie neu und senden Sie Ihre Anfrage erneut.',
@@ -85,8 +83,6 @@ function texts( string $lang ): array {
 		'en' => array(
 			'skip'       => 'Skip to content',
 			'newwin'     => '(opens in a new window)',
-			'pause'      => 'Pause slideshow',
-			'play'       => 'Resume slideshow',
 			'senderror'  => 'Your message could not be sent. Please try again later or write to <a href="mailto:info@serviceinvest.de">info@serviceinvest.de</a>.',
 			'msenderror' => 'Your request could not be sent. Please try again later or write to <a href="mailto:info@serviceinvest.de">info@serviceinvest.de</a>.',
 			'expired'    => 'This page has been open for too long. Please reload it and send your enquiry again.',
@@ -340,11 +336,6 @@ foreach ( $pages as $lang => $list ) {
 			$body = rep( $body, 'class="{{seqT}}"', 'class="stack rise seq"', $file );
 			$body = rep( $body, 'class="{{seqE}}"', 'class="stack rise seq"', $file );
 			$body = rep( $body, 'class="{{lageCls}}"', 'class="bgimg zoom approach"', $file );
-			// Pause-Schaltfläche (HA 4.2, 11) hinter den Fortschrittsbalken; auf Mobilgeräten allein sichtbar (site.css .sg)
-			$icons = '<svg class="i-pause" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M3 2h3v12H3zM10 2h3v12h-3z"></path></svg>'
-				. '<svg class="i-play" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M4 2l10 6-10 6z"></path></svg>';
-			$body  = rep_re( $body, '#(<button type="button" class="seg" aria-label="[^"]+ 5 [^"]+" data-go="4"><i></i></button>\n)#', '$1<button type="button" class="seg-pause" data-pause aria-pressed="false" aria-label="' . esc( $t['pause'] ) . '" data-label-pause="' . esc( $t['pause'] ) . '" data-label-play="' . esc( $t['play'] ) . '">' . $icons . "</button>\n", $file );
-			$body  = rep( $body, '<div class="hide-m" role="group"', '<div class="hide-m sg" role="group"', $file );
 		}
 
 		if ( str_contains( $body, '<sc-for' ) ) {   // Anlegerzugang

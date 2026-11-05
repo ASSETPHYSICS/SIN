@@ -8,9 +8,9 @@
  *   - Text: sichtbarer Text jeder Seite = Text des Pakets im Anfangszustand (HA 3.1); ohne Skip-Link und Screenreader-Hinweise
  *   - Alternativtexte gleich, in gleicher Reihenfolge (HA 3.2)
  *   - Darstellung: Bildschirmfoto der ganzen Seite ohne Bewegung pixelgleich zum Paket. Die Bildvarianten (AVIF/WebP) werden
- *     dafür durch die Originalbilder ersetzt und die ergänzte Pause-Schaltfläche ausgeblendet, sonst zählte die Kompression
+ *     dafür durch die Originalbilder ersetzt, sonst zählte die Kompression
  *     bzw. die Ergänzung als Abweichung.
- * Abläufe: Menü (Fokus, Escape), Slider und Pause, Reiter mit Pfeiltasten, Fonds-Zugang, Kontakt- und Mieterformular
+ * Abläufe: Menü (Fokus, Escape), Slider, Reiter mit Pfeiltasten, Fonds-Zugang, Kontakt- und Mieterformular
  * (Prüfung, Hinweise, Danke-Ansicht, Fehlermeldung bei Ausfall), Sprachwechsel, ohne JavaScript, axe (WCAG 2.2 AA).
  *
  * Umgebung:
@@ -122,7 +122,7 @@ const originals = async (pg) => pg.route(/\/assets\/img\/v\/([\w-]+?)-\d+\.(avif
 					const pg = await still.newPage();
 					if (wp) await originals(pg);
 					await pg.goto(url, { waitUntil: 'networkidle' });
-					await pg.addStyleTag({ content: '*,*::before,*::after{animation:none!important;transition:none!important}' + (wp ? '.seg-pause{display:none!important}@media (max-width:960px){.sg.hide-m{display:none!important}}' : '') });
+					await pg.addStyleTag({ content: '*,*::before,*::after{animation:none!important;transition:none!important}' });
 					await scrollThrough(pg);
 					await pg.waitForTimeout(300);
 					const b = await pg.screenshot({ fullPage: true });
@@ -158,21 +158,18 @@ const originals = async (pg) => pg.route(/\/assets\/img\/v\/([\w-]+?)-\d+\.(avif
 		ok(hrefs.length >= 2 && hrefs.every(h => h === PAIR[p]), `${p} Sprachwechsel -> ${hrefs.join(', ')} (erwartet ${PAIR[p]})`);
 	}
 
-	// Slider: Klick auf den dritten Abschnitt, Pause-Schaltfläche
+	// Slider: Klick auf den dritten Abschnitt, Halt bei Hover über der Steuerung, Weiterlauf danach
 	await page.goto(BASE + '/', { waitUntil: 'networkidle' });
 	await page.locator('.hero .seg').nth(2).click();
 	ok(await page.locator('.hero .slide').nth(2).evaluate(e => e.classList.contains('on')), 'Slider springt per Klick');
-	await page.locator('[data-pause]').click();
-	ok(await page.locator('[data-pause]').getAttribute('aria-pressed') === 'true' && await page.locator('.hero').evaluate(e => e.classList.contains('paused')), 'Pause-Schaltfläche hält an');
-	await page.mouse.move(10, 10);
+	ok(await page.locator('[data-pause]').count() === 0, 'keine Pause-Schaltfläche');
 	await page.waitForTimeout(8600);
-	ok(await page.locator('.hero .slide').nth(2).evaluate(e => e.classList.contains('on')), 'angehalten: kein Bildwechsel nach 8 s');
-	await page.locator('[data-pause]').click();
+	ok(await page.locator('.hero .slide').nth(2).evaluate(e => e.classList.contains('on')), 'Hover über der Steuerung: kein Bildwechsel nach 8 s');
 	await page.mouse.move(10, 10);
 	await page.waitForTimeout(8600);
 	ok(await page.locator('.hero .slide').nth(3).evaluate(e => e.classList.contains('on')), 'fortgesetzt: Bildwechsel nach 8 s');
 
-	// Mobiles Menü: Fokus ins Menü, Escape schließt, Fokus zurück; Pause-Schaltfläche auch mobil
+	// Mobiles Menü: Fokus ins Menü, Escape schließt, Fokus zurück
 	await page.setViewportSize({ width: 390, height: 844 });
 	await page.goto(BASE + '/kontakt/', { waitUntil: 'networkidle' });
 	await page.locator('[data-menu-open]').click();
@@ -182,7 +179,6 @@ const originals = async (pg) => pg.route(/\/assets\/img\/v\/([\w-]+?)-\d+\.(avif
 	await page.keyboard.press('Escape');
 	ok(!(await page.locator('#mmenu').isVisible()) && await page.evaluate(() => document.activeElement.hasAttribute('data-menu-open')), 'Escape schließt, Fokus zurück');
 	await page.goto(BASE + '/', { waitUntil: 'networkidle' });
-	ok(await page.locator('[data-pause]').isVisible(), 'Pause-Schaltfläche bei 390 px sichtbar');
 	await page.locator('a.skip').focus();
 	ok(await page.locator('a.skip').isVisible(), 'Skip-Link bei Fokus sichtbar');
 	await page.setViewportSize({ width: 1440, height: 900 });

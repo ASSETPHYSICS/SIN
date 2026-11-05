@@ -62,14 +62,13 @@
 		window.addEventListener('resize', function () { if (window.innerWidth > 1359) closeMenu(false); });
 	}
 
-	/* --- Hero-Slider der Startseite: 5 Bilder, Wechsel alle 8 s, Pause-Schaltfläche, Pause bei Hover/Fokus der Steuerung --- */
+	/* --- Hero-Slider der Startseite: 5 Bilder, Wechsel alle 8 s, Halt bei Hover/Tastaturfokus der Steuerung --- */
 	var hero = $('.hero');
 	var slides = hero ? $$('.slide', hero) : [];
 	if (slides.length) {
 		var segs = $$('[data-go]', hero);
-		var pauseBtn = $('[data-pause]', hero);
-		var controls = pauseBtn ? pauseBtn.parentNode : null;
-		var cur = 0, prev = -1, timer = null, paused = reduce, hold = false;
+		var controls = segs.length ? segs[0].parentNode : null;
+		var cur = 0, prev = -1, timer = null, paused = reduce, hold = false; // "Bewegung reduzieren": kein automatischer Wechsel
 		var render = function () {
 			slides.forEach(function (s, k) { s.className = k === cur ? 'slide on' : (k === prev ? 'slide was' : 'slide'); });
 			segs.forEach(function (s, k) {
@@ -95,20 +94,9 @@
 			cur = k;
 			render();
 		};
-		var setPaused = function (p) {
-			paused = p;
-			hero.classList.toggle('paused', paused || hold);
-			if (pauseBtn) {
-				pauseBtn.setAttribute('aria-pressed', paused ? 'true' : 'false');
-				pauseBtn.setAttribute('aria-label', pauseBtn.getAttribute(paused ? 'data-label-play' : 'data-label-pause'));
-			}
-			if (!paused) restartBar();
-			schedule();
-		};
 		segs.forEach(function (s) {
 			s.addEventListener('click', function () { go(+s.getAttribute('data-go')); restartBar(); schedule(); });
 		});
-		if (pauseBtn) pauseBtn.addEventListener('click', function () { setPaused(!paused); });
 		if (controls) {
 			var setHold = function (h) {
 				if (h === hold) return;
@@ -119,13 +107,14 @@
 			};
 			controls.addEventListener('mouseenter', function () { setHold(true); });
 			controls.addEventListener('mouseleave', function () { setHold(!!controls.querySelector(':focus-visible')); });
-			// nur Tastaturfokus hält an; nach einem Mausklick auf "fortsetzen" soll es weiterlaufen
-			controls.addEventListener('focusin', function (e) { setHold(e.target.matches(':focus-visible')); });
+			// nur Tastaturfokus hält an; nach einem Mausklick auf einen Abschnitt soll es weiterlaufen
+			controls.addEventListener('focusin', function (e) { setHold(e.target.matches(':focus-visible') || controls.matches(':hover')); });
 			controls.addEventListener('focusout', function (e) { if (!controls.contains(e.relatedTarget)) setHold(false); });
 		}
 		doc.addEventListener('visibilitychange', function () { if (doc.hidden) { clearInterval(timer); timer = null; } else { schedule(); } });
 		render();
-		setPaused(paused);
+		hero.classList.toggle('paused', paused);
+		schedule();
 	}
 
 	/* --- Effekte beim Erscheinen (Startseite): einmalig per IntersectionObserver --- */

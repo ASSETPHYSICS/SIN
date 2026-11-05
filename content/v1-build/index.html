@@ -159,25 +159,15 @@ picture{display:contents}
 a:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid #FFFFFF;outline-offset:3px}
 .light a:focus-visible,.light button:focus-visible{outline-color:#000000}
 .skip:focus-visible{outline:2px solid #000000;outline-offset:-6px}
-/* Bildwechsel anhalten (HA 4.2, WCAG 2.2.2) */
-.seg-pause{flex:none;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin-left:6px;padding:0;background:none;border:0;color:#FFFFFF;cursor:pointer}
-.seg-pause svg{display:block}
-.seg-pause .i-play{display:none}
-.seg-pause[aria-pressed="true"] .i-play{display:block}
-.seg-pause[aria-pressed="true"] .i-pause{display:none}
+/* Bildwechsel hält bei Hover/Tastaturfokus der Bildsteuerung an (site.js) */
 .hero.paused .slide img,.hero.paused .seg.on i{animation-play-state:paused}
-@media (max-width:960px){
-.sg.hide-m{display:flex !important}
-.sg .seg{display:none}
-.sg .seg-pause{margin-left:-12px}
-}
 /* Fonds-Offenlegungen nach Passwortprüfung (HA 7) */
 .az-msg{flex:1 1 100%;margin:0;font-size:16px;line-height:1.5;font-weight:600;color:#FFFFFF}
 .az-docs{flex:1 1 100%;display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin:0;padding:0;list-style:none}
 .az-docs li{padding:0 !important;border:0 !important}
 .az-docs .doc{min-height:44px;text-align:left;line-height:1.3;padding:8px 16px}
 </style>
-<script src="/assets/js/site.js?v=974776b778" defer></script>
+<script src="/assets/js/site.js?v=4677bc901f" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ServiceInvest Kapitalverwaltungsgesellschaft mbH","alternateName":"ServiceInvest","url":"https://www.serviceinvest.de/","logo":"https://www.serviceinvest.de/assets/logo/serviceinvest-logo-farbe.png","email":"info@serviceinvest.de","telephone":"+49 89 544344-0","address":{"@type":"PostalAddress","streetAddress":"Fürstenrieder Straße 61","postalCode":"80686","addressLocality":"München","addressCountry":"DE"},"parentOrganization":{"@type":"Organization","name":"Institutional Investment Group","url":"https://www.2ig.de/"}}</script>
 </head>
 <body>
@@ -234,13 +224,12 @@ a:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible
 <a href="#rolle" class="btn">Unsere Rolle</a>
 <a href="/kontakt/" class="btn btn-fill">Gespräch vereinbaren</a>
 </div>
-<div class="hide-m sg" role="group" aria-label="Bild wählen" style="display: flex; gap: 10px">
+<div class="hide-m" role="group" aria-label="Bild wählen" style="display: flex; gap: 10px">
 <button type="button" class="seg on" aria-current="true" aria-label="Bild 1 von 5" data-go="0"><i></i></button>
 <button type="button" class="seg" aria-label="Bild 2 von 5" data-go="1"><i></i></button>
 <button type="button" class="seg" aria-label="Bild 3 von 5" data-go="2"><i></i></button>
 <button type="button" class="seg" aria-label="Bild 4 von 5" data-go="3"><i></i></button>
 <button type="button" class="seg" aria-label="Bild 5 von 5" data-go="4"><i></i></button>
-<button type="button" class="seg-pause" data-pause aria-pressed="false" aria-label="Bildwechsel anhalten" data-label-pause="Bildwechsel anhalten" data-label-play="Bildwechsel fortsetzen"><svg class="i-pause" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M3 2h3v12H3zM10 2h3v12h-3z"></path></svg><svg class="i-play" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M4 2l10 6-10 6z"></path></svg></button>
 </div>
 </div>
 </div>
