@@ -6,7 +6,7 @@ auf WordPress. Grundlage: `content/Handlungsanweisung_Live-Schaltung_serviceinve
 | | |
 |---|---|
 | Webspace | `su172769@access-5019820309.webspace-host.com` (Schlüssel `~/.ssh/ionos_2ip`) |
-| Neuer Ordner | `~/public/_sin_v1` (bisheriger Ordner `~/public/_sin` bleibt unverändert) |
+| Ordner | `~/public/_sin_v1` (live seit 05.11.2026; bisheriger Ordner `~/public/_sin` am 05.11.2026 entfernt) |
 | Datenbank | dieselbe wie bisher, eigene Tabellen mit Präfix `v1_` (bisherige `wp_*` bleiben) |
 | Adresse | `https://www.serviceinvest.de` (wie bisher mit www; `serviceinvest.de` und `http` leiten in einem Schritt per 301 weiter) |
 | Formulare | Kontakt an `info@serviceinvest.de`, Mieter an `SIN_MIETER_TO` (vorerst ebenfalls info@); Absender `ServiceInvest <contact@2ig.de>` über Amazon SES (eu-central-1) |
@@ -28,7 +28,7 @@ auf WordPress. Grundlage: `content/Handlungsanweisung_Live-Schaltung_serviceinve
    - HA 13 von Hand: Browser/Geräte, Lighthouse mobil, Screenreader, securityheaders.com, Vorschau in LinkedIn/Teams
    - Sitemap `https://www.serviceinvest.de/sitemap.xml` in der Google Search Console und den Bing Webmaster Tools einreichen
 
-**Zurück zur bisherigen Seite:** im Panel den Zielordner wieder auf `/_sin` stellen. Die bisherige Installation ist unverändert.
+**Kein Rückweg mehr:** Die bisherige Installation `~/public/_sin` (Divi 5.8.1) samt Tabellen `wp_*` wurde am 05.11.2026 wegen CVE-2026-91707 entfernt. Archiv (nur für den Notfall, nicht im Webroot): `~/backups/archiv-_sin-20261105-*.tar.gz`, `.sql.gz` und `archiv-_sin-rest-*.sql.gz` (Wordfence-Tabellen). `remote.sh` überspringt seitdem die Schritte, die `_sin` brauchten.
 
 ## Was das Deploy tut
 

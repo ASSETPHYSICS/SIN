@@ -3,9 +3,8 @@
 # (Git Bash oder WSL); vorher lokal bauen: bash tools/v1/build.sh (das Ergebnis content/v1-build/ ist versioniert).
 #
 #   deploy/v1/deploy.sh          ~/public/_sin_v1 einrichten/aktualisieren, fertig konfiguriert für https://www.serviceinvest.de.
-#                                Die bisherige Website ~/public/_sin und ihre Tabellen wp_* bleiben unberührt. Erreichbar ist
-#                                die neue Installation erst, wenn serviceinvest.de/www.serviceinvest.de im IONOS-Panel auf
-#                                /_sin_v1 zeigen.
+#                                Seit 05.11.2026 live (Panel zeigt auf /_sin_v1); die bisherige Website ~/public/_sin samt
+#                                Tabellen wp_* ist entfernt, remote.sh überspringt die Schritte, die sie brauchten.
 #   deploy/v1/deploy.sh check    Prüfung VOR dem Umschalten: startet auf dem Webspace einen PHP-Server für _sin_v1
 #                                (127.0.0.1:18092, Host www.serviceinvest.de) und führt dort tools/v1/check.php aus
 #                                (ohne .htaccess; die Apache-Teile prüft check.php nach dem Umschalten).

@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 # Läuft auf dem Server (von deploy/v1/deploy.sh per SSH gestartet). Siehe deploy/v1/README.md.
-# Richtet ~/public/_sin_v1 für https://www.serviceinvest.de ein; die bisherige Website ~/public/_sin bleibt unverändert.
+# Richtet ~/public/_sin_v1 für https://www.serviceinvest.de ein.
+# Die bisherige Website ~/public/_sin (Divi) wurde nur beim ersten Einrichten gebraucht (Kern, wp-config, PAI-PDFs,
+# Fondspasswörter) und am 05.11.2026 samt Tabellen wp_* entfernt (CVE-2026-91707); ohne sie werden diese Schritte übersprungen.
 set -euo pipefail
 
 URL="https://www.serviceinvest.de"
 PREFIX="v1_"
 SRC="$HOME/temp/sin-v1-src"
-OLD="$HOME/public/_sin"          # bisherige Website (nur gelesen)
+OLD="$HOME/public/_sin"          # bisherige Website (nur gelesen, nur falls noch vorhanden)
 DIR="$HOME/public/_sin_v1"       # neue Website
 SAFE="$HOME/geschuetzt/sin"      # Fonds-Offenlegungen, außerhalb des Webroots (SIN_FONDS_DIR)
 CLI="$HOME/wp-cli.phar"
@@ -17,22 +19,27 @@ mkdir -p "$TMPDIR" "$HOME/backups" "$HOME/config" "$HOME/logs"
 
 # --- Schutz ---
 [ "$DIR" != "$OLD" ] || { echo "Zielordner ist der bisherige Live-Ordner"; exit 1; }
-[ -f "$OLD/wp-includes/version.php" ] || { echo "Bisherige Installation $OLD nicht gefunden"; exit 1; }
+HAVE_OLD=0; [ -f "$OLD/wp-includes/version.php" ] && HAVE_OLD=1
+if [ "$HAVE_OLD" = 0 ] && [ ! -f "$DIR/wp-config.php" ]; then echo "Weder bisherige Installation $OLD noch $DIR/wp-config.php vorhanden"; exit 1; fi
 [ -d "$SRC/wp-content/themes/sin-v1" ] || { echo "Upload fehlt: $SRC"; exit 1; }
 
-echo "-- Datenbank sichern (bisherige Tabellen wp_* und, falls vorhanden, ${PREFIX}*)"
+echo "-- Datenbank sichern (ganze Datenbank)"
 STAMP="$(date +%Y%m%d-%H%M%S)"
-OLDWP db export "$HOME/backups/sin-vor-v1-$STAMP.sql" >/dev/null
+if [ -f "$DIR/wp-config.php" ]; then WP db export "$HOME/backups/sin-vor-v1-$STAMP.sql" >/dev/null; else OLDWP db export "$HOME/backups/sin-vor-v1-$STAMP.sql" >/dev/null; fi
 chmod 600 "$HOME/backups/sin-vor-v1-$STAMP.sql"
 echo "   ~/backups/sin-vor-v1-$STAMP.sql"
 
-echo "-- WordPress-Kern (Version der bisherigen Installation: $(OLDWP core version))"
-mkdir -p "$DIR/wp-admin" "$DIR/wp-includes"
-cp -a "$OLD/wp-admin/." "$DIR/wp-admin/"
-cp -a "$OLD/wp-includes/." "$DIR/wp-includes/"
-for f in index.php wp-activate.php wp-blog-header.php wp-comments-post.php wp-cron.php wp-links-opml.php wp-load.php wp-login.php wp-mail.php wp-settings.php wp-signup.php wp-trackback.php xmlrpc.php; do
-	cp -a "$OLD/$f" "$DIR/$f"
-done
+if [ "$HAVE_OLD" = 1 ]; then
+	echo "-- WordPress-Kern (Version der bisherigen Installation: $(OLDWP core version))"
+	mkdir -p "$DIR/wp-admin" "$DIR/wp-includes"
+	cp -a "$OLD/wp-admin/." "$DIR/wp-admin/"
+	cp -a "$OLD/wp-includes/." "$DIR/wp-includes/"
+	for f in index.php wp-activate.php wp-blog-header.php wp-comments-post.php wp-cron.php wp-links-opml.php wp-load.php wp-login.php wp-mail.php wp-settings.php wp-signup.php wp-trackback.php xmlrpc.php; do
+		cp -a "$OLD/$f" "$DIR/$f"
+	done
+else
+	echo "-- WordPress-Kern: vorhandener Stand in $DIR bleibt (WordPress $(WP core version))"
+fi
 
 echo "-- Build-Dateien ins Stammverzeichnis (assets/, Favicons, sitemap.xml, robots.txt)"
 bash "$SRC/tools/v1/copy-static.sh" "$SRC/content/v1-build" "$DIR"
@@ -40,7 +47,8 @@ bash "$SRC/tools/v1/copy-static.sh" "$SRC/content/v1-build" "$DIR"
 echo "-- PAI-PDFs nach /dokumente/ (HA 8, aus der bisherigen Website)"
 mkdir -p "$DIR/dokumente"
 for f in 2026-06-22_SIN_Annex_I-PAI-Statement_v2.2_DE-clean.pdf 2026-06-22_SIN_Annex_I-PAI-Statement_v2.2_ENG-clean.pdf; do
-	cp -p "$OLD/wp-content/uploads/2026/06/$f" "$DIR/dokumente/$f"
+	if [ "$HAVE_OLD" = 1 ]; then cp -p "$OLD/wp-content/uploads/2026/06/$f" "$DIR/dokumente/$f"; fi
+	[ -f "$DIR/dokumente/$f" ] || { echo "PAI-PDF fehlt: $f"; exit 1; }
 done
 
 echo "-- Fonds-Offenlegungen nach $SAFE (HA 7, außerhalb des Webroots)"
@@ -64,7 +72,7 @@ mkdir -p "$DIR/wp-content"/{themes,plugins,mu-plugins,uploads,languages}
 rm -rf "$DIR/wp-content/themes/sin-v1"
 cp -a "$SRC/wp-content/themes/sin-v1" "$DIR/wp-content/themes/sin-v1"
 cp -a "$SRC/wp-content/mu-plugins/sin-hardening.php" "$SRC/wp-content/mu-plugins/site-mail.php" "$DIR/wp-content/mu-plugins/"
-[ -d "$OLD/wp-content/languages" ] && cp -a "$OLD/wp-content/languages/." "$DIR/wp-content/languages/"
+if [ -d "$OLD/wp-content/languages" ]; then cp -a "$OLD/wp-content/languages/." "$DIR/wp-content/languages/"; fi
 
 echo "-- wp-config.php"
 if [ ! -f "$DIR/wp-config.php" ]; then
@@ -122,8 +130,10 @@ install -m 644 "$SRC/deploy/v1/htaccess-live" "$DIR/.htaccess"   # WordPress dar
 
 echo "-- Seiten importieren"
 WP eval-file "$SRC/tools/v1/import.php" "$SRC/content/v1-build" 2>&1 | tail -1
-echo "-- Fonds-Offenlegungen (Passwörter der bisherigen Fondsseiten als Hash, Titel)"
-WP eval-file "$SRC/tools/v1/fonds-migration.php" wp_ 2>&1 | sed 's/^/   /'
+if [ "$HAVE_OLD" = 1 ]; then
+	echo "-- Fonds-Offenlegungen (Passwörter der bisherigen Fondsseiten als Hash, Titel)"
+	WP eval-file "$SRC/tools/v1/fonds-migration.php" wp_ 2>&1 | sed 's/^/   /'
+fi
 WP rewrite flush >/dev/null
 WP cache flush >/dev/null 2>&1 || true
 
@@ -143,5 +153,8 @@ echo "-- Kontrolle"
 printf '   WordPress %s | home=%s | Theme=%s | blog_public=%s | Seiten=%s | Alias=%s\n' "$(WP core version)" "$(WP option get home)" \
 	"$(WP option get stylesheet)" "$(WP option get blog_public)" "$(WP post list --post_type=page --post_status=publish --format=count)" \
 	"$(WP config get SITE_MAIL_FROM_NAME)"
-printf '   Bisherige Website: home=%s (unverändert), Tabellen wp_*: %s\n' "$(OLDWP option get home)" \
-	"$(OLDWP db query "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name LIKE 'wp\\_%'" --skip-column-names)"
+if [ "$HAVE_OLD" = 1 ]; then
+	printf '   Bisherige Website: home=%s (unverändert), Tabellen wp_*: %s\n' "$(OLDWP option get home)" \
+		"$(OLDWP db query "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name LIKE 'wp\\_%'" --skip-column-names)"
+fi
+printf '   Fondspasswörter: %s\n' "$(WP eval 'echo count( (array) get_option( "sin_fonds_passwords", array() ) );' 2>/dev/null || echo '?')"
